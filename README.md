@@ -67,7 +67,8 @@ elmo-hikes/
 
 ## Contributors
 - **Wenting Yang** - BCIT CST Student with a passion on interactive technology and AI. Fun facts-curious all the problems and solutions.
-- **Teammate Name** - BCIT CST Student, Frontend enthusiast with a knack for creative design. Fun fact: Has a collection of over 50 houseplants.
+- **Marcus Leung** - BCIT CST Student with a passion for coding user-friendly websites
+- **Matthew Yun** - BCIT CST Student with a passion for programming and photography. Fun Fact: I like pizza.
 
 ---
 
