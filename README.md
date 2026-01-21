@@ -66,7 +66,6 @@ elmo-hikes/
 
 
 ## Contributors
-- **Fardis Valipour** - BCIT CST Student with a passion for outdoor adventures.I love teaching piano and music to kids.
 - **Matthew Yun** - BCIT CST Student with a passion for programming and photography. Fun Fact: I like pizza.
 
 ---
