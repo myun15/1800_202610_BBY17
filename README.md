@@ -66,6 +66,7 @@ elmo-hikes/
 
 
 ## Contributors
+- **Marcus Leung** - BCIT CST Student with a passion for coding user-friendly websites
 - **Matthew Yun** - BCIT CST Student with a passion for programming and photography. Fun Fact: I like pizza.
 
 ---
