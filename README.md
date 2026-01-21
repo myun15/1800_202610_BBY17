@@ -66,7 +66,7 @@ elmo-hikes/
 
 
 ## Contributors
-- **Marcue Leung** - BCIT CST Student with a passion for coding user-friendly websites
+- **Marcus Leung** - BCIT CST Student with a passion for coding user-friendly websites
 
 ---
 
