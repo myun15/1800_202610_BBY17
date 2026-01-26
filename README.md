@@ -70,7 +70,7 @@ elmo-hikes/
 - **Marcus Leung** - BCIT CST Student with a passion for coding user-friendly websites
 - **Matthew Yun** - BCIT CST Student with a passion for programming and photography. Fun Fact: I like pizza and sushi.
 
-- **Fardis Valipour** - BCIT CST Student with passion for teaching piano for kids. And I love doing the adventures activities.
+- **Fardis Valipour** - BCIT CST Student with a passion for teaching piano for kids. And I love doing the adventures activities.
 ---
 
 
