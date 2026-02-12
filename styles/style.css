@@ -1,1 +1,63 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  background-color: #ffaf00; /* Lightest shade for body background to follow the 60% rule */
+  font-family: "Inter";
+}
 
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+  color: white; /* Dark green for brand name & nav links for visibility */
+  text-decoration: none;
+}
+
+.login,
+.sign-up {
+  font-size: small;
+  font-weight: bold;
+  border: 0;
+  padding: 0.5rem 0.75rem;
+}
+
+.sign-up {
+  color: white;
+  background-color: red;
+}
+
+.sign-up:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+
+.login:hover {
+  background-color: #e0e0e0;
+}
+
+.address-input {
+  padding-left: 4rem;
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.address-input:focus {
+    box-shadow: red 0px -2px 0px inset;
+}
+
+.address-input {
+    background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
+    background-position-x: 20px;
+    background-position-y: 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-color: white;
+    width: 40%;
+}
+
+.hero-area {
+    height: 90vh;
+}
+
+.search-button:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+}

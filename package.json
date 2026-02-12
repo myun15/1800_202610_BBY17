@@ -9,5 +9,14 @@
   },
   "devDependencies": {
     "vite": "^7.0.0"
+  },
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8"
   }
 }
