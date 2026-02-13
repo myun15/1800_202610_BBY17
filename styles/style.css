@@ -1,18 +1,41 @@
+/* --------------------------------------------------
+* Theme colours (CSS variables)
+* --------------------------------------------------
+*
+* Store as variables for reuse and maintainability. 
+*/
+:root {
+  /* 60% — background */
+  --background: #ffaf00;
+
+  /* 30% — primary actions and supporting surfaces) */
+  --primary: red;
+  --secondary: white;
+  --third: #e0e0e0;
+
+  /* 10% — accent for emphasis and interaction */
+  --accent: rgba(255, 0, 0, 0.5);
+}
+
 body {
-  display: flex;
-  flex-direction: column;
   margin: 0;
   padding: 0;
   background-color: #ffaf00; /* Lightest shade for body background to follow the 60% rule */
   font-family: "Inter";
 }
-
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link {
   color: white; /* Dark green for brand name & nav links for visibility */
   text-decoration: none;
+  background-color: #ffaf00; /* Lightest shade for body background to follow the 60% rule */
 }
-
+.navbar-brand,
+.px-4,
+.collapse {
+  font-size: large;
+  font-weight: 400;
+  font-style: normal;
+}
 .login,
 .sign-up {
   font-size: small;
@@ -27,7 +50,7 @@ body {
 }
 
 .sign-up:hover {
-    background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 .login:hover {
@@ -41,23 +64,54 @@ body {
 }
 
 .address-input:focus {
-    box-shadow: red 0px -2px 0px inset;
+  box-shadow: red 0px -2px 0px inset;
 }
 
 .address-input {
-    background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
-    background-position-x: 20px;
-    background-position-y: 50%;
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-color: white;
-    width: 40%;
+  background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
+  background-position-x: 20px;
+  background-position-y: 50%;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-color: white;
+  width: 40%;
 }
 
 .hero-area {
-    height: 90vh;
+  width: 100%;
+  height: 90vh;
+  background-image: url("../images/restaurant.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .search-button:hover {
-    background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.5);
+}
+.footer {
+  display: flex;
+  align-items: center;
+  background-color: var(--background);
+  height: 60px;
+}
+.footer-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100%;
+}
+.footer-nav li {
+  flex: 1;
+  text-align: center;
+}
+.footer-nav a {
+  display: block;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+}
+.footer-nav a:hover {
+  color: rgba(255, 0, 0, 0.5);
 }
