@@ -1,89 +1,37 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>TeamBBY</title>
-    <meta name="comp1800 template" content="My 1800 App" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="./styles/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-  </head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg">
-      <div class="container d-flex justify-content-start ms-0 ps-4 gap-2">
-        <div class="dropdown">
-          <button type="button" class="btn btn-link" data-bs-toggle="dropdown">
-            <img src="images/menu.svg" alt="dropdown" width="20" height="25" />
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">asdf</a></li>
-            <li><a class="dropdown-item" href="#">asdf</a></li>
-            <li><a class="dropdown-item" href="#">asdf</a></li>
-          </ul>
-        </div>
-        <a class="navbar-brand col-md-auto" href="./index.html">
-          Website Name
-        </a>
-      </div>
-      <div class="d-flex flex-row gap-3 pe-5">
-        <button class="login col-md-auto rounded-pill">Log in</button>
-        <button class="sign-up col-md-auto rounded-pill">Sign up</button>
-      </div>
-    </nav>
+<head>
+  <title>TeamBBY</title>
+  <meta name="comp1800 template" content="My 1800 App" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script type="module" src="/src/components/site-navbar.js"></script>
+  <script type="module" src="/src/components/site-footer.js"></script>
+</head>
 
-    <div
-      class="hero-area d-flex justify-content-center flex-column h-90vh px-5"
-    >
-      <h1 class="display-5 fw-bold pb-4">Restaurant wait-lists near you</h1>
-      <div class="d-flex gap-2">
-        <input
-          type="text"
-          class="address-input form-control py-3"
-          placeholder="Enter address"
-        />
-        <button class="search-button btn btn-danger">Search</button>
-      </div>
+<body>
+  <site-navbar></site-navbar>
+
+  <!-- Main Content -->
+  <div class="hero-area d-flex justify-content-center flex-column h-90vh px-5">
+    <h1 class="display-5 fw-bold pb-4">Restaurant wait-lists near you</h1>
+    <div class="d-flex gap-2">
+      <input type="text" class="address-input form-control py-3" placeholder="Enter address" />
+      <button class="search-button btn btn-danger">Search</button>
+      <button class="open-map-button btn btn-success">Map</button>
     </div>
+  </div>
 
-    <footer class="fixed-bottom footer">
-      <ul class="footer-nav">
-        <li>
-          <a href="#"
-            ><span class="material-symbols-outlined">home</span>
-            <span class="home">home</span></a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><span class="material-symbols-outlined">history_2</span>
-            <span class="Recent">Recent</span></a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><span class="material-symbols-outlined">calendar_meal</span>
-            <span class="Reservation">Reservation</span></a
-          >
-        </li>
-        <li>
-          <a href="#"
-            ><span class="material-symbols-outlined">favorite</span>
-            <span class="favorite">Favorite</span></a
-          >
-        </li>
-      </ul>
-    </footer>
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
 
-    <script type="module" src="./src/main.js"></script>
-  </body>
 </html>
