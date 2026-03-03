@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>TeamBBY</title>
+  <meta name="comp1800 template" content="My 1800 App" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script type="module" src="/src/components/site-navbar.js"></script>
+  <script type="module" src="/src/components/site-footer.js"></script>
+</head>
+
+<body>
+  <site-navbar></site-navbar>
+
+  <!-- Main Content -->
+  <form class="design-flex">
+    <div class="card-body form-group">
+      <label for="hikename">Name of the Restaurant</label>
+      <input type="text" id="restaurantname" class="form-control" />
+    </div>
+
+    <div class="card-body form-group dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Style of Restaurant
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <li>
+          <button class="dropdown-item" type="button" id="leveleasy">
+            Fast Food
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="levelmoderate">
+            Street Food / Food stall
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="levelmoderate">
+            Cafe
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="levelmoderate">
+            Easy/Causal
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="levelmoderate">
+            Bistro
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="levelmoderate">
+            Pub
+          </button>
+        </li>
+        <li>
+          <button class="dropdown-item" type="button" id="levelhard">
+            Fine Dining
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="card-body form-group mb-3 mt-3">
+      <label for="comment">Comments:</label>
+      <textarea class="form-control" rows="5" id="comment" name="text"></textarea>
+    </div>
+
+
+    <div class="card-body form-group">
+      <div id="group">
+        <label style="width: 200px">Would you recommend it?</label>
+        <input type="radio" value="val1" name="mud" />
+        <label style="width: 80px">Yes</label>
+        <input type="radio" value="val2" name="mud" />
+        <label style="width: 50px">Maybe</label>
+        <input type="radio" value="val2" name="mud" />
+        <label style="width: 50px">No</label>
+      </div>
+    </div>
+
+
+    <div class="card-body">
+      <p>Rate your overall experience:</p>
+      <span src="./images/star.png" height="36">
+        <span class="material-icons" id="star1">star</span>
+        <span class="material-icons" id="star2">star</span>
+        <span class="material-icons" id="star3">star</span>
+        <span class="material-icons" id="star3">star</span>
+        <span class="material-icons" id="star4">star_outline</span>
+    </div>
+
+    <div class="card-body d-grid gap-2">
+      <button id="submit" class="btn btn-info" type="button">
+        Submit
+      </button>
+    </div>
+
+
+
+  </form>
+
+  <site-footer></site-footer>
+
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
