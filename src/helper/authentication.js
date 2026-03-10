@@ -1,4 +1,5 @@
-import { auth } from "./firebaseConfig.js";
+import { auth, db } from "./firebaseConfig.js";
+import { doc, setDoc } from "firebase/firestore";
 
 import {
   signInWithEmailAndPassword,
@@ -13,9 +14,30 @@ export async function loginUser(email, password) {
 }
 
 export async function signupUser(name, email, password) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password,
+  );
+
+  const user = userCredential.user;
+
   await updateProfile(userCredential.user, { displayName: name });
-  return userCredential.user;
+
+  try {
+    await setDoc(doc(db, "users", user.uid), {
+      name: name,
+      email: email,
+      country: "Canada",
+      school: "BCIT",
+    });
+  } catch (error) {
+    alert(
+      `Error creating user document: \n${error.code || ""}\n${error.message || error}`,
+    );
+  }
+
+  return user;
 }
 
 export async function logoutUser() {
@@ -57,4 +79,3 @@ export function authErrorMessage(error) {
 
   return map[code] || "Something went wrong. Please try again.";
 }
-

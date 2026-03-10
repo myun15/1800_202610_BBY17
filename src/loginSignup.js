@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import './styles/style.css';
+
+import { auth } from './helper/firebaseConfig.js';
 import {
     loginUser,
     signupUser,
@@ -101,13 +103,11 @@ function initAuthUI() {
     });
 }
 
-function redirectToMainIfLoggedIn() {
-  onAuthReady(user => {
-    if (user) {
-      location.href = "main.js";
-      return;
-    }
-  })
+async function redirectToMainIfLoggedIn() {
+  await auth.authStateReady();
+  if (auth.currentUser) {
+    location.href = "main.html";
+  }
 }
 
 redirectToMainIfLoggedIn();
