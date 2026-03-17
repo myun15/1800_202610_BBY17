@@ -13,6 +13,45 @@ import { db } from "/src/helper/firebaseConfig.js"
 import { onAuthReady, logoutUser } from "./helper/authentication.js";
 import "/src/styles/style.css";
 
+// --- Map Preview for main.html ---
+let previewMap;
+const VANCOUVER = { lat: 49.2827, lng: -123.1207 };
+
+function initPreviewMap() {
+  const mapEl = document.getElementById("map-preview");
+  if (!mapEl) return; // Only run if the div exists
+
+  previewMap = new google.maps.Map(mapEl, {
+    zoom: 13,
+    center: VANCOUVER,
+  });
+
+  // Try to get user location
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userLocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        previewMap.setCenter(userLocation);
+
+        new google.maps.Marker({
+          position: userLocation,
+          map: previewMap,
+          title: "You are here",
+        });
+      },
+      () => {
+        console.log("Location denied, showing Vancouver");
+      }
+    );
+  }
+}
+
+// Initialize the map preview when page loads
+window.addEventListener("load", initPreviewMap);
+
 function showNameWhenLoggedIn() {
   onAuthReady((user) => {
     const nameElement = document.getElementById("welcome-user");
