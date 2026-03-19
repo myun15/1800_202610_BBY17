@@ -12,6 +12,7 @@ import {
 import { db } from "/src/helper/firebaseConfig.js"
 import { onAuthReady, logoutUser } from "./helper/authentication.js";
 import "/src/styles/style.css";
+import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
 
 // --- Map Preview for main.html ---
 let previewMap;
