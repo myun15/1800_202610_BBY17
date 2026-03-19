@@ -15,13 +15,6 @@ body {
 
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link {
-  #map-preview {
-    width: 100%;
-    height: 400px;
-    margin-top: 20px;
-    border-radius: 12px;
-  }
-
   color: white;
   text-decoration: none;
   background-color: #ffaf00;
@@ -140,6 +133,7 @@ body {
   height: 400px;
   margin-top: 20px;
   border-radius: 12px;
+  overflow: hidden;
 }
 @media (max-width: 768px) {
   #map-preview {
