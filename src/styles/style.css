@@ -1,3 +1,86 @@
+/*
+* --------------------------------------------------
+* Custom styles overriding Bootstrap defaults
+* --------------------------------------------------
+*
+* Design principles applied:
+*
+* 1) 20/80 Rule
+*    A small number of targeted changes (colours on key
+*    components like buttons, navbar, and backgrounds)
+*    create most of the visual impact without rewriting
+*    Bootstrap’s core styles.
+*
+* 2) 60 / 30 / 10 Colour Rule
+*    - 60% dominant: lighter for backgrounds and large surfaces
+*    - 30% primary/secondary: primary for main actions, secondary for supporting elements
+*    - 10% accent: used sparingly for hover or emphasis
+*/
+
+/* --------------------------------------------------
+* Theme colours (CSS variables)
+* --------------------------------------------------
+*
+* Store as variables for reuse and maintainability. 
+*/
+:root {
+  /* 60% — background */
+  --light-text: #ffffff;
+
+  /* 30% — primary actions and supporting surfaces) */
+  --primary: #ffa500;
+  --secondary: #ffe380;
+  --thirdOption: #fff1bf;
+
+  /* 10% — accent for emphasis and interaction */
+  --accent: #b38b00;
+
+  /* Button border widths */
+  --btn-border-width: 3px;
+  --btn-border-width-hover: 5px;
+}
+
+/* --------------------------------------------------
+* Button: .btn-info
+* --------------------------------------------------
+*  
+* Uses secondary (30%) color used in the call-to-action buttons, 
+* with a border to add visual interest without overwhelming the design.
+*/
+
+.btn-info {
+  color: var(--light-text);
+  background-color: var(--secondary);
+  border-color: var(--primary);
+  border-width: var(--btn-border-width);
+}
+.design-flex {
+  grid-template-columns: auto;
+  columns: 500px;
+  width: 60%;
+  margin: 40px auto;
+  text-align: center;
+  border-color: var(--accent);
+  border-radius: 5px;
+}
+.card-body {
+  background-color: var(--primary);
+  color: var(--thirdOption);
+}
+/*
+* OPTIONAL: Hover/focus for desktop users - progressive enhancement
+* A thicker accent-colored border adds visual feedback without 
+* changing the button's core color scheme.
+*/
+.btn-info:hover,
+.btn-info:focus {
+  background-color: var(--secondary);
+  border-color: var(--accent);
+  border-width: var(--btn-border-width-hover);
+}
+
+
+
 :root {
   --background: #ffaf00;
   --primary: red;
