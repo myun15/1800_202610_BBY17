@@ -7,8 +7,11 @@ class SiteNavbar extends HTMLElement {
   }
 
   renderNavbar() {
-    onAuthReady((user) => {
-      const href = user ? "./main.html" : "./index.html";
+    onAuthReady(user => {
+        const href = user ? "./main.html" : "./index.html";
+        const authButton = user
+            ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
+            : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='login.html'" type="button">Log in</button>`;
 
       this.innerHTML = `
             <nav class="navbar navbar-expand-lg">
@@ -46,10 +49,10 @@ class SiteNavbar extends HTMLElement {
             </nav>
         `;
 
-      this.querySelector("#logOutBtn").addEventListener("click", () =>
-        logoutUser(),
-      );
-    });
+        if (user) {
+            this.querySelector('#logOutBtn').addEventListener('click', () => logoutUser());
+        }
+    })
   }
 }
 

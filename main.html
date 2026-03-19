@@ -18,64 +18,8 @@
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
 
-    <style>
-      /* Map preview */
-      #map-preview {
-        width: 100%;
-        height: 80vh;
-        min-height: 500px;
-        margin-top: 20px;
-        border-radius: 12px;
-        background-color: #b0b0b0;
-        position: relative; /* for pins */
-      }
 
-      /* Pins */
-      .restaurant-pin {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        border: 2px solid white;
-        position: absolute;
-        cursor: pointer;
-          transition: transform 0.2s;
-        z-index: 5;
-      }
-      
-      /* Color codes for status */
-      .green {
-        background-color: green;
-      }
-      .orange {
-        background-color: orange;
-      }
-      .red {
-        background-color: red;
-      }
-
-      /* Popup */
-      #popup {
-        position: absolute;
-        background-color: white;
-        border-radius: 12px;
-        padding: 10px;
-        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
-        display: none;
-        z-index: 10;
-        width: 150px;
-      }
-
-      #popup button {
-        margin-top: 5px;
-        padding: 2px 6px;
-        border: none;
-        background-color: red;
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-    </style>
-  </head>
+</head>
 
   <body>
     <site-navbar></site-navbar>
@@ -103,39 +47,10 @@
         </button>
       </div> -->
 
-      <!-- Map Placeholder with pins -->
-      <div id="map-preview">
-        <div
-          class="restaurant-pin green"
-          data-name="Sushi Town"
-          data-status="Busy"
-          data-rating="4.5"
-          style="top: 50px; left: 80px"
-        ></div>
-        <div
-          class="restaurant-pin orange"
-          data-name="Burger King"
-          data-status="Empty"
-          data-rating="3.8"
-          style="top: 120px; left: 200px"
-        ></div>
-        <div
-          class="restaurant-pin red"
-          data-name="McDonalds"
-          data-status="Full"
-          data-rating="4.0"
-          style="top: 250px; left: 150px"
-        ></div>
-      </div>
+    <!-- Map Preview -->
+    <div id="map-preview"></div>
 
-      <!-- Popup -->
-      <div id="popup">
-        <h5 id="popup-name"></h5>
-        <p>Status: <span id="popup-status"></span></p>
-        <p>Rating: <span id="popup-rating"></span> ⭐</p>
-        <button onclick="closePopup()">Close</button>
-      </div>
-    </div>
+  </div>
 
     <!-- our own footer goes here -->
     <site-footer></site-footer>
@@ -170,6 +85,6 @@
     <!-- Your own JavaScript scripts go here      -->
     <!---------------------------------------------->
     <script type="module" src="/src/app.js"></script>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/pages/home.js"></script>
   </body>
 </html>
