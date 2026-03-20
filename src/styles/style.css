@@ -39,15 +39,6 @@
   --btn-border-width: 3px;
   --btn-border-width-hover: 5px;
 }
-
-/* --------------------------------------------------
-* Button: .btn-info
-* --------------------------------------------------
-*  
-* Uses secondary (30%) color used in the call-to-action buttons, 
-* with a border to add visual interest without overwhelming the design.
-*/
-@media only screen and (max-width: 700px) {
   .btn-info {
     color: var(--light-text);
     background-color: var(--secondary);
@@ -72,42 +63,25 @@
 * A thicker accent-colored border adds visual feedback without 
 * changing the button's core color scheme.
 */
-  .btn-info:hover,
-  .btn-info:focus {
-    background-color: var(--secondary);
-    border-color: var(--accent);
-    border-width: var(--btn-border-width-hover);
-  }
 
-  :root {
-    --background: #ffaf00;
-    --primary: red;
-    --secondary: white;
-    --third: #e0e0e0;
-    --accent: rgba(255, 0, 0, 0.5);
-  }
+  /*nav bar with dropdown menu,title,research bar,search
+map and login logout*/
 
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: #ffaf00;
-    font-family: "Inter", "Arial";
+  .navbar-main-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
   }
 
   .navbar-light .navbar-brand,
   .navbar-light .navbar-nav .nav-link {
-    #map-preview {
-      width: 100%;
-      height: 400px;
-      margin-top: 20px;
-      border-radius: 12px;
-    }
-
     color: white;
     text-decoration: none;
     background-color: #ffaf00;
   }
-
+  /*TimesUp design*/
   .navbar-brand,
   .px-4,
   .collapse {
@@ -115,6 +89,97 @@
     font-weight: 400;
     font-style: normal;
   }
+
+  /* research bar design */
+  .address-input {
+    padding-left: 4rem;
+    border: none;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .address-input:focus {
+    box-shadow: red 0px -2px 0px inset;
+  }
+  .address-input {
+    background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
+    background-position-x: 20px;
+    background-position-y: 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-color: white;
+    width: 40%;
+  }
+
+  /* hero area design with image background */
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden; /*not move the map when scroll*/
+  }
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .hero-area {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    background-image: url("images/restaurant.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+  }
+  .hero-area h1 {
+    display: inline-block;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0px;
+    max-width: 90%;
+    position: relative;
+    z-index: 2;
+    font-size: 18px;
+    text-align: left;
+    color: rgb(0, 0, 0);
+    margin: 0;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    max-width: 90%;
+    white-space: nowrap;
+  }
+
+  #map-container {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  #map-preview {
+    position: fixed;
+    top: 140px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /*anything else will add on top of the map preview.*/
+  .hero-area .d-flex {
+    position: relative;
+    z-index: 2;
+  }
+  /* login and logout button design */
 
   .login,
   .sign-up {
@@ -137,49 +202,14 @@
     background-color: #e0e0e0;
   }
 
-  .address-input {
-    padding-left: 4rem;
-    border: none;
-    transition: box-shadow 0.3s ease-in-out;
-  }
-
-  .address-input:focus {
-    box-shadow: red 0px -2px 0px inset;
-  }
-
-  .address-input {
-    background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
-    background-position-x: 20px;
-    background-position-y: 50%;
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-color: white;
-    width: 40%;
-  }
-
-  .hero-area {
-    width: 100%;
-    height: 90vh;
-    background-image: url("images/restaurant.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .hero-area h1 {
-    margin-top: 0;
-    font-size: 16pt;
-    align-self: flex-start;
-  }
-
-  .search-button:hover {
-    background-color: rgba(255, 0, 0, 0.5);
-  }
-
+  /* footer bar with original navbar design  */
   .footer {
     display: flex;
     align-items: center;
-    background-color: var(--background);
+    background-color: var(--primary);
     height: 60px;
+    justify-content: center;
+    z-index: 1;
   }
 
   .footer-nav {
@@ -188,6 +218,7 @@
     margin: 0;
     display: flex;
     width: 100%;
+    justify-content: center;
   }
 
   .footer-nav li {
@@ -205,31 +236,3 @@
   .footer-nav a:hover {
     color: rgba(255, 0, 0, 0.5);
   }
-
-  .restaurants {
-    list-style-type: none;
-  }
-
-  .restaurants img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-
-#map {
-  height: 50vh;
-  width: 50vh;
-  justify-self: center;
-}
-#map-preview {
-  width: 100%;
-  height: 400px;
-  margin-top: 20px;
-  border-radius: 12px;
-  overflow: hidden;
-}
-@media (max-width: 768px) {
-  #map-preview {
-    height: 300px;
-  }
-}
