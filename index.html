@@ -28,21 +28,95 @@
     <div class="hero-area d-flex justify-content-center flex-column px-5">
       <!-- Main text -->
       <h1>Restaurant wait-lists near you</h1>
+      <p class="lead">Discover the best food in Vancouver</p>
 
       <!-- Map Preview -->
       <div id="map-container"></div>
       <div id="map-preview"></div>
 
-      <!-- <h1 class="display-5 fw-bold pb-4">Restaurant wait-lists near you</h1> -->
-      <!-- <div class="d-flex gap-2">
-        <input
-          type="text"
-          class="address-input form-control py-3"
-          placeholder="Enter address"
-        />
-        <button class="search-button btn btn-danger">Search</button>
-        <button class="open-map-button btn btn-success">Map</button>
-      </div> </div>  -->
+      <!-- Restaurant Cards Carousel Section -->
+      <div class="restaurants-carousel-wrapper">
+        <div class="restaurants-carousel">
+          <!-- left button -->
+          <button class="carousel-btn prev-btn" onclick="prevSlide()">❮</button>
+
+          <!-- Restaurant Preview Cards Section-->
+          <div class="restaurants-container">
+            <div class="row row-cols-1 row-cols-md-3 g-4" id="cardsRow">
+              <!-- Cards 1 Section-->
+              <div class="col">
+                <div class="card h-100">
+                  <img
+                    src="public/images/FirePizza.jpg"
+                    class="card-img-top"
+                    alt="Italian Pizza"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Italian Pizza</h5>
+                    <p class="card-text">
+                      Delicious Italian pizza made with fresh ingredients.
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-body-secondary"
+                      >Last updated 3 mins ago</small
+                    >
+                  </div>
+                </div>
+              </div>
+              <!-- Cards 2 Section-->
+
+              <div class="col">
+                <div class="card h-100">
+                  <img
+                    src="public/images/restaurant.jpg"
+                    class="card-img-top"
+                    alt="Salad Bar"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">Salad Bar</h5>
+                    <p class="card-text">
+                      Fresh salads made with the best ingredients.
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-body-secondary"
+                      >Last updated 3 mins ago</small
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cards 3 Section-->
+
+              <div class="col">
+                <div class="card h-100">
+                  <img
+                    src="public/images/FirePizza.jpg"
+                    class="card-img-top"
+                    alt="ShareBar"
+                  />
+                  <div class="card-body">
+                    <h5 class="card-title">ShareBar</h5>
+                    <p class="card-text">
+                      A great place to share meals with friends and family.
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-body-secondary"
+                      >Last updated 3 mins ago</small
+                    >
+                  </div>
+                </div>
+
+              <!-- right select -->
+              <button class="carousel-btn next-btn" onclick="nextSlide()">
+                ❯
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- our own footer goes here -->
     <site-footer></site-footer>

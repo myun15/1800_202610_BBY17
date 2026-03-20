@@ -39,200 +39,332 @@
   --btn-border-width: 3px;
   --btn-border-width-hover: 5px;
 }
-  .btn-info {
-    color: var(--light-text);
-    background-color: var(--secondary);
-    border-color: var(--primary);
-    border-width: var(--btn-border-width);
-  }
-  .design-flex {
-    grid-template-columns: auto;
-    columns: 500px;
-    width: 60%;
-    margin: 40px auto;
-    text-align: center;
-    border-color: var(--accent);
-    border-radius: 5px;
-  }
-  .card-body {
-    background-color: var(--primary);
-    color: var(--thirdOption);
-  }
-  /*
+.btn-info {
+  color: var(--light-text);
+  background-color: var(--secondary);
+  border-color: var(--primary);
+  border-width: var(--btn-border-width);
+}
+.design-flex {
+  grid-template-columns: auto;
+  columns: 500px;
+  width: 60%;
+  margin: 40px auto;
+  text-align: center;
+  border-color: var(--accent);
+  border-radius: 5px;
+}
+.card-body {
+  background-color: var(--primary);
+  color: var(--thirdOption);
+}
+/*
 * OPTIONAL: Hover/focus for desktop users - progressive enhancement
 * A thicker accent-colored border adds visual feedback without 
 * changing the button's core color scheme.
 */
 
-  /*nav bar with dropdown menu,title,research bar,search
+/*nav bar with dropdown menu,title,research bar,search
 map and login logout*/
 
-  .navbar-main-container {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    gap: 20px;
-  }
+.navbar-main-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+}
 
-  .navbar-light .navbar-brand,
-  .navbar-light .navbar-nav .nav-link {
-    color: white;
-    text-decoration: none;
-    background-color: #ffaf00;
-  }
-  /*TimesUp design*/
-  .navbar-brand,
-  .px-4,
-  .collapse {
-    font-size: large;
-    font-weight: 400;
-    font-style: normal;
-  }
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+  color: white;
+  text-decoration: none;
+  background-color: #ffaf00;
+}
+/*TimesUp design*/
+.navbar-brand,
+.px-4,
+.collapse {
+  font-size: large;
+  font-weight: 400;
+  font-style: normal;
+}
 
-  /* research bar design */
-  .address-input {
-    padding-left: 4rem;
-    border: none;
-    transition: box-shadow 0.3s ease-in-out;
-  }
+/* research bar design */
+.address-input {
+  padding-left: 4rem;
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+}
 
-  .address-input:focus {
-    box-shadow: red 0px -2px 0px inset;
-  }
-  .address-input {
-    background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
-    background-position-x: 20px;
-    background-position-y: 50%;
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-color: white;
-    width: 40%;
-  }
+.address-input:focus {
+  box-shadow: red 0px -2px 0px inset;
+}
+.address-input {
+  background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
+  background-position-x: 20px;
+  background-position-y: 50%;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-color: white;
+  width: 40%;
+}
 
-  /* hero area design with image background */
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    overflow: hidden; /*not move the map when scroll*/
-  }
-  body {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  .hero-area {
-    position: relative;
-    flex: 1;
-    width: 100%;
-    height: 100%;
-    background-image: url("images/restaurant.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    z-index: 3;
-  }
-  .hero-area h1 {
-    display: inline-block;
-    top: 10px;
-    right: 0;
-    bottom: 0;
-    left: 0px;
-    max-width: 90%;
-    position: relative;
-    z-index: 2;
-    font-size: 18px;
-    text-align: left;
-    color: rgb(0, 0, 0);
-    margin: 0;
-    padding: 10px 20px;
-    background: rgba(255, 255, 255, 1);
-    border-radius: 20px;
-    max-width: 90%;
-    white-space: nowrap;
-  }
+/* MainPage hero area design with image background */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden; /*not move the map when scroll*/
+}
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.hero-area {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 400px;
+  background-image: url("images/restaurant.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-shrink: 0;
+  z-index: 3;
+}
 
-  #map-container {
-    flex: 1;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-  #map-preview {
-    position: fixed;
-    top: 140px;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+.hero-area h1 {
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  margin: 20px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  max-width: 90%;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
-  /*anything else will add on top of the map preview.*/
-  .hero-area .d-flex {
-    position: relative;
-    z-index: 2;
-  }
-  /* login and logout button design */
+.hero-area .lead {
+  position: absolute;
+  top: 80px;
+  left: 100px;
+  z-index: 2;
+  font-size: 16px;
+  color: #333;
+  padding: 8px 16px;
 
-  .login,
-  .sign-up {
-    font-size: small;
-    font-weight: bold;
-    border: 0;
-    padding: 0.5rem 0.75rem;
-  }
+  background: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
+}
 
-  .sign-up {
-    color: white;
-    background-color: red;
-  }
+/* MainPage map container and preview design */
+#map-container {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+#map-preview {
+  position: fixed;
+  top: 200px;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/*anything else will add on top of the map preview.*/
+.hero-area .d-flex {
+  position: relative;
+  z-index: 2;
+}
 
-  .sign-up:hover {
-    background-color: rgba(255, 0, 0, 0.5);
-  }
+/* MainPage RestaurantCards for search results and default search */
+.card-section {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin: 20px 0;
+  padding: 20px 0;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+  font-weight: bold;
+}
 
-  .login:hover {
-    background-color: #e0e0e0;
-  }
+/* 轮播容器样式 */
+.restaurants-carousel-wrapper {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 50px;
+  max-width: 500px; /* 限制宽度，让卡片居中 */
+}
 
-  /* footer bar with original navbar design  */
-  .footer {
-    display: flex;
-    align-items: center;
-    background-color: var(--primary);
-    height: 60px;
-    justify-content: center;
-    z-index: 1;
-  }
+.restaurants-carousel {
+  position: relative;
+  width: 100%;
+}
 
-  .footer-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    width: 100%;
-    justify-content: center;
-  }
+.restaurants-container {
+  overflow: hidden;
+  position: relative;
+}
 
-  .footer-nav li {
-    flex: 1;
-    text-align: center;
-  }
+/* 关键：让卡片横向排列 */
+#cardsRow {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.5s ease;
+  margin: 0;
+  padding: 0;
+}
 
-  .footer-nav a {
-    display: block;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-weight: 500;
-  }
+#cardsRow .col {
+  flex: 0 0 100%;
+  min-width: 100%;
+  padding: 0 15px;
+}
 
-  .footer-nav a:hover {
-    color: rgba(255, 0, 0, 0.5);
-  }
+/* flowing effects */
+.card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  z-index: 2;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  height: 180px;
+  object-fit: cover;
+  width: 100%;
+}
+.card-body {
+  padding: 20px;
+}
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.card-text {
+  color: #666;
+  line-height: 1.5;
+}
+
+.card-footer {
+  background: #f8f9fa;
+  padding: 12px 20px;
+  border-top: 1px solid #e9ecef;
+}
+/* 按钮样式 */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: translateY(-10%) scale(1.1);
+}
+
+.prev-btn {
+  left: -20px;
+}
+
+.next-btn {
+  right: -20px;
+}
+
+/* login and logout button design */
+.login,
+.sign-up {
+  font-size: x-small;
+  font-weight: bold;
+  border: 0;
+  padding: 0.25rem 0.5rem;
+}
+
+.sign-up {
+  color: white;
+  background-color: red;
+}
+
+.sign-up:hover {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.login:hover {
+  background-color: #bf0e0e;
+}
+/* footer bar with original navbar design  */
+.footer {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary);
+  height: 60px;
+  justify-content: center;
+  z-index: 1;
+}
+
+.footer-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.footer-nav li {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-nav a {
+  display: block;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+}
+
+.footer-nav a:hover {
+  color: rgba(255, 0, 0, 0.5);
+}
