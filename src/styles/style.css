@@ -205,12 +205,12 @@ body {
   font-weight: bold;
 }
 
-/* 轮播容器样式 */
+/* Container element for slider*/
 .restaurants-carousel-wrapper {
   position: relative;
   margin: 0 auto;
   padding: 0 50px;
-  max-width: 500px; /* 限制宽度，让卡片居中 */
+  max-width: 500px; /* max width */
 }
 
 .restaurants-carousel {
@@ -223,7 +223,7 @@ body {
   position: relative;
 }
 
-/* 关键：让卡片横向排列 */
+/* key bard can align in row */
 #cardsRow {
   display: flex;
   flex-wrap: nowrap;
@@ -279,7 +279,7 @@ body {
   padding: 12px 20px;
   border-top: 1px solid #e9ecef;
 }
-/* 按钮样式 */
+/* button style*/
 .carousel-btn {
   position: absolute;
   top: 50%;
