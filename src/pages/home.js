@@ -8,6 +8,8 @@ import { onAuthReady } from "/src/helper/authentication.js";
 const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
 const VANCOUVER = { lng: -123.1207, lat: 49.2827 };
 
+
+
 function initPreviewMap() {
   const mapEl = document.getElementById("map-preview");
   if (!mapEl) return;
@@ -85,7 +87,9 @@ async function seedRestaurants() {
   const querySnapshot = await getDocs(restaurantsRef);
 
   if (!querySnapshot.empty) {
-    console.log("Restaurant collection already contains data. Skipping seed...");
+    console.log(
+      "Restaurant collection already contains data. Skipping seed...",
+    );
     return;
   }
 
@@ -96,7 +100,10 @@ async function seedRestaurants() {
     const tags = place.tags || {};
     await addDoc(restaurantsRef, {
       name: tags.name || "Unknown Restaurant",
-      address: [tags["addr:street"], tags["addr:housenumber"]].filter(Boolean).join(" ") || "",
+      address:
+        [tags["addr:street"], tags["addr:housenumber"]]
+          .filter(Boolean)
+          .join(" ") || "",
       city: "Vancouver",
       cuisine: tags.cuisine || "",
       lat: String(place.lat || ""),
