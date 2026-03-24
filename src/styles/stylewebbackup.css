@@ -1,0 +1,229 @@
+/*
+* --------------------------------------------------
+* Custom styles overriding Bootstrap defaults
+* --------------------------------------------------
+*
+* Design principles applied:
+*
+* 1) 20/80 Rule
+*    A small number of targeted changes (colours on key
+*    components like buttons, navbar, and backgrounds)
+*    create most of the visual impact without rewriting
+*    Bootstrap’s core styles.
+*
+* 2) 60 / 30 / 10 Colour Rule
+*    - 60% dominant: lighter for backgrounds and large surfaces
+*    - 30% primary/secondary: primary for main actions, secondary for supporting elements
+*    - 10% accent: used sparingly for hover or emphasis
+*/
+
+/* --------------------------------------------------
+* Theme colours (CSS variables)
+* --------------------------------------------------
+*
+* Store as variables for reuse and maintainability. 
+*/
+:root {
+  /* 60% — background */
+  --light-text: #ffffff;
+
+  /* 30% — primary actions and supporting surfaces) */
+  --primary: #ffa500;
+  --secondary: #ffe380;
+  --thirdOption: #fff1bf;
+
+  /* 10% — accent for emphasis and interaction */
+  --accent: #b38b00;
+
+  /* Button border widths */
+  --btn-border-width: 3px;
+  --btn-border-width-hover: 5px;
+}
+
+/* --------------------------------------------------
+* Button: .btn-info
+* --------------------------------------------------
+*  
+* Uses secondary (30%) color used in the call-to-action buttons, 
+* with a border to add visual interest without overwhelming the design.
+*/
+  .btn-info {
+    color: var(--light-text);
+    background-color: var(--secondary);
+    border-color: var(--primary);
+    border-width: var(--btn-border-width);
+  }
+  .design-flex {
+    grid-template-columns: auto;
+    columns: 500px;
+    width: 60%;
+    margin: 40px auto;
+    text-align: center;
+    border-color: var(--accent);
+    border-radius: 5px;
+  }
+  .card-body {
+    background-color: var(--primary);
+    color: var(--thirdOption);
+  }
+  /*
+* OPTIONAL: Hover/focus for desktop users - progressive enhancement
+* A thicker accent-colored border adds visual feedback without 
+* changing the button's core color scheme.
+*/
+  .btn-info:hover,
+  .btn-info:focus {
+    background-color: var(--secondary);
+    border-color: var(--accent);
+    border-width: var(--btn-border-width-hover);
+  }
+
+  :root {
+    --background: #ffaf00;
+    --primary: red;
+    --secondary: white;
+    --third: #e0e0e0;
+    --accent: rgba(255, 0, 0, 0.5);
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffaf00;
+    font-family: "Inter", "Arial";
+  }
+
+  .navbar-light .navbar-brand,
+  .navbar-light .navbar-nav .nav-link {
+    #map-preview {
+      width: 100%;
+      height: 400px;
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    color: white;
+    text-decoration: none;
+    background-color: #ffaf00;
+  }
+
+  .navbar-brand,
+  .px-4,
+  .collapse {
+    font-size: large;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .login,
+  .sign-up {
+    font-size: small;
+    font-weight: bold;
+    border: 0;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .sign-up {
+    color: white;
+    background-color: red;
+  }
+
+  .sign-up:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+
+  .login:hover {
+    background-color: #e0e0e0;
+  }
+
+  .address-input {
+    padding-left: 4rem;
+    border: none;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  .address-input:focus {
+    box-shadow: red 0px -2px 0px inset;
+  }
+
+  .address-input {
+    background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
+    background-position-x: 20px;
+    background-position-y: 50%;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-color: white;
+    width: 40%;
+  }
+
+  .hero-area {
+    width: 100%;
+    height: 90vh;
+    background-image: url("../images/restaurant.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .search-button:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    background-color: var(--background);
+    height: 60px;
+  }
+
+  .footer-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+  }
+
+  .footer-nav li {
+    flex: 1;
+    text-align: center;
+  }
+
+  .footer-nav a {
+    display: block;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+  }
+
+  .footer-nav a:hover {
+    color: rgba(255, 0, 0, 0.5);
+  }
+
+  .restaurants {
+    list-style-type: none;
+  }
+
+  .restaurants img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  #map {
+    height: 50vh;
+    width: 50vh;
+    justify-self: center;
+  }
+  #map-preview {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    border-radius: 12px;
+  }
+  @media (max-width: 768px) {
+    #map-preview {
+      height: 300px;
+    }
+  }
+
