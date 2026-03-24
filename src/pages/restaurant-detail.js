@@ -1,4 +1,4 @@
-import { db } from "./helper/firebaseConfig.js";
+import { db } from "../helper/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
 
 // Get the document ID from the URL

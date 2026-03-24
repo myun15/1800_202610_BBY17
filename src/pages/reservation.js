@@ -130,7 +130,7 @@ async function displayRestaurantCardsDynamically() {
             }
             
             // Add link
-            newcard.querySelector(".read-more").href = `eachRestaurant.html?docID=${doc.id}`;
+            newcard.querySelector(".read-more").href = `restaurant-detail.html?docID=${doc.id}`;
             
             // Add to container
             container.appendChild(newcard);
