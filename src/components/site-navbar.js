@@ -7,11 +7,19 @@ class SiteNavbar extends HTMLElement {
   }
 
   renderNavbar() {
+<<<<<<< HEAD
+    onAuthReady(user => {
+        const href = user ? "./home.html" : "./index.html";
+        const authButton = user
+            ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
+            : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='login.html'" type="button">Log in</button>`;
+=======
     onAuthReady((user) => {
       const href = user ? "./main.html" : "./index.html";
       const authButton = user
         ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
         : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='login.html'" type="button">Log in</button>`;
+>>>>>>> c6c0e4e9e2cdf70bb942805550d3f2df10832573
 
       this.innerHTML = `
             <nav class="navbar navbar-expand-lg">
