@@ -1,28 +1,3 @@
-/*
-* --------------------------------------------------
-* Custom styles overriding Bootstrap defaults
-* --------------------------------------------------
-*
-* Design principles applied:
-*
-* 1) 20/80 Rule
-*    A small number of targeted changes (colours on key
-*    components like buttons, navbar, and backgrounds)
-*    create most of the visual impact without rewriting
-*    Bootstrap’s core styles.
-*
-* 2) 60 / 30 / 10 Colour Rule
-*    - 60% dominant: lighter for backgrounds and large surfaces
-*    - 30% primary/secondary: primary for main actions, secondary for supporting elements
-*    - 10% accent: used sparingly for hover or emphasis
-*/
-
-/* --------------------------------------------------
-* Theme colours (CSS variables)
-* --------------------------------------------------
-*
-* Store as variables for reuse and maintainability. 
-*/
 :root {
   /* 60% — background */
   --light-text: #ffffff;
@@ -71,28 +46,55 @@ map and login logout*/
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100%;
-  gap: 20px;
+  height: 60px;
+  gap: clamp(8px, 1.5vw, 20px);
 }
 
-.navbar-light .navbar-brand,
-.navbar-light .navbar-nav .nav-link {
+.navbar-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  gap: clamp(4px, 0.8vw, 8px);
+}
+
+nav.navbar {
+  background-color: #ffaf00;
+  padding: clamp(4px, 0.8vw, 10px) clamp(8px, 1.5vw, 16px);
+}
+
+.navbar-menu-icon {
+  width: clamp(14px, 1.8vw, 20px);
+  height: clamp(18px, 2.2vw, 25px);
+}
+
+.navbar-search-wrapper {
+  gap: clamp(4px, 0.8vw, 8px);
+}
+
+.navbar-search-wrapper .form-control {
+  padding-top: clamp(6px, 1vw, 12px);
+  padding-bottom: clamp(6px, 1vw, 12px);
+}
+
+.navbar-auth-wrapper {
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar .navbar-brand {
   color: white;
   text-decoration: none;
-  background-color: #ffaf00;
-}
-/*TimesUp design*/
-.navbar-brand,
-.px-4,
-.collapse {
-  font-size: large;
+  font-size: clamp(0.9rem, 1.5vw, 1.25rem);
   font-weight: 400;
   font-style: normal;
 }
 
+.search-button {
+  white-space: nowrap;
+}
+
 /* research bar design */
 .address-input {
-  padding-left: 4rem;
   border: none;
   transition: box-shadow 0.3s ease-in-out;
 }
@@ -102,7 +104,7 @@ map and login logout*/
 }
 .address-input {
   background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
-  background-position-x: 20px;
+  background-position-x: clamp(10px, 1.5vw, 17px);
   background-position-y: 50%;
   background-size: 20px 20px;
   background-repeat: no-repeat;
@@ -127,7 +129,7 @@ body {
   position: relative;
   flex: 1;
   width: 100%;
-  min-height: 400px;
+  min-height: 30vh;
   background-image: url("images/restaurant.jpg");
   background-size: cover;
   background-position: center;
@@ -143,26 +145,22 @@ body {
   position: relative;
   display: inline-block;
   z-index: 2;
-  font-size: 18px;
   color: rgb(0, 0, 0);
-  margin: 20px;
-  padding: 12px 24px;
-  background: rgba(255, 255, 255, 0.95);
+  margin: clamp(10px, 2vw, 20px);
+  padding: clamp(8px, 1vw, 12px) clamp(14px, 2vw, 24px);
+  background: transparent;
   border-radius: 30px;
   max-width: 90%;
-  white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .hero-area .lead {
   position: absolute;
-  top: 80px;
-  left: 100px;
+  top: clamp(50px, 7vw, 80px);
+  left: clamp(50px, 8vw, 100px);
   z-index: 2;
-  font-size: 16px;
+  font-size: clamp(0.8rem, 1.3vw, 1rem);
   color: #333;
-  padding: 8px 16px;
-
+  padding: clamp(4px, 0.8vw, 8px) clamp(8px, 1.2vw, 16px);
   background: rgba(255, 255, 255, 0.95);
   white-space: nowrap;
 }
@@ -176,11 +174,8 @@ body {
   z-index: 2;
 }
 #map-preview {
-  position: fixed;
-  top: 200px;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  flex: 1;
+  width: 100%;
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -199,8 +194,8 @@ body {
 }
 .section-title {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 2rem;
+  margin-bottom: clamp(15px, 3vw, 30px);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
   color: #333;
   font-weight: bold;
 }
@@ -209,8 +204,8 @@ body {
 .restaurants-carousel-wrapper {
   position: relative;
   margin: 0 auto;
-  padding: 0 50px;
-  max-width: 500px; /* max width */
+  padding: 0 clamp(20px, 4vw, 50px);
+  max-width: min(500px, 90vw);
 }
 
 .restaurants-carousel {
@@ -256,16 +251,16 @@ body {
 }
 
 .card-img-top {
-  height: 180px;
+  height: clamp(120px, 15vw, 180px);
   object-fit: cover;
   width: 100%;
 }
 .card-body {
-  padding: 20px;
+  padding: clamp(12px, 2vw, 20px);
 }
 .card-title {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  margin-bottom: clamp(6px, 1vw, 10px);
   color: #333;
 }
 
@@ -276,7 +271,7 @@ body {
 
 .card-footer {
   background: #f8f9fa;
-  padding: 12px 20px;
+  padding: clamp(8px, 1.2vw, 12px) clamp(12px, 1.8vw, 20px);
   border-top: 1px solid #e9ecef;
 }
 /* button style*/
@@ -287,11 +282,11 @@ body {
   background: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
-  width: 45px;
-  height: 45px;
+  width: clamp(30px, 4vw, 45px);
+  height: clamp(30px, 4vw, 45px);
   border-radius: 50%;
   cursor: pointer;
-  font-size: 24px;
+  font-size: clamp(16px, 2vw, 24px);
   font-weight: bold;
   transition: all 0.3s ease;
   z-index: 10;
@@ -316,10 +311,12 @@ body {
 /* login and logout button design */
 .login,
 .sign-up {
-  font-size: x-small;
-  font-weight: bold;
+  font-size: 16px;
   border: 0;
-  padding: 0.25rem 0.5rem;
+  padding: 8px 12px;
+  margin-left: 2rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .sign-up {
