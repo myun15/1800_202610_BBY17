@@ -3,7 +3,7 @@ class SiteFooter extends HTMLElement {
     this.innerHTML = `
         <footer class="fixed-bottom footer">
             <ul class="footer-nav">
-            <li onclick="window.location.href='main.html'">
+            <li onclick="window.location.href='home.html'">
                 <a href="#"><span class="material-symbols-outlined">home</span>
                 <span class="home">home</span></a>
             </li>

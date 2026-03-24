@@ -17,7 +17,7 @@ function initAuthUI() {
   const toLoginBtn = document.getElementById('toLogin');
   const loginForm = document.getElementById('loginForm');
   const signupForm = document.getElementById('signupForm');
-  const redirectUrl = 'main.html';
+  const redirectUrl = 'home.html';
 
   function setVisible(el, visible) {
     el.classList.toggle('d-none', !visible);
@@ -105,7 +105,7 @@ function initAuthUI() {
 async function redirectToMainIfLoggedIn() {
   await auth.authStateReady();
   if (auth.currentUser) {
-    location.href = "main.html";
+    location.href = "home.html";
   }
 }
 
