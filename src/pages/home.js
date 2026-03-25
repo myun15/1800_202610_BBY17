@@ -124,10 +124,22 @@ async function initRestaurantPins(map) {
     if (data.lat && data.lng) {
       new maplibregl.Marker({ color: "#ff0000" })
         .setLngLat([parseFloat(data.lng), parseFloat(data.lat)])
+
         .setPopup(
-          new maplibregl.Popup().setHTML(
-            `<h3>${data.name}</h3><p>${data.address}</p>`,
-          ),
+          new maplibregl.Popup().setHTML(`
+    <h3>${data.name}</h3>
+    <p>${data.address || ""}</p>
+    <p>
+      ${data.status === "empty"
+              ? "🟢 EMPTY"
+              : data.status === "busy"
+                ? "🟡 BUSY"
+                : data.status === "full"
+                  ? "🔴 FULL"
+                  : "⚪ UNKNOWN"
+            }
+    </p>
+  `)
         )
         .addTo(map);
     }
