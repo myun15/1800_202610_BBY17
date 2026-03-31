@@ -1,25 +1,23 @@
 :root {
-  /* 60% — background */
   --light-text: #ffffff;
-
-  /* 30% — primary actions and supporting surfaces) */
   --primary: #ffa500;
   --secondary: #ffe380;
   --thirdOption: #fff1bf;
-
-  /* 10% — accent for emphasis and interaction */
   --accent: #b38b00;
 
-  /* Button border widths */
   --btn-border-width: 3px;
   --btn-border-width-hover: 5px;
 }
+
+/* BUTTONS */
 .btn-info {
   color: var(--light-text);
   background-color: var(--secondary);
   border-color: var(--primary);
   border-width: var(--btn-border-width);
 }
+
+/* FLEX DESIGN */
 .design-flex {
   grid-template-columns: auto;
   columns: 500px;
@@ -29,19 +27,14 @@
   border-color: var(--accent);
   border-radius: 5px;
 }
+
+/* CARD BODY */
 .card-body {
   background-color: var(--primary);
   color: var(--thirdOption);
 }
-/*
-* OPTIONAL: Hover/focus for desktop users - progressive enhancement
-* A thicker accent-colored border adds visual feedback without 
-* changing the button's core color scheme.
-*/
 
-/*nav bar with dropdown menu,title,research bar,search
-map and login logout*/
-
+/* NAVBAR */
 .navbar-main-container {
   display: flex;
   align-items: center;
@@ -62,6 +55,11 @@ site-navbar {
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+
+
+site-footer {
+  display: block;
 }
 
 nav.navbar {
@@ -93,14 +91,13 @@ nav.navbar {
   text-decoration: none;
   font-size: clamp(0.9rem, 1.5vw, 1.25rem);
   font-weight: 400;
-  font-style: normal;
 }
 
 .search-button {
   white-space: nowrap;
 }
 
-/* research bar design */
+/* SEARCH INPUT */
 .address-input {
   border: none;
   transition: box-shadow 0.3s ease-in-out;
@@ -109,6 +106,7 @@ nav.navbar {
 .address-input:focus {
   box-shadow: red 0px -2px 0px inset;
 }
+
 .address-input {
   background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
   background-position-x: clamp(10px, 1.5vw, 17px);
@@ -119,21 +117,25 @@ nav.navbar {
   width: 40%;
 }
 
-/* MainPage hero area design with image background */
+/* BODY */
 html,
 body {
   margin: 0;
   padding: 0;
 }
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 body.no-scroll {
   height: 100vh;
-  overflow: hidden; /*not move the map when scroll*/
+  overflow: hidden;
 }
+
+/* HERO */
 .hero-area {
   position: relative;
   flex: 1;
@@ -154,12 +156,10 @@ body.no-scroll {
   position: relative;
   display: inline-block;
   z-index: 2;
-  color: rgb(0, 0, 0);
+  color: black;
   margin: clamp(10px, 2vw, 20px);
   padding: clamp(8px, 1vw, 12px) clamp(14px, 2vw, 24px);
-  background: transparent;
   border-radius: 30px;
-  max-width: 90%;
 }
 
 .hero-area .lead {
@@ -169,12 +169,11 @@ body.no-scroll {
   z-index: 2;
   font-size: clamp(0.8rem, 1.3vw, 1rem);
   color: #333;
-  padding: clamp(4px, 0.8vw, 8px) clamp(8px, 1.2vw, 16px);
+  padding: clamp(4px, 0.8vw, 8px);
   background: rgba(255, 255, 255, 0.95);
-  white-space: nowrap;
 }
 
-/* MainPage map container and preview design */
+/* MAP */
 #map-container {
   flex: 1;
   position: relative;
@@ -182,150 +181,36 @@ body.no-scroll {
   height: 100%;
   z-index: 2;
 }
+
+/* ✅ MAIN FIX HERE */
 #map-preview {
   flex: 1;
   width: 100%;
+  height: calc(100vh - 120px);
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-/*anything else will add on top of the map preview.*/
-.hero-area .d-flex {
-  position: relative;
-  z-index: 2;
-}
 
-/* MainPage RestaurantCards for search results and default search */
-.card-section {
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  margin: 20px 0;
-  padding: 20px 0;
-}
-.section-title {
-  text-align: center;
-  margin-bottom: clamp(15px, 3vw, 30px);
-  font-size: clamp(1.25rem, 2.5vw, 2rem);
-  color: #333;
-  font-weight: bold;
-}
-
-/* Container element for slider*/
-.restaurants-carousel-wrapper {
-  position: relative;
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 50px);
-  max-width: min(500px, 90vw);
-}
-
-.restaurants-carousel {
-  position: relative;
-  width: 100%;
-}
-
-.restaurants-container {
-  overflow: hidden;
-  position: relative;
-}
-
-/* key bard can align in row */
-#cardsRow {
-  display: flex;
-  flex-wrap: nowrap;
-  transition: transform 0.5s ease;
-  margin: 0;
-  padding: 0;
-}
-
-#cardsRow .col {
-  flex: 0 0 100%;
-  min-width: 100%;
-  padding: 0 15px;
-}
-
-/* flowing effects */
+/* CARDS */
 .card {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.card-img-top {
-  height: clamp(120px, 15vw, 180px);
-  object-fit: cover;
-  width: 100%;
-}
-.card-body {
-  padding: clamp(12px, 2vw, 20px);
-}
-.card-title {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  margin-bottom: clamp(6px, 1vw, 10px);
-  color: #333;
-}
-
-.card-text {
-  color: #666;
-  line-height: 1.5;
-}
-
-.card-footer {
-  background: #f8f9fa;
-  padding: clamp(8px, 1.2vw, 12px) clamp(12px, 1.8vw, 20px);
-  border-top: 1px solid #e9ecef;
-}
-/* button style*/
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  width: clamp(30px, 4vw, 45px);
-  height: clamp(30px, 4vw, 45px);
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: clamp(16px, 2vw, 24px);
-  font-weight: bold;
-  transition: all 0.3s ease;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carousel-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-  transform: translateY(-10%) scale(1.1);
-}
-
-.prev-btn {
-  left: -20px;
-}
-
-.next-btn {
-  right: -20px;
-}
-
-/* login and logout button design */
+/* BUTTONS */
 .login,
 .sign-up {
   font-size: 16px;
   border: 0;
   padding: 8px 12px;
   margin-left: 2rem;
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .sign-up {
@@ -340,14 +225,14 @@ body.no-scroll {
 .login:hover {
   background-color: #bf0e0e;
 }
-/* footer bar with original navbar design  */
+
+/* FOOTER */
 .footer {
   display: flex;
   align-items: center;
   background-color: var(--primary);
   height: 60px;
   justify-content: center;
-  z-index: 1;
 }
 
 .footer-nav {
@@ -367,10 +252,104 @@ body.no-scroll {
 .footer-nav a {
   display: block;
   text-decoration: none;
-  color: rgb(0, 0, 0);
-  font-weight: 500;
+  color: black;
 }
 
 .footer-nav a:hover {
   color: rgba(255, 0, 0, 0.5);
+}
+.maplibregl-popup {
+  z-index: 9999 !important;
+}
+
+.maplibregl-popup-content {
+  padding: 0 !important;
+  border-radius: 16px !important;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+  font-family: "Inter", sans-serif;
+}
+
+.maplibregl-popup-tip {
+  display: none;
+}
+
+.maplibregl-popup-close-button {
+  font-size: 18px;
+  padding: 6px 10px;
+  color: #333;
+}
+
+.restaurant-popup-card {
+  width: 280px;
+  background: #fff;
+}
+
+.restaurant-popup-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.restaurant-popup-body {
+  padding: 12px;
+}
+
+.restaurant-popup-title {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #222;
+}
+
+.restaurant-popup-cuisine {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #666;
+}
+
+.restaurant-popup-address {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.restaurant-popup-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.restaurant-popup-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.crowd-low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.crowd-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.crowd-high {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.crowd-unknown {
+  background: #e5e7eb;
+  color: #374151;
 }
