@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>TeamBBY</title>
     <meta name="comp1800 template" content="My 1800 App" />
     <meta charset="utf-8" />
@@ -25,6 +26,32 @@
 
       <!-- Map Preview -->
       <div id="map-preview"></div>
+      <div class="container mt-4">
+        <div id="restaurants-go-here" class="row row-cols-1 row-cols-md-3 g-4">
+            </div>
+    </div>
+
+    <template id="vendorCardTemplate">
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm" style="background-color: #FFA500; border-radius: 12px; overflow: hidden;">
+                <img src="" class="card-img-top vendor-img" alt="Food Vendor" style="height: 180px; object-fit: cover;">
+                <div class="card-body text-dark">
+                    <h5 class="card-title fw-bold">Business Name</h5>
+                    <p class="category-text mb-1">Category</p>
+                    <p class="address-text small mb-2">Location</p>
+                    <span class="status-badge badge rounded-pill bg-success px-3">● Open</span>
+                    
+                    <div class="d-flex justify-content-end mt-2">
+                      <i class="material-icons fav-icon" 
+                   style="font-size: 36px; cursor: pointer; color: white;">
+                   favorite_border
+                </i>
+                        <i class="material-icons fav-icon" style="font-size: 36px; cursor: pointer;">favorite_border</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
 
     <!-- our own footer goes here -->
     <site-footer></site-footer>
