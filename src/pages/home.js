@@ -1,3 +1,4 @@
+import { collection, getDocs, addDoc, doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { collection, getDocs, addDoc } from "firebase/firestore";
@@ -273,3 +274,30 @@ async function initRestaurantPins(map) {
 window.addEventListener("load", initPreviewMap);
 showNameWhenLoggedIn();
 seedRestaurants();
+
+// --- Favorite Toggle Logic (Demo #12) ---
+async function toggleFavorite(restaurantID) {
+    onAuthReady(async (user) => {
+        if (!user) return;
+
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = await getDoc(userRef);
+        const bookmarks = userSnap.data()?.bookmarks || [];
+        const isBookmarked = bookmarks.includes(restaurantID);
+
+        try {
+            if (isBookmarked) {
+                await updateDoc(userRef, { bookmarks: arrayRemove(restaurantID) });
+                console.log("Removed from favorites");
+            } else {
+                await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
+                console.log("Added to favorites");
+            }
+        } catch (err) {
+            console.error("Error updating favorite:", err);
+        }
+    });
+}
+
+// Make it globally accessible for the button in the popup
+window.toggleFavorite = toggleFavorite;
