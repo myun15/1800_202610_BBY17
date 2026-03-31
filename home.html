@@ -18,58 +18,13 @@
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
     <script type="module" src="/src/styles/style.css"></script>
-</head>
+  </head>
 
-  <body>
+  <body class="no-scroll">
     <site-navbar></site-navbar>
 
-    <!-- Main Content
-    <div
-      class="hero-area d-flex justify-content-center flex-column h-90vh px-5"
-    >
-      <h1 id="welcome-user" class="display-5 fw-bold pb-4 text-white"></h1>
-      <h1 class="display-5 fw-bold pb-4 text-white">
-        Restaurant wait-lists near you
-      </h1>
-      <div class="d-flex gap-2">
-        <input
-          type="text"
-          class="address-input form-control py-3"
-          placeholder="Enter address"
-        />
-        <button class="search-button btn btn-danger">Search</button>
-        <button
-          class="btn btn-success"
-          onclick="window.location.href = 'map.html'"
-        >
-          Map
-        </button>
-      </div> -->
-
-    <!-- Map Preview -->
-    <div id="map-preview"></div>
-
-        <div class="container-fluid bg-light text-dark p-5">
-        <h1>Popular Restaurants</h1>
-        <div id="Restaurants-go-here" class="row">
-        </div>
-    </div>
-
-    <!-- Restaurant Preview -->
-    <template id="restaurantCardTemplate">
-        <div class="col">
-            <div class="card">
-                <img class="card-img-top card-image" src="..." alt="Restaurant Image">
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text"></p>
-                    <p>Length: <span class="card-length"></span> km</p>
-                    <a class="btn btn-primary read-more" href="#">Read More</a>
-                </div>
-            </div>
-        </div>
-    </template>
-  </div>
+      <!-- Map Preview -->
+      <div id="map-preview"></div>
 
     <!-- our own footer goes here -->
     <site-footer></site-footer>
@@ -100,9 +55,10 @@
         popup.style.display = "none";
       }
     </script>
+
     <!---------------------------------------------->
     <!-- Your own JavaScript scripts go here      -->
-    <!---------------------------------------------->
+    <!------------------------------------------------>
     <script type="module" src="/src/app.js"></script>
     <script type="module" src="/src/pages/home.js"></script>
   </body>

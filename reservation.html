@@ -17,33 +17,49 @@
     />
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
+    <script type="module" src="/src/styles/style.css"></script>
   </head>
 
   <body>
     <site-navbar></site-navbar>
 
+    <!-- Restaurant Preview -->
+    <!-- Food Vendors Section -->
     <div class="container-fluid bg-light text-dark p-5">
-      <h1>Reservation</h1>
-      <div id="restaurant-go-here" class="row"></div>
+      <div class="container">
+        <h1 class="mb-4">🍽️ Featured Reservation Vendors</h1>
+        <p class="mb-4">
+          Explore Vancouver's diverse food truck scene - from hot dogs to Fine
+          cuisine
+        </p>
+        <div id="Restaurants-go-here" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <!-- Vendor cards will be dynamically inserted here -->
+        </div>
+      </div>
     </div>
 
-    <template id="Restaurantbooking">
+    <!-- Vendor Card Template -->
+    <template id="vendorCardTemplate">
       <div class="col">
-        <div class="card">
-          <img class="card-img-top card-image" src="..." alt="Hike Image" />
+        <div class="card h-100">
+          <img src="/images/food-truck.jpg" class="card-img-top card-image" alt="Food Vendor" />
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text"></p>
-            <p>Address: <span class="card-length"></span> km</p>
-            <a class="btn btn-primary read-more" href="#">Read More</a>
           </div>
+
         </div>
       </div>
     </template>
 
+    <!-- our own footer goes here -->
     <site-footer></site-footer>
 
+
+    <!---------------------------------------------->
+    <!-- Your own JavaScript scripts go here      -->
+    <!---------------------------------------------->
     <script type="module" src="/src/app.js"></script>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/pages/reservation.js"></script>
   </body>
 </html>
