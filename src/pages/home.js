@@ -1,7 +1,6 @@
 import { collection, getDocs, addDoc, doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from "/src/helper/firebaseConfig.js";
 import { onAuthReady } from "/src/helper/authentication.js";
 
