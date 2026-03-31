@@ -28,6 +28,13 @@
   border-radius: 5px;
 }
 
+/* CARD IMAGE */
+.card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
 /* CARD BODY */
 .card-body {
   background-color: var(--primary);
