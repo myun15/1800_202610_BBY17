@@ -8,8 +8,6 @@ import { onAuthReady } from "/src/helper/authentication.js";
 const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
 const VANCOUVER = { lng: -123.1207, lat: 49.2827 };
 
-
-
 function initPreviewMap() {
   const mapEl = document.getElementById("map-preview");
   if (!mapEl) return;
@@ -59,27 +57,34 @@ function showNameWhenLoggedIn() {
   });
 }
 
-// --- Restaurant Seeding from OpenStreetMap ---
-async function fetchRestaurantsFromOverpass() {
-  const query = `
-    [out:json][timeout:30];
-    node["amenity"="restaurant"](49.20,-123.27,49.32,-123.02);
-    out body 100;
-  `;
+// --- Restaurant Seeding from Yelp ---
+async function fetchRestaurantsFromYelp() {
+  const restaurants = [];
 
-  const response = await fetch("https://overpass-api.de/api/interpreter", {
-    method: "POST",
-    body: `data=${encodeURIComponent(query)}`,
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  });
+  // Yelp returns max 50 per call, so paginate to get ~100
+  for (let offset = 0; offset < 100; offset += 50) {
+    const params = new URLSearchParams({
+      latitude: VANCOUVER.lat,
+      longitude: VANCOUVER.lng,
+      categories: "restaurants",
+      limit: "50",
+      offset: String(offset),
+    });
 
-  if (!response.ok) {
-    console.error("Overpass API error:", response.status);
-    return [];
+    const response = await fetch(`/api/yelp/businesses/search?${params}`);
+    if (!response.ok) {
+      console.error("Yelp API error:", response.status);
+      break;
+    }
+
+    const data = await response.json();
+    if (data.businesses) {
+      restaurants.push(...data.businesses);
+    }
+    if (!data.businesses || data.businesses.length < 50) break;
   }
 
-  const data = await response.json();
-  return data.elements || [];
+  return restaurants;
 }
 
 async function seedRestaurants() {
@@ -93,26 +98,24 @@ async function seedRestaurants() {
     return;
   }
 
-  console.log("Seeding restaurants from OpenStreetMap...");
-  const places = await fetchRestaurantsFromOverpass();
+  console.log("Seeding restaurants from Yelp...");
+  const places = await fetchRestaurantsFromYelp();
 
   for (const place of places) {
-    const tags = place.tags || {};
+    const loc = place.location || {};
     await addDoc(restaurantsRef, {
-      name: tags.name || "Unknown Restaurant",
-      address:
-        [tags["addr:street"], tags["addr:housenumber"]]
-          .filter(Boolean)
-          .join(" ") || "",
-      city: "Vancouver",
-      cuisine: tags.cuisine || "",
-      lat: String(place.lat || ""),
-      lng: String(place.lon || ""),
-      imageSrc: "",
+      name: place.name || "Unknown Restaurant",
+      address: loc.address1 || "",
+      city: loc.city || "Vancouver",
+      cuisine:
+        (place.categories || []).map((c) => c.title).join(", ") || "",
+      lat: String(place.coordinates?.latitude || ""),
+      lng: String(place.coordinates?.longitude || ""),
+      imageSrc: place.image_url || "",
     });
   }
 
-  console.log(`Seeded ${places.length} restaurants from OpenStreetMap.`);
+  console.log(`Seeded ${places.length} restaurants from Yelp.`);
 }
 
 async function initRestaurantPins(map) {
