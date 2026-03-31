@@ -8,7 +8,7 @@ import { onAuthReady } from "/src/helper/authentication.js";
 const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
 const VANCOUVER = { lng: -123.1207, lat: 49.2827 };
 
-
+let userLocation = null;
 
 function initPreviewMap() {
   const mapEl = document.getElementById("map-preview");
@@ -29,14 +29,20 @@ function initPreviewMap() {
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const { longitude, latitude } = position.coords;
+
+        userLocation = { lng: longitude, lat: latitude };
+
         map.setCenter([longitude, latitude]);
 
-        new maplibregl.Marker({ color: "#ff0000" })
+        new maplibregl.Marker({ color: "#2563eb" })
           .setLngLat([longitude, latitude])
           .setPopup(new maplibregl.Popup().setText("You are here"))
           .addTo(map);
+
+        // refresh markers so popup distance uses real user location
+        await initRestaurantPins(map);
       },
       () => {
         console.log("Location denied, showing Vancouver");
@@ -87,9 +93,7 @@ async function seedRestaurants() {
   const querySnapshot = await getDocs(restaurantsRef);
 
   if (!querySnapshot.empty) {
-    console.log(
-      "Restaurant collection already contains data. Skipping seed...",
-    );
+    console.log("Restaurant collection already contains data. Skipping seed...");
     return;
   }
 
@@ -103,46 +107,166 @@ async function seedRestaurants() {
       address:
         [tags["addr:street"], tags["addr:housenumber"]]
           .filter(Boolean)
-          .join(" ") || "",
+          .join(" ") || "Address not available",
       city: "Vancouver",
-      cuisine: tags.cuisine || "",
+      cuisine: tags.cuisine || "Restaurant",
       lat: String(place.lat || ""),
       lng: String(place.lon || ""),
       imageSrc: "",
+      rating: "",
+      hours: "",
+      status: "",
     });
   }
 
   console.log(`Seeded ${places.length} restaurants from OpenStreetMap.`);
 }
 
+// --- Helper functions ---
+function escapeHTML(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function normalizeStatus(status = "") {
+  const value = status.toString().trim().toLowerCase();
+
+  if (value === "empty" || value === "low") {
+    return { label: "Low", emoji: "🟢", className: "crowd-low" };
+  }
+
+  if (value === "busy" || value === "medium" || value === "moderate") {
+    return { label: "Busy", emoji: "🟡", className: "crowd-medium" };
+  }
+
+  if (value === "full" || value === "high") {
+    return { label: "Full", emoji: "🔴", className: "crowd-high" };
+  }
+
+  return { label: "Unknown", emoji: "⚪", className: "crowd-unknown" };
+}
+
+function getRestaurantImage(data) {
+  if (data.imageSrc && data.imageSrc.trim() !== "") {
+    return data.imageSrc;
+  }
+
+  return "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+}
+
+function getOpenText(data) {
+  if (data.hours && data.hours.trim() !== "") {
+    return data.hours;
+  }
+
+  return "Hours not available";
+}
+
+function calculateDistance(lat1, lng1, lat2, lng2) {
+  const R = 6371; // Earth radius in km
+
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+function getDistanceText(data) {
+  if (!userLocation || !data.lat || !data.lng) {
+    return "📍 Nearby";
+  }
+
+  const distance = calculateDistance(
+    userLocation.lat,
+    userLocation.lng,
+    parseFloat(data.lat),
+    parseFloat(data.lng),
+  );
+
+  return `📍 ${distance.toFixed(1)} km`;
+}
+
+function buildPopupHTML(data) {
+  const status = normalizeStatus(data.status);
+  const image = getRestaurantImage(data);
+  const openText = getOpenText(data);
+  const distanceText = getDistanceText(data);
+
+  return `
+    <div class="restaurant-popup-card">
+      <img
+        class="restaurant-popup-image"
+        src="${escapeHTML(image)}"
+        alt="${escapeHTML(data.name || "Restaurant image")}"
+      />
+
+      <div class="restaurant-popup-body">
+        <h3 class="restaurant-popup-title">
+          ${escapeHTML(data.name || "Unknown Restaurant")}
+        </h3>
+
+        <p class="restaurant-popup-cuisine">
+          ${escapeHTML(data.cuisine || "Restaurant")}
+        </p>
+
+        <p class="restaurant-popup-address">
+          ${escapeHTML(data.address || "Address not available")}
+        </p>
+
+        <div class="restaurant-popup-meta">
+          <span>${data.rating ? `⭐ ${escapeHTML(data.rating)}` : "⭐ N/A"}</span>
+          <span>${distanceText}</span>
+        </div>
+
+        <div class="restaurant-popup-meta">
+          <span>${escapeHTML(openText)}</span>
+        </div>
+
+        <div class="restaurant-popup-badge ${status.className}">
+          ${status.emoji} ${status.label}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// --- Restaurant Pins ---
 async function initRestaurantPins(map) {
   const snapshot = await getDocs(collection(db, "restaurants"));
 
   snapshot.docs.forEach((doc) => {
     const data = doc.data();
 
-    if (data.lat && data.lng) {
-      new maplibregl.Marker({ color: "#ff0000" })
-        .setLngLat([parseFloat(data.lng), parseFloat(data.lat)])
+    if (!data.lat || !data.lng) return;
 
-        .setPopup(
-          new maplibregl.Popup().setHTML(`
-    <h3>${data.name}</h3>
-    <p>${data.address || ""}</p>
-    <p>
-      ${data.status === "empty"
-              ? "🟢 EMPTY"
-              : data.status === "busy"
-                ? "🟡 BUSY"
-                : data.status === "full"
-                  ? "🔴 FULL"
-                  : "⚪ UNKNOWN"
-            }
-    </p>
-  `)
-        )
-        .addTo(map);
-    }
+    const lat = parseFloat(data.lat);
+    const lng = parseFloat(data.lng);
+
+    if (Number.isNaN(lat) || Number.isNaN(lng)) return;
+
+    const popup = new maplibregl.Popup({
+      closeButton: true,
+      closeOnClick: true,
+      maxWidth: "300px",
+      offset: 25,
+    }).setHTML(buildPopupHTML(data));
+
+    new maplibregl.Marker({ color: "#ff0000" })
+      .setLngLat([lng, lat])
+      .setPopup(popup)
+      .addTo(map);
   });
 }
 
