@@ -64,7 +64,6 @@ site-navbar {
   z-index: 1000;
 }
 
-
 site-footer {
   display: block;
 }
@@ -201,7 +200,9 @@ body.no-scroll {
 
 /* CARDS */
 .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
   height: 100%;
   border-radius: 12px;
   overflow: hidden;
@@ -359,4 +360,25 @@ body.no-scroll {
 .crowd-unknown {
   background: #e5e7eb;
   color: #374151;
+}
+/* 3.31 add style for button in vendor cards */
+.move-right {
+  margin-left: 150px;
+}
+.btn-group {
+  font-size: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#filter-container {
+  min-width: 260px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
 }

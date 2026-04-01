@@ -13,7 +13,7 @@ class SiteFooter extends HTMLElement {
             </li>
             <li onclick="window.location.href='reservation.html'">
                 <a href="#" class="text-dark d-flex flex-column align-items-center"><span class="material-symbols-outlined">calendar_meal</span>
-                <span class="Reservation">Reservation</span></a>
+                <span class="Featured Vendor">Featured Vendor</span></a>
             </li>
             <li onclick="window.location.href='favorites.html'">
                 <a href="#"class="text-dark d-flex flex-column align-items-center"><span class="material-symbols-outlined">favorite</span>
