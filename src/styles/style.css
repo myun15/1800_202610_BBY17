@@ -399,7 +399,11 @@ body.no-scroll {
   font-size: 16px;
   box-shadow: 0 4px 12px rgba(207, 68, 47, 0.3);
 }
-
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
 .ticker {
   width: 100%;
   overflow: hidden;
