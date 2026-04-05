@@ -1,32 +1,39 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>TeamBBY</title>
-    <meta name="comp1800 template" content="My 1800 App" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-    <script type="module" src="/src/components/site-navbar.js"></script>
-    <script type="module" src="/src/components/site-footer.js"></script>
-  </head>
 
-  <body>
-    <site-navbar></site-navbar>
+<head>
+  <title>TeamBBY</title>
+  <meta name="comp1800 template" content="My 1800 App" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script type="module" src="/src/components/site-navbar.js"></script>
+  <script type="module" src="/src/components/site-footer.js"></script>
+</head>
 
-    <!-- Main Content -->
+<body>
+  <site-navbar></site-navbar>
 
-    <site-footer></site-footer>
+  <!-- Main Content -->
+  <main class="container py-4 favorites-page">
+    <div class="favorites-header">
+      <h1 class="favorites-title">Favorite Restaurants</h1>
+      <p class="favorites-subtitle">Your saved places, all in one spot.</p>
+    </div>
 
-    <script type="module" src="/src/app.js"></script>
-    <script type="module" src="/src/pages/favorites.js"></script>
-  </body>
+    <div id="Restaurants-go-here" class="favorites-grid"></div>
+  </main>
+
+  <site-footer></site-footer>
+
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/pages/favorites.js"></script>
+</body>
+
 </html>
