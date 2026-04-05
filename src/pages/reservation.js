@@ -243,5 +243,3 @@ function renderFilteredCards(vendors) {
 
 // once page is loaded, generate the restaurant cards, and load the filters
 loadFilters();
-
-// ========= FILTER: mutile selection version end =========
