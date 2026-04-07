@@ -120,7 +120,7 @@ nav.navbar {
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-color: white;
-  width: 40%;
+  width: clamp(200px, 30vw, 500px);
 }
 
 /* BODY */
@@ -361,7 +361,6 @@ body.no-scroll {
   background: #e5e7eb;
   color: #374151;
 }
-<<<<<<< HEAD
 
 .restaurant-last-updated {
   margin: 8px 0 10px;
@@ -737,30 +736,7 @@ body.no-scroll {
     font-size: 1.5rem;
   }
 }
-=======
-/* 3.31 add style for button in vendor cards */
-.move-right {
-  margin-left: 150px;
-}
-.btn-group {
-  font-size: 10px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-bottom: 30px;
-}
 
-#filter-container {
-  min-width: 260px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-.card-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* 4.1 add style for live bar Don't Delete!!!!*/
 .live-bar {
   position: fixed;
   bottom: 70px; /* show on the bottom */
@@ -810,7 +786,7 @@ body.no-scroll {
 
 .ticker-item {
   cursor:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🍜</text></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>:ramen:</text></svg>"),
     auto;
   opacity: 0.95;
   transition: opacity 0.2s ease;
@@ -818,15 +794,14 @@ body.no-scroll {
 }
 
 .trend-up {
-  color: #22c55e;
+  color: #22C55E;
 }
 
 .trend-down {
-  color: #3b82f6;
+  color: #3B82F6;
 }
 
 .trend-flat {
-  color: #ffffff;
+  color: #FFFFFF;
   opacity: 0.8;
 }
->>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816

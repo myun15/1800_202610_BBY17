@@ -7,11 +7,6 @@ import {
   arrayUnion,
   arrayRemove,
   getDoc,
-<<<<<<< HEAD
-  setDoc,
-  serverTimestamp,
-=======
->>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
 } from "firebase/firestore";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -48,23 +43,19 @@ function initPreviewMap() {
   const mapEl = document.getElementById("map-preview");
   if (!mapEl) return;
 
-  previewMap = new maplibregl.Map({
+  const map = new maplibregl.Map({
     container: mapEl,
     style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`,
     center: [VANCOUVER.lng, VANCOUVER.lat],
     zoom: 13,
   });
 
-<<<<<<< HEAD
-  previewMap.addControl(new maplibregl.NavigationControl(), "top-right");
-=======
   map.scrollZoom.disable();
 
   map.addControl(new maplibregl.NavigationControl(), "top-right");
->>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
 
-  previewMap.on("load", async () => {
-    await initRestaurantPins(previewMap);
+  map.on("load", async () => {
+    await initRestaurantPins(map);
   });
 
   if (navigator.geolocation) {
@@ -74,14 +65,14 @@ function initPreviewMap() {
 
         userLocation = { lng: longitude, lat: latitude };
 
-        previewMap.setCenter([longitude, latitude]);
+        map.setCenter([longitude, latitude]);
 
         new maplibregl.Marker({ color: "#2563eb" })
           .setLngLat([longitude, latitude])
           .setPopup(new maplibregl.Popup().setText("You are here"))
-          .addTo(previewMap);
+          .addTo(map);
 
-        await initRestaurantPins(previewMap);
+        await initRestaurantPins(map);
       },
       () => {
         console.log("Location denied, showing Vancouver");
@@ -438,59 +429,6 @@ window.addEventListener("load", initPreviewMap);
 showNameWhenLoggedIn();
 seedRestaurants();
 
-<<<<<<< HEAD
-// --- Favorite Toggle Logic ---
-async function toggleFavorite(buttonEl, restaurantID) {
-  onAuthReady(async (user) => {
-    if (!user) {
-      alert("Please log in to save favorites.");
-      return;
-    }
-
-    const userRef = doc(db, "users", user.uid);
-
-    try {
-      const userSnap = await getDoc(userRef);
-
-      if (!userSnap.exists()) {
-        await setDoc(userRef, {
-          bookmarks: [restaurantID],
-        });
-
-        if (buttonEl) {
-          buttonEl.classList.add("is-favorited");
-          buttonEl.innerHTML = "♥";
-        }
-
-        console.log("Created user favorites and added restaurant");
-        return;
-      }
-
-      const bookmarks = userSnap.data()?.bookmarks || [];
-      const isBookmarked = bookmarks.includes(restaurantID);
-
-      if (isBookmarked) {
-        await updateDoc(userRef, {
-          bookmarks: arrayRemove(restaurantID),
-        });
-
-        if (buttonEl) {
-          buttonEl.classList.remove("is-favorited");
-          buttonEl.innerHTML = "♡";
-        }
-
-        console.log("Removed from favorites");
-      } else {
-        await updateDoc(userRef, {
-          bookmarks: arrayUnion(restaurantID),
-        });
-
-        if (buttonEl) {
-          buttonEl.classList.add("is-favorited");
-          buttonEl.innerHTML = "♥";
-        }
-
-=======
 // --- Favorite Toggle Logic (Demo #12) ---
 async function toggleFavorite(restaurantID) {
   onAuthReady(async (user) => {
@@ -507,12 +445,10 @@ async function toggleFavorite(restaurantID) {
         console.log("Removed from favorites");
       } else {
         await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
->>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
         console.log("Added to favorites");
       }
     } catch (err) {
       console.error("Error updating favorite:", err);
-<<<<<<< HEAD
       alert("Could not update favorites.");
     }
   });
@@ -552,8 +488,3 @@ async function syncFavoriteButton(restaurantID) {
 
 window.syncFavoriteButton = syncFavoriteButton;
 window.toggleFavorite = toggleFavorite;
-=======
-    }
-  });
-}
->>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
