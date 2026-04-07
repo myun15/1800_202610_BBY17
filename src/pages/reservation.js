@@ -1,3 +1,12 @@
+import { auth, db } from "../helper/firebaseConfig.js";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
+
 async function displayVendorCards() {
   const template = document.getElementById("vendorCardTemplate"); // Blueprint for restaurant cards
   const container = document.getElementById("Restaurants-go-here"); // Actual <div> that the restaurant cards are appended to
@@ -25,6 +34,7 @@ async function displayVendorCards() {
     // Create a restaurant card for each restaurant
     validVendors.forEach((vendor) => {
       const card = template.content.cloneNode(true);
+      const vendorID = vendor.id || null;
 
       card.querySelector(".card-image").src = vendor.image_url;
       card.querySelector(".card-image").alt = vendor.business_name;
@@ -39,25 +49,29 @@ async function displayVendorCards() {
                       <span class="fw-semibold">Busyness:</span> ${vendor.busyness || "no data"}<br>
                   `;
 
-      // 1. Create the heart icon element
       const heartEl = document.createElement("i");
       heartEl.classList.add("material-icons", "fav-icon");
       heartEl.textContent = "♡";
       heartEl.style.cssText = "font-size: 36px; cursor: pointer; color: white;";
 
-      // 2. Create a wrapper to push it to the bottom-right
       const heartWrapper = document.createElement("div");
       heartWrapper.classList.add("d-flex", "justify-content-end", "mt-2");
       heartWrapper.appendChild(heartEl);
 
-      // 3. Attach it to the card body
       card.querySelector(".card-body").appendChild(heartWrapper);
 
       // 4. Make it interactive (Toggles red/filled on click)
-      heartEl.addEventListener("click", () => {
+      heartEl.addEventListener("click", async () => {
         const isFavorited = heartEl.textContent === "♥";
         heartEl.textContent = isFavorited ? "♡" : "♥";
         heartEl.style.color = isFavorited ? "white" : "red";
+
+        const user = auth.currentUser;
+        if (user) {
+          await toggleBookmark(user.uid, vendorID);
+        } else {
+          console.log("Login to save favorites");
+        }
       });
 
       container.appendChild(card);
@@ -71,9 +85,37 @@ async function displayVendorCards() {
   }
 }
 
-displayVendorCards();
+async function toggleBookmark(userId, vendorID) {
+  if (!db) {
+    console.error("Database (db) is not defined! Check your imports.");
+    return;
+  }
 
-// ========= FILTER: mutiple vendor filter and busyness filter =========
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data() || {};
+  const bookmarks = userData["favorited-restaurants"] || [];
+
+  const isBookmarked = bookmarks.includes(vendorID);
+
+  console.log()
+
+  try {
+    if (isBookmarked) {
+      await updateDoc(userRef, {
+        "favorited-restaurants": arrayRemove(vendorID),
+      });
+    } else {
+      await updateDoc(userRef, {
+        "favorited-restaurants": arrayUnion(vendorID),
+      });
+    }
+  } catch (err) {
+    console.error("Error toggling bookmarkj:", err);
+  }
+}
+
+displayVendorCards();
 
 let allVendorData = [];
 let selectedFoodTypes = [];
@@ -214,7 +256,7 @@ function renderFilteredCards(vendors) {
       <p class="text-muted small mt-2">📍 ${vendor.geo_localarea || "Vancouver"}</p>
       
     `;
-    
+
     const busyness = document.createElement("p");
     busyness.classList.add("mt-3", "mb-2", "fw-semibold");
     busyness.textContent = `Busyness: ${vendor.busyness || "no data"}`;
@@ -231,10 +273,17 @@ function renderFilteredCards(vendors) {
 
     card.querySelector(".card-body").appendChild(heartWrapper);
 
-    heartEl.addEventListener("click", () => {
+    heartEl.addEventListener("click", async () => {
       const isFavorited = heartEl.textContent === "♥";
       heartEl.textContent = isFavorited ? "♡" : "♥";
       heartEl.style.color = isFavorited ? "white" : "red";
+
+      const user = auth.currentUser;
+      if (user) {
+        await toggleBookmark(user.uid, vendor.id);
+      } else {
+        console.log("Login to save favorites");
+      }
     });
 
     container.appendChild(card);
