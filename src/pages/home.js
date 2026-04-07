@@ -1,4 +1,13 @@
-import { collection, getDocs, addDoc, doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  getDoc,
+} from "firebase/firestore";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { db } from "/src/helper/firebaseConfig.js";
@@ -100,7 +109,9 @@ async function seedRestaurants() {
   const querySnapshot = await getDocs(restaurantsRef);
 
   if (!querySnapshot.empty) {
-    console.log("Restaurant collection already contains data. Skipping seed...");
+    console.log(
+      "Restaurant collection already contains data. Skipping seed...",
+    );
     return;
   }
 
@@ -113,8 +124,7 @@ async function seedRestaurants() {
       name: place.name || "Unknown Restaurant",
       address: loc.address1 || "",
       city: loc.city || "Vancouver",
-      cuisine:
-        (place.categories || []).map((c) => c.title).join(", ") || "",
+      cuisine: (place.categories || []).map((c) => c.title).join(", ") || "",
       lat: String(place.coordinates?.latitude || ""),
       lng: String(place.coordinates?.longitude || ""),
       imageSrc: place.image_url || "",
@@ -278,27 +288,24 @@ seedRestaurants();
 
 // --- Favorite Toggle Logic (Demo #12) ---
 async function toggleFavorite(restaurantID) {
-    onAuthReady(async (user) => {
-        if (!user) return;
+  onAuthReady(async (user) => {
+    if (!user) return;
 
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-        const bookmarks = userSnap.data()?.bookmarks || [];
-        const isBookmarked = bookmarks.includes(restaurantID);
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const bookmarks = userSnap.data()?.bookmarks || [];
+    const isBookmarked = bookmarks.includes(restaurantID);
 
-        try {
-            if (isBookmarked) {
-                await updateDoc(userRef, { bookmarks: arrayRemove(restaurantID) });
-                console.log("Removed from favorites");
-            } else {
-                await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
-                console.log("Added to favorites");
-            }
-        } catch (err) {
-            console.error("Error updating favorite:", err);
-        }
-    });
+    try {
+      if (isBookmarked) {
+        await updateDoc(userRef, { bookmarks: arrayRemove(restaurantID) });
+        console.log("Removed from favorites");
+      } else {
+        await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
+        console.log("Added to favorites");
+      }
+    } catch (err) {
+      console.error("Error updating favorite:", err);
+    }
+  });
 }
-
-// Make it globally accessible for the button in the popup
-window.toggleFavorite = toggleFavorite;
