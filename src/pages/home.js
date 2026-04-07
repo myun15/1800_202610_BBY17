@@ -30,6 +30,8 @@ function initPreviewMap() {
     zoom: 13,
   });
 
+  map.scrollZoom.disable();
+
   map.addControl(new maplibregl.NavigationControl(), "top-right");
 
   map.on("load", () => {
