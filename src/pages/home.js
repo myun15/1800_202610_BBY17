@@ -7,8 +7,11 @@ import {
   arrayUnion,
   arrayRemove,
   getDoc,
+<<<<<<< HEAD
   setDoc,
   serverTimestamp,
+=======
+>>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
 } from "firebase/firestore";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -52,7 +55,13 @@ function initPreviewMap() {
     zoom: 13,
   });
 
+<<<<<<< HEAD
   previewMap.addControl(new maplibregl.NavigationControl(), "top-right");
+=======
+  map.scrollZoom.disable();
+
+  map.addControl(new maplibregl.NavigationControl(), "top-right");
+>>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
 
   previewMap.on("load", async () => {
     await initRestaurantPins(previewMap);
@@ -129,7 +138,9 @@ async function seedRestaurants() {
   const querySnapshot = await getDocs(restaurantsRef);
 
   if (!querySnapshot.empty) {
-    console.log("Restaurant collection already contains data. Skipping seed...");
+    console.log(
+      "Restaurant collection already contains data. Skipping seed...",
+    );
     return;
   }
 
@@ -427,6 +438,7 @@ window.addEventListener("load", initPreviewMap);
 showNameWhenLoggedIn();
 seedRestaurants();
 
+<<<<<<< HEAD
 // --- Favorite Toggle Logic ---
 async function toggleFavorite(buttonEl, restaurantID) {
   onAuthReady(async (user) => {
@@ -478,10 +490,29 @@ async function toggleFavorite(buttonEl, restaurantID) {
           buttonEl.innerHTML = "♥";
         }
 
+=======
+// --- Favorite Toggle Logic (Demo #12) ---
+async function toggleFavorite(restaurantID) {
+  onAuthReady(async (user) => {
+    if (!user) return;
+
+    const userRef = doc(db, "users", user.uid);
+    const userSnap = await getDoc(userRef);
+    const bookmarks = userSnap.data()?.bookmarks || [];
+    const isBookmarked = bookmarks.includes(restaurantID);
+
+    try {
+      if (isBookmarked) {
+        await updateDoc(userRef, { bookmarks: arrayRemove(restaurantID) });
+        console.log("Removed from favorites");
+      } else {
+        await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
+>>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
         console.log("Added to favorites");
       }
     } catch (err) {
       console.error("Error updating favorite:", err);
+<<<<<<< HEAD
       alert("Could not update favorites.");
     }
   });
@@ -521,3 +552,8 @@ async function syncFavoriteButton(restaurantID) {
 
 window.syncFavoriteButton = syncFavoriteButton;
 window.toggleFavorite = toggleFavorite;
+=======
+    }
+  });
+}
+>>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816
