@@ -8,10 +8,11 @@ class SiteNavbar extends HTMLElement {
 
   renderNavbar() {
     onAuthReady((user) => {
-      const href = user ? "./home.html" : "./index.html";
+      const href = "/index.html";
       const authButton = user
         ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
-        : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='login.html'" type="button">Log in</button>`;
+        : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html'" type="button">Log in</button> 
+           <button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html#signup'" type="button">Sign up</button>`;
 
       this.innerHTML = `
             <nav class="navbar">
