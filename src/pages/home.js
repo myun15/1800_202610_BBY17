@@ -288,7 +288,6 @@ window.addEventListener("load", initPreviewMap);
 showNameWhenLoggedIn();
 seedRestaurants();
 
-// --- Favorite Toggle Logic (Demo #12) ---
 async function toggleFavorite(restaurantID) {
   onAuthReady(async (user) => {
     if (!user) return;
