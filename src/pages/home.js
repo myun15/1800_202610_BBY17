@@ -18,6 +18,26 @@ const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
 const VANCOUVER = { lng: -123.1207, lat: 49.2827 };
 
 let userLocation = null;
+let previewMap = null;
+let restaurantMarkers = [];
+
+const STATUS_CONFIG = {
+  empty: {
+    label: "Empty",
+    className: "crowd-empty",
+    markerColor: "#22c55e",
+  },
+  busy: {
+    label: "Busy",
+    className: "crowd-busy",
+    markerColor: "#f59e0b",
+  },
+  full: {
+    label: "Full",
+    className: "crowd-full",
+    markerColor: "#ef4444",
+  },
+};
 
 function initPreviewMap() {
   const mapEl = document.getElementById("map-preview");
@@ -34,8 +54,8 @@ function initPreviewMap() {
 
   map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-  map.on("load", () => {
-    initRestaurantPins(map);
+  map.on("load", async () => {
+    await initRestaurantPins(map);
   });
 
   if (navigator.geolocation) {
@@ -52,7 +72,6 @@ function initPreviewMap() {
           .setPopup(new maplibregl.Popup().setText("You are here"))
           .addTo(map);
 
-        // refresh markers so popup distance uses real user location
         await initRestaurantPins(map);
       },
       () => {
@@ -80,7 +99,6 @@ function showNameWhenLoggedIn() {
 async function fetchRestaurantsFromYelp() {
   const restaurants = [];
 
-  // Yelp returns max 50 per call, so paginate to get ~100
   for (let offset = 0; offset < 100; offset += 50) {
     const params = new URLSearchParams({
       latitude: VANCOUVER.lat,
@@ -130,6 +148,9 @@ async function seedRestaurants() {
       lat: String(place.coordinates?.latitude || ""),
       lng: String(place.coordinates?.longitude || ""),
       imageSrc: place.image_url || "",
+      rating: place.rating ?? null,
+      status: "empty",
+      lastUpdated: null,
     });
   }
 
@@ -149,27 +170,30 @@ function escapeHTML(value = "") {
 function normalizeStatus(status = "") {
   const value = status.toString().trim().toLowerCase();
 
-  if (value === "empty" || value === "low") {
-    return { label: "Low", emoji: "🟢", className: "crowd-low" };
+  if (value === "low") return STATUS_CONFIG.empty;
+  if (value === "medium" || value === "moderate") return STATUS_CONFIG.busy;
+  if (value === "high") return STATUS_CONFIG.full;
+
+  if (STATUS_CONFIG[value]) {
+    return STATUS_CONFIG[value];
   }
 
-  if (value === "busy" || value === "medium" || value === "moderate") {
-    return { label: "Busy", emoji: "🟡", className: "crowd-medium" };
-  }
-
-  if (value === "full" || value === "high") {
-    return { label: "Full", emoji: "🔴", className: "crowd-high" };
-  }
-
-  return { label: "Unknown", emoji: "⚪", className: "crowd-unknown" };
+  return {
+    label: "No update yet",
+    className: "crowd-unknown",
+    markerColor: "#9ca3af",
+  };
 }
 
 function getRestaurantImage(data) {
+  const defaultImage =
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+
   if (data.imageSrc && data.imageSrc.trim() !== "") {
     return data.imageSrc;
   }
 
-  return "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+  return defaultImage;
 }
 
 function getOpenText(data) {
@@ -181,7 +205,7 @@ function getOpenText(data) {
 }
 
 function calculateDistance(lat1, lng1, lat2, lng2) {
-  const R = 6371; // Earth radius in km
+  const R = 6371;
 
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLng = ((lng2 - lng1) * Math.PI) / 180;
@@ -189,9 +213,9 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
     Math.cos((lat1 * Math.PI) / 180) *
-      Math.cos((lat2 * Math.PI) / 180) *
-      Math.sin(dLng / 2) *
-      Math.sin(dLng / 2);
+    Math.cos((lat2 * Math.PI) / 180) *
+    Math.sin(dLng / 2) *
+    Math.sin(dLng / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
@@ -212,11 +236,39 @@ function getDistanceText(data) {
   return `📍 ${distance.toFixed(1)} km`;
 }
 
-function buildPopupHTML(data) {
+function formatTimeAgo(timestamp) {
+  if (!timestamp) return "No updates yet";
+
+  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+  const diffSeconds = Math.floor((Date.now() - date.getTime()) / 1000);
+
+  if (diffSeconds < 10) return "Just now";
+  if (diffSeconds < 60) return `${diffSeconds} sec ago`;
+
+  const minutes = Math.floor(diffSeconds / 60);
+  if (minutes < 60) return `${minutes} min${minutes > 1 ? "s" : ""} ago`;
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+
+  const days = Math.floor(hours / 24);
+  return `${days} day${days > 1 ? "s" : ""} ago`;
+}
+
+function createMarkerElement(statusValue) {
+  const status = normalizeStatus(statusValue);
+  const markerEl = document.createElement("div");
+  markerEl.className = "custom-status-marker";
+  markerEl.style.backgroundColor = status.markerColor;
+  return markerEl;
+}
+
+function buildPopupHTML(id, data) {
   const status = normalizeStatus(data.status);
   const image = getRestaurantImage(data);
   const openText = getOpenText(data);
   const distanceText = getDistanceText(data);
+  const lastUpdatedText = formatTimeAgo(data.lastUpdated);
 
   return `
     <div class="restaurant-popup-card">
@@ -224,6 +276,7 @@ function buildPopupHTML(data) {
         class="restaurant-popup-image"
         src="${escapeHTML(image)}"
         alt="${escapeHTML(data.name || "Restaurant image")}"
+        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80';"
       />
 
       <div class="restaurant-popup-body">
@@ -232,7 +285,11 @@ function buildPopupHTML(data) {
         </h3>
 
         <p class="restaurant-popup-cuisine">
-          ${escapeHTML(data.cuisine || "Restaurant")}
+          ${escapeHTML(
+            data.cuisine
+              ? data.cuisine.charAt(0).toUpperCase() + data.cuisine.slice(1)
+              : "Restaurant"
+          )}
         </p>
 
         <p class="restaurant-popup-address">
@@ -240,7 +297,7 @@ function buildPopupHTML(data) {
         </p>
 
         <div class="restaurant-popup-meta">
-          <span>${data.rating ? `⭐ ${escapeHTML(data.rating)}` : "⭐ N/A"}</span>
+          ${data.rating != null ? `<span>⭐ ${escapeHTML(data.rating)}</span>` : ""}
           <span>${distanceText}</span>
         </div>
 
@@ -249,7 +306,37 @@ function buildPopupHTML(data) {
         </div>
 
         <div class="restaurant-popup-badge ${status.className}">
-          ${status.emoji} ${status.label}
+          ${status.label}
+        </div>
+
+        <p class="restaurant-last-updated">
+          Updated ${lastUpdatedText}
+        </p>
+
+        <div class="restaurant-update-controls">
+          <select id="status-select-${id}" class="status-select">
+            <option value="empty" ${data.status === "empty" ? "selected" : ""}>Empty</option>
+            <option value="busy" ${data.status === "busy" ? "selected" : ""}>Busy</option>
+            <option value="full" ${data.status === "full" ? "selected" : ""}>Full</option>
+          </select>
+
+          <button class="update-status-btn" onclick="window.updateRestaurantStatus('${id}')">
+            Update
+          </button>
+        </div>
+
+        <div class="restaurant-popup-actions">
+          <button class="view-details-btn" onclick="window.goToRestaurantPage('${id}')">
+            View Details
+          </button>
+
+          <button
+            id="favorite-btn-${id}"
+            class="favorite-popup-btn"
+            onclick="window.toggleFavorite(this, '${id}')"
+            ♡
+            >
+          </button>
         </div>
       </div>
     </div>
@@ -258,10 +345,14 @@ function buildPopupHTML(data) {
 
 // --- Restaurant Pins ---
 async function initRestaurantPins(map) {
+  restaurantMarkers.forEach((marker) => marker.remove());
+  restaurantMarkers = [];
+
   const snapshot = await getDocs(collection(db, "restaurants"));
 
-  snapshot.docs.forEach((doc) => {
-    const data = doc.data();
+  snapshot.docs.forEach((docSnap) => {
+    const data = docSnap.data();
+    const id = docSnap.id;
 
     if (!data.lat || !data.lng) return;
 
@@ -270,19 +361,69 @@ async function initRestaurantPins(map) {
 
     if (Number.isNaN(lat) || Number.isNaN(lng)) return;
 
-    const popup = new maplibregl.Popup({
-      closeButton: true,
-      closeOnClick: true,
-      maxWidth: "300px",
-      offset: 25,
-    }).setHTML(buildPopupHTML(data));
+const popup = new maplibregl.Popup({
+  closeButton: true,
+  closeOnClick: true,
+  maxWidth: "320px",
+  offset: 25,
+}).setHTML(buildPopupHTML(id, data));
 
-    new maplibregl.Marker({ color: "#ff0000" })
+popup.on("open", () => {
+  setTimeout(() => {
+    window.syncFavoriteButton(id);
+  }, 0);
+});
+
+    const marker = new maplibregl.Marker({
+      element: createMarkerElement(data.status),
+    })
       .setLngLat([lng, lat])
       .setPopup(popup)
       .addTo(map);
+
+    restaurantMarkers.push(marker);
   });
 }
+
+async function updateRestaurantStatusById(restaurantId) {
+  const select = document.getElementById(`status-select-${restaurantId}`);
+  if (!select) return;
+
+  const newStatus = select.value;
+
+  try {
+    const restaurantRef = doc(db, "restaurants", restaurantId);
+
+    await updateDoc(restaurantRef, {
+      status: newStatus,
+      lastUpdated: serverTimestamp(),
+    });
+
+    if (previewMap) {
+      await initRestaurantPins(previewMap);
+    }
+  } catch (error) {
+    console.error("Error updating restaurant status:", error);
+    alert("Could not update restaurant status.");
+  }
+}
+
+window.updateRestaurantStatus = updateRestaurantStatusById;
+function goToRestaurantPage(restaurantId) {
+  const recentRestaurants =
+    JSON.parse(localStorage.getItem("recentRestaurants")) || [];
+
+  const updatedRecents = [
+    restaurantId,
+    ...recentRestaurants.filter((id) => id !== restaurantId),
+  ].slice(0, 10);
+
+  localStorage.setItem("recentRestaurants", JSON.stringify(updatedRecents));
+
+  window.location.href = `/restaurant-detail.html?id=${restaurantId}`;
+}
+
+window.goToRestaurantPage = goToRestaurantPage;
 
 window.addEventListener("load", initPreviewMap);
 showNameWhenLoggedIn();
@@ -307,6 +448,42 @@ async function toggleFavorite(restaurantID) {
       }
     } catch (err) {
       console.error("Error updating favorite:", err);
+      alert("Could not update favorites.");
     }
   });
 }
+async function syncFavoriteButton(restaurantID) {
+  onAuthReady(async (user) => {
+    if (!user) return;
+
+    try {
+      const buttonEl = document.getElementById(`favorite-btn-${restaurantID}`);
+      if (!buttonEl) return;
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        buttonEl.classList.remove("is-favorited");
+        buttonEl.innerHTML = "♡";
+        return;
+      }
+
+      const bookmarks = userSnap.data()?.bookmarks || [];
+      const isBookmarked = bookmarks.includes(restaurantID);
+
+      if (isBookmarked) {
+        buttonEl.classList.add("is-favorited");
+        buttonEl.innerHTML = "♥";
+      } else {
+        buttonEl.classList.remove("is-favorited");
+        buttonEl.innerHTML = "♡";
+      }
+    } catch (error) {
+      console.error("Error syncing favorite button:", error);
+    }
+  });
+}
+
+window.syncFavoriteButton = syncFavoriteButton;
+window.toggleFavorite = toggleFavorite;

@@ -1,67 +1,58 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>TeamBBY</title>
-    <meta name="BBY Team 17 template" content="TimesUp App" />
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <title>TeamBBY</title>
 
-    <!-- Web Components for shared navbar and footer layout -->
-    <script type="module" src="/src/components/site-navbar.js"></script>
-    <script type="module" src="/src/components/site-footer.js"></script>
-  </head>
+  <meta name="BBY Team 17 template" content="TimesUp App" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <!-- our own navbar goes here -->
-    <site-navbar></site-navbar>
+  <script type="module" src="/src/components/site-navbar.js"></script>
+  <script type="module" src="/src/components/site-footer.js"></script>
+  <script type="module" src="/src/styles/style.css"></script>
+</head>
 
-    <!-- Main content goes here -->
-    <!-- <main class="container py-4">
-    <h1 id="restaurantName">Loading...</h1>
-    <img id="restaurantImage" class="img-fluid rounded mt-3" src="" alt="Restaurant image">
-</main> -->
+<body>
+  <site-navbar></site-navbar>
 
-    <!-- Main content -->
-    <main class="container py-4">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h1 id="restaurantName" class="mb-4">Loading...</h1>
-          <img
-            id="restaurantImage"
-            class="img-fluid rounded shadow-sm mb-4"
-            src=""
-            alt="Restaurant image"
-            style="max-height: 400px; width: 100%; object-fit: cover"
-          />
-          <div id="restaurantDetails" class="mt-4">
-            <div class="text-center">
-              <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading details...</span>
-              </div>
-              <p class="mt-2">Loading restaurant details...</p>
+  <main class="container py-4 restaurant-detail-page">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <a href="/home.html" class="btn btn-secondary mb-3">← Back to Map</a>
+
+        <img id="restaurantImage" class="img-fluid rounded shadow-sm mb-4 restaurant-detail-image" src=""
+          alt="Restaurant image" />
+
+        <h1 id="restaurantName" class="mb-2">Loading...</h1>
+        <p id="restaurantMeta" class="text-muted mb-2"></p>
+        <div id="restaurantStatus" class="mb-4"></div>
+
+        <div id="restaurantDetails">
+          <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading details...</span>
             </div>
+            <p class="mt-2">Loading restaurant details...</p>
           </div>
+<<<<<<< HEAD:restaurant-detail.html
+=======
           <a href="/index.html" class="btn btn-secondary mt-4"
             >← Back to Restaurants</a
           >
+>>>>>>> 1f071a007837d2019538ae36d30a5750acf5c816:pages/restaurant-detail.html
         </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- our own footer goes here -->
-    <site-footer></site-footer>
+  <site-footer></site-footer>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript scripts go here      -->
-    <!---------------------------------------------->
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/pages/restaurant-detail.js"></script>
+</body>
 
-    <script type="module" src="/src/app.js"></script>
-    <script type="module" src="/src/pages/restaurant-detail.js"></script>
-  </body>
 </html>

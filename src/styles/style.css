@@ -342,17 +342,17 @@ body.no-scroll {
   font-weight: 700;
 }
 
-.crowd-low {
+.crowd-empty {
   background: #dcfce7;
   color: #166534;
 }
 
-.crowd-medium {
+.crowd-busy {
   background: #fef3c7;
   color: #92400e;
 }
 
-.crowd-high {
+.crowd-full {
   background: #fee2e2;
   color: #991b1b;
 }
@@ -361,29 +361,382 @@ body.no-scroll {
   background: #e5e7eb;
   color: #374151;
 }
-/* 3.31 add style for button in vendor cards */
-.move-right {
-  margin-left: 150px;
+
+.restaurant-last-updated {
+  margin: 8px 0 10px;
+  font-size: 13px;
+  color: #6b7280;
 }
-.btn-group {
-  font-size: 10px;
+
+.restaurant-update-controls {
   display: flex;
-  justify-content: flex-end;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.status-select {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font-size: 14px;
+  background: white;
+}
+
+.update-status-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #ffaf00;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.update-status-btn:hover {
+  opacity: 0.9;
+}
+
+.custom-status-marker {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+}
+.restaurant-popup-actions {
+  margin-top: 10px;
+}
+
+.view-details-btn {
+  width: 100%;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.view-details-btn:hover {
+  opacity: 0.9;
+}
+.restaurant-detail-page {
+  padding-bottom: 140px;
+}
+
+.restaurant-detail-image {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.restaurant-detail-card {
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.restaurant-detail-card .card-body {
+  background: #ffffff !important;
+  color: #222 !important;
+}
+
+.restaurant-detail-card h5 {
+  color: #222;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.restaurant-detail-card strong {
+  color: #111;
+}
+
+#restaurantName {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+#restaurantMeta {
+  font-size: 1.1rem;
+  color: #6b7280 !important;
+}
+
+#restaurantStatus {
+  display: flex;
+  align-items: center;
   gap: 10px;
-  margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
-#filter-container {
-  min-width: 260px;
-  max-height: 300px;
-  overflow-y: auto;
+#restaurantStatus .badge {
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 999px;
 }
-.card-body {
+.recent-page {
+  padding-bottom: 120px;
+}
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.recent-card {
+  background: white;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recent-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.recent-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.recent-card-body {
+  padding: 16px;
+  background: white;
+  color: #222;
+}
+
+.recent-card-title {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.recent-card-cuisine {
+  margin: 0 0 6px;
+  color: #666;
+}
+
+.recent-card-address {
+  margin: 0 0 12px;
+  color: #444;
+  font-size: 14px;
+}
+
+.recent-card-footer {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.restaurant-popup-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-/* 4.1 add style for live bar Don't Delete!!!!*/
+.view-details-btn {
+  flex: 1;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #222;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.view-details-btn:hover {
+  opacity: 0.9;
+}
+
+.favorite-popup-btn {
+  border: none;
+  min-width: 56px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: white;
+  color: #111;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.favorite-popup-btn:hover {
+  background: #fff1f2;
+}
+.favorite-popup-btn {
+  border: none;
+  min-width: 56px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: white;
+  color: #111;
+  font-size: 24px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+}
+
+.favorite-popup-btn:hover {
+  background: #fff1f2;
+  transform: scale(1.05);
+}
+
+.favorite-popup-btn.is-favorited {
+  background: #ffe4e6;
+  color: #e11d48;
+}
+.favorites-page {
+  flex: 1;
+  padding-top: 24px;
+  padding-bottom: 110px;
+}
+
+.favorites-page .favorites-header {
+  margin-bottom: 28px;
+}
+
+.favorites-page .favorites-title {
+  margin: 0 0 8px;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.favorites-page .favorites-subtitle {
+  margin: 0;
+  color: #6b7280;
+  font-size: 1.05rem;
+}
+
+.favorites-page .favorites-grid,
+.favorites-page #Restaurants-go-here,
+.favorites-page #favoritesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.favorites-page .favorite-card {
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+}
+
+.favorites-page .favorite-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+}
+
+.favorites-page .favorite-card-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.favorites-page .favorite-card-body {
+  padding: 18px;
+  background: #fff !important;
+  color: #222 !important;
+}
+
+.favorites-page .favorite-card-title {
+  margin: 0 0 8px;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #222;
+  line-height: 1.2;
+}
+
+.favorites-page .favorite-card-cuisine {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.favorites-page .favorite-card-address {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+.favorites-page .favorite-card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.98rem;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.favorites-page .favorite-card-hours {
+  margin: 0 0 14px;
+  font-size: 0.98rem;
+  color: #444;
+}
+
+.favorites-page .favorite-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.favorites-page .favorite-card-updated {
+  margin: 14px 0 0;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.favorites-page .favorite-rating {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.favorites-page .status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .favorites-page .favorites-title {
+    font-size: 1.8rem;
+  }
+
+  .favorites-page .favorite-card-image {
+    height: 190px;
+  }
+
+  .favorites-page .favorite-card-title {
+    font-size: 1.5rem;
+  }
+}
+
 .live-bar {
   position: fixed;
   bottom: 70px; /* show on the bottom */
@@ -433,7 +786,7 @@ body.no-scroll {
 
 .ticker-item {
   cursor:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🍜</text></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>:ramen:</text></svg>"),
     auto;
   opacity: 0.95;
   transition: opacity 0.2s ease;
@@ -441,14 +794,14 @@ body.no-scroll {
 }
 
 .trend-up {
-  color: #22c55e;
+  color: #22C55E;
 }
 
 .trend-down {
-  color: #3b82f6;
+  color: #3B82F6;
 }
 
 .trend-flat {
-  color: #ffffff;
+  color: #FFFFFF;
   opacity: 0.8;
 }
