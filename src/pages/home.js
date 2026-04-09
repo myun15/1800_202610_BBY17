@@ -7,13 +7,14 @@ import {
   arrayUnion,
   arrayRemove,
   getDoc,
+  setDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { db } from "/src/helper/firebaseConfig.js";
 import { onAuthReady } from "/src/helper/authentication.js";
 
-// --- Map Preview ---
 const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
 const VANCOUVER = { lng: -123.1207, lat: 49.2827 };
 
@@ -43,76 +44,65 @@ function initPreviewMap() {
   const mapEl = document.getElementById("map-preview");
   if (!mapEl) return;
 
-  const map = new maplibregl.Map({
+  previewMap = new maplibregl.Map({
     container: mapEl,
     style: `https://api.maptiler.com/maps/streets-v2/style.json?key=${MAPTILER_KEY}`,
     center: [VANCOUVER.lng, VANCOUVER.lat],
     zoom: 13,
   });
 
-  map.scrollZoom.disable();
+  previewMap.addControl(new maplibregl.NavigationControl(), "top-right");
 
-  map.addControl(new maplibregl.NavigationControl(), "top-right");
-
-  map.on("load", async () => {
-    await initRestaurantPins(map);
+  previewMap.on("load", async () => {
+    await initRestaurantPins(previewMap);
   });
 
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { longitude, latitude } = position.coords;
-
         userLocation = { lng: longitude, lat: latitude };
 
-        map.setCenter([longitude, latitude]);
+        previewMap.setCenter([longitude, latitude]);
 
         new maplibregl.Marker({ color: "#2563eb" })
           .setLngLat([longitude, latitude])
           .setPopup(new maplibregl.Popup().setText("You are here"))
-          .addTo(map);
+          .addTo(previewMap);
 
-        await initRestaurantPins(map);
+        await initRestaurantPins(previewMap);
       },
       () => {
         console.log("Location denied, showing Vancouver");
-      },
+      }
     );
   }
 }
 
-// --- Welcome Message ---
-function showNameWhenLoggedIn() {
-  onAuthReady((user) => {
-    const nameElement = document.getElementById("welcome-user");
-    if (!user) {
-      if (nameElement) nameElement.textContent = "";
-      return;
+async function fetchRestaurantsFromYelp() {
+  const restaurants = [];
+
+  for (let offset = 0; offset < 100; offset += 50) {
+    const params = new URLSearchParams({
+      latitude: VANCOUVER.lat,
+      longitude: VANCOUVER.lng,
+      categories: "restaurants",
+      limit: "50",
+      offset: String(offset),
+    });
+
+    const response = await fetch(`/api/yelp/businesses/search?${params}`);
+    if (!response.ok) {
+      console.error("Yelp API error:", response.status);
+      break;
     }
 
-    const name = user.displayName || user.email;
-    if (nameElement) nameElement.textContent = `Welcome ${name}`;
-  });
-}
-
-// --- Restaurant Seeding from Yelp ---
-async function fetchRestaurantsFromYelp() {
-  const params = new URLSearchParams({
-    latitude: VANCOUVER.lat,
-    longitude: VANCOUVER.lng,
-    categories: "restaurants",
-    limit: "10",
-    offset: "0",
-  });
-
-  const response = await fetch(`/api/yelp/businesses/search?${params}`);
-  if (!response.ok) {
-    console.error("Yelp API error:", response.status);
-    return [];
+    const data = await response.json();
+    if (data.businesses) restaurants.push(...data.businesses);
+    if (!data.businesses || data.businesses.length < 50) break;
   }
 
-  const data = await response.json();
-  return (data.businesses || []).slice(0, 10);
+  return restaurants;
 }
 
 async function seedRestaurants() {
@@ -120,13 +110,10 @@ async function seedRestaurants() {
   const querySnapshot = await getDocs(restaurantsRef);
 
   if (!querySnapshot.empty) {
-    console.log(
-      "Restaurant collection already contains data. Skipping seed...",
-    );
+    console.log("Restaurant collection already contains data. Skipping seed...");
     return;
   }
 
-  console.log("Seeding restaurants from Yelp...");
   const places = await fetchRestaurantsFromYelp();
 
   for (const place of places) {
@@ -144,11 +131,8 @@ async function seedRestaurants() {
       lastUpdated: null,
     });
   }
-
-  console.log(`Seeded ${places.length} restaurants from Yelp.`);
 }
 
-// --- Helper functions ---
 function escapeHTML(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -164,10 +148,7 @@ function normalizeStatus(status = "") {
   if (value === "low") return STATUS_CONFIG.empty;
   if (value === "medium" || value === "moderate") return STATUS_CONFIG.busy;
   if (value === "high") return STATUS_CONFIG.full;
-
-  if (STATUS_CONFIG[value]) {
-    return STATUS_CONFIG[value];
-  }
+  if (STATUS_CONFIG[value]) return STATUS_CONFIG[value];
 
   return {
     label: "No update yet",
@@ -188,16 +169,12 @@ function getRestaurantImage(data) {
 }
 
 function getOpenText(data) {
-  if (data.hours && data.hours.trim() !== "") {
-    return data.hours;
-  }
-
+  if (data.hours && data.hours.trim() !== "") return data.hours;
   return "Hours not available";
 }
 
 function calculateDistance(lat1, lng1, lat2, lng2) {
   const R = 6371;
-
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
   const dLng = ((lng2 - lng1) * Math.PI) / 180;
 
@@ -213,15 +190,13 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
 }
 
 function getDistanceText(data) {
-  if (!userLocation || !data.lat || !data.lng) {
-    return "📍 Nearby";
-  }
+  if (!userLocation || !data.lat || !data.lng) return "📍 Nearby";
 
   const distance = calculateDistance(
     userLocation.lat,
     userLocation.lng,
     parseFloat(data.lat),
-    parseFloat(data.lng),
+    parseFloat(data.lng)
   );
 
   return `📍 ${distance.toFixed(1)} km`;
@@ -277,10 +252,10 @@ function buildPopupHTML(id, data) {
 
         <p class="restaurant-popup-cuisine">
           ${escapeHTML(
-            data.cuisine
-              ? data.cuisine.charAt(0).toUpperCase() + data.cuisine.slice(1)
-              : "Restaurant"
-          )}
+    data.cuisine
+      ? data.cuisine.charAt(0).toUpperCase() + data.cuisine.slice(1)
+      : "Restaurant"
+  )}
         </p>
 
         <p class="restaurant-popup-address">
@@ -325,8 +300,8 @@ function buildPopupHTML(id, data) {
             id="favorite-btn-${id}"
             class="favorite-popup-btn"
             onclick="window.toggleFavorite(this, '${id}')"
+          >
             ♡
-            >
           </button>
         </div>
       </div>
@@ -334,7 +309,6 @@ function buildPopupHTML(id, data) {
   `;
 }
 
-// --- Restaurant Pins ---
 async function initRestaurantPins(map) {
   restaurantMarkers.forEach((marker) => marker.remove());
   restaurantMarkers = [];
@@ -352,18 +326,18 @@ async function initRestaurantPins(map) {
 
     if (Number.isNaN(lat) || Number.isNaN(lng)) return;
 
-const popup = new maplibregl.Popup({
-  closeButton: true,
-  closeOnClick: true,
-  maxWidth: "320px",
-  offset: 25,
-}).setHTML(buildPopupHTML(id, data));
+    const popup = new maplibregl.Popup({
+      closeButton: true,
+      closeOnClick: true,
+      maxWidth: "320px",
+      offset: 25,
+    }).setHTML(buildPopupHTML(id, data));
 
-popup.on("open", () => {
-  setTimeout(() => {
-    window.syncFavoriteButton(id);
-  }, 0);
-});
+    popup.on("open", () => {
+      setTimeout(() => {
+        window.syncFavoriteButton(id);
+      }, 0);
+    });
 
     const marker = new maplibregl.Marker({
       element: createMarkerElement(data.status),
@@ -387,19 +361,16 @@ async function updateRestaurantStatusById(restaurantId) {
 
     await updateDoc(restaurantRef, {
       status: newStatus,
-      lastUpdated: serverTimestamp(),
+      lastUpdated: new Date(),
     });
 
-    if (previewMap) {
-      await initRestaurantPins(previewMap);
-    }
+    if (previewMap) await initRestaurantPins(previewMap);
   } catch (error) {
     console.error("Error updating restaurant status:", error);
     alert("Could not update restaurant status.");
   }
 }
 
-window.updateRestaurantStatus = updateRestaurantStatusById;
 function goToRestaurantPage(restaurantId) {
   const recentRestaurants =
     JSON.parse(localStorage.getItem("recentRestaurants")) || [];
@@ -410,32 +381,48 @@ function goToRestaurantPage(restaurantId) {
   ].slice(0, 10);
 
   localStorage.setItem("recentRestaurants", JSON.stringify(updatedRecents));
-
-  window.location.href = `/restaurant-detail.html?id=${restaurantId}`;
+  window.location.href = `/pages/restaurant-detail.html?id=${restaurantId}`;
 }
 
-window.goToRestaurantPage = goToRestaurantPage;
-
-window.addEventListener("load", initPreviewMap);
-showNameWhenLoggedIn();
-seedRestaurants();
-
-async function toggleFavorite(restaurantID) {
+async function toggleFavorite(buttonEl, restaurantID) {
   onAuthReady(async (user) => {
-    if (!user) return;
+    if (!user) {
+      alert("Please log in to save favorites.");
+      return;
+    }
 
     const userRef = doc(db, "users", user.uid);
-    const userSnap = await getDoc(userRef);
-    const bookmarks = userSnap.data()?.bookmarks || [];
-    const isBookmarked = bookmarks.includes(restaurantID);
 
     try {
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, { bookmarks: [restaurantID] });
+
+        if (buttonEl) {
+          buttonEl.classList.add("is-favorited");
+          buttonEl.innerHTML = "♥";
+        }
+        return;
+      }
+
+      const bookmarks = userSnap.data()?.bookmarks || [];
+      const isBookmarked = bookmarks.includes(restaurantID);
+
       if (isBookmarked) {
         await updateDoc(userRef, { bookmarks: arrayRemove(restaurantID) });
-        console.log("Removed from favorites");
+
+        if (buttonEl) {
+          buttonEl.classList.remove("is-favorited");
+          buttonEl.innerHTML = "♡";
+        }
       } else {
         await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
-        console.log("Added to favorites");
+
+        if (buttonEl) {
+          buttonEl.classList.add("is-favorited");
+          buttonEl.innerHTML = "♥";
+        }
       }
     } catch (err) {
       console.error("Error updating favorite:", err);
@@ -443,6 +430,7 @@ async function toggleFavorite(restaurantID) {
     }
   });
 }
+
 async function syncFavoriteButton(restaurantID) {
   onAuthReady(async (user) => {
     if (!user) return;
@@ -476,5 +464,10 @@ async function syncFavoriteButton(restaurantID) {
   });
 }
 
-window.syncFavoriteButton = syncFavoriteButton;
+window.updateRestaurantStatus = updateRestaurantStatusById;
+window.goToRestaurantPage = goToRestaurantPage;
 window.toggleFavorite = toggleFavorite;
+window.syncFavoriteButton = syncFavoriteButton;
+
+window.addEventListener("load", initPreviewMap);
+seedRestaurants();
