@@ -129,6 +129,15 @@ body {
   margin: 0;
   padding: 0;
 }
+body {
+  padding-bottom: 110px;
+}
+
+.restaurant-detail-page,
+.recent-page,
+.favorites-page {
+  padding-bottom: 140px;
+}
 
 body {
   display: flex;
@@ -236,11 +245,17 @@ body.no-scroll {
 
 /* FOOTER */
 .footer {
+  background-color: #ffa500;
+  min-height: 88px;
   display: flex;
   align-items: center;
-  background-color: var(--primary);
-  height: 60px;
   justify-content: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  margin: 0;
 }
 
 .footer-nav {
@@ -424,6 +439,8 @@ body.no-scroll {
   opacity: 0.9;
 }
 .restaurant-detail-page {
+  flex: 1;
+  padding-top: 24px;
   padding-bottom: 140px;
 }
 
@@ -451,8 +468,32 @@ body.no-scroll {
   font-weight: 700;
 }
 
-.restaurant-detail-card strong {
-  color: #111;
+.restaurant-detail-page {
+  flex: 1;
+  padding-top: 24px;
+  padding-bottom: 110px;
+}
+
+.restaurant-detail-image {
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.restaurant-detail-card .card-body {
+  background: #fff !important;
+  color: #222 !important;
+}
+
+#restaurantName {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+#restaurantMeta {
+  color: #6b7280 !important;
 }
 
 #restaurantName {

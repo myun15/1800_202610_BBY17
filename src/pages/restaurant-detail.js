@@ -69,11 +69,9 @@ async function displayRestaurantInfo() {
 
   if (!id) {
     if (nameElement) nameElement.textContent = "No restaurant selected";
-    if (metaElement) metaElement.textContent = "";
-    if (statusElement) statusElement.innerHTML = "";
     if (detailsContainer) {
       detailsContainer.innerHTML =
-        '<div class="alert alert-warning">No restaurant ID was provided.</div>';
+        '<p class="text-center">No restaurant ID was provided.</p>';
     }
     return;
   }
@@ -86,11 +84,9 @@ async function displayRestaurantInfo() {
 
     if (!restaurantSnap.exists()) {
       if (nameElement) nameElement.textContent = "Restaurant not found";
-      if (metaElement) metaElement.textContent = "";
-      if (statusElement) statusElement.innerHTML = "";
       if (detailsContainer) {
         detailsContainer.innerHTML =
-          '<div class="alert alert-warning">This restaurant could not be found.</div>';
+          '<p class="text-center">This restaurant could not be found.</p>';
       }
       return;
     }
@@ -104,9 +100,7 @@ async function displayRestaurantInfo() {
     }
 
     if (metaElement) {
-      const cuisine = formatCuisine(restaurant.cuisine);
-      const city = restaurant.city || "Vancouver";
-      metaElement.textContent = `${cuisine} • ${city}`;
+      metaElement.textContent = `${formatCuisine(restaurant.cuisine)} • ${restaurant.city || "Vancouver"}`;
     }
 
     if (statusElement) {
@@ -132,58 +126,56 @@ async function displayRestaurantInfo() {
 
     if (detailsContainer) {
       detailsContainer.innerHTML = `
-    <div class="card shadow-sm border-0 rounded-4 restaurant-detail-card">
-      <div class="card-body p-4">
-        <h5 class="mb-3">Restaurant Information</h5>
+        <div class="card shadow-sm border-0 rounded-4 restaurant-detail-card">
+          <div class="card-body p-4">
+            <h5 class="mb-3">Restaurant Information</h5>
 
-        <div class="mb-3">
-          <strong>Address:</strong><br>
-          ${restaurant.address || "Address not available"}
-        </div>
+            <div class="mb-3">
+              <strong>Address:</strong><br>
+              ${restaurant.address || "Address not available"}
+            </div>
 
-        <div class="mb-3">
-          <strong>City:</strong><br>
-          ${restaurant.city || "Vancouver"}
-        </div>
+            <div class="mb-3">
+              <strong>City:</strong><br>
+              ${restaurant.city || "Vancouver"}
+            </div>
 
-        <div class="mb-3">
-          <strong>Cuisine:</strong><br>
-          ${formatCuisine(restaurant.cuisine)}
-        </div>
+            <div class="mb-3">
+              <strong>Cuisine:</strong><br>
+              ${formatCuisine(restaurant.cuisine)}
+            </div>
 
-        ${restaurant.rating != null
-          ? `
-        <div class="mb-3">
-          <strong>Rating:</strong><br>
-          ⭐ ${restaurant.rating} / 5
-        </div>
-        `
-          : ""
-        }
+            ${
+              restaurant.rating != null
+                ? `
+            <div class="mb-3">
+              <strong>Rating:</strong><br>
+              ⭐ ${restaurant.rating} / 5
+            </div>
+            `
+                : ""
+            }
 
-        <div class="mb-3">
-          <strong>Crowd Status:</strong><br>
-          ${getStatusBadge(restaurant.status)}
-        </div>
+            <div class="mb-3">
+              <strong>Crowd Status:</strong><br>
+              ${getStatusBadge(restaurant.status)}
+            </div>
 
-        <div class="mb-0">
-          <strong>Updated:</strong><br>
-          ${formatTimeAgo(restaurant.lastUpdated)}
+            <div class="mb-0">
+              <strong>Updated:</strong><br>
+              ${formatTimeAgo(restaurant.lastUpdated)}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  `;
+      `;
     }
   } catch (error) {
     console.error("Error loading restaurant:", error);
 
     if (nameElement) nameElement.textContent = "Error loading restaurant";
-    if (metaElement) metaElement.textContent = "";
-    if (statusElement) statusElement.innerHTML = "";
-
     if (detailsContainer) {
       detailsContainer.innerHTML =
-        '<div class="alert alert-danger">Failed to load restaurant details. Please try again later.</div>';
+        '<p class="text-center">Failed to load restaurant details.</p>';
     }
   }
 }
@@ -193,5 +185,3 @@ if (document.readyState === "loading") {
 } else {
   displayRestaurantInfo();
 }
-
-export { displayRestaurantInfo };

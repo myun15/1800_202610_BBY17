@@ -1,51 +1,43 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <title>TeamBBY</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-  <title>TeamBBY</title>
-  <meta name="BBY Team 17 template" content="TimesUp App" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
 
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="module" src="/src/components/site-navbar.js"></script>
+    <script type="module" src="/src/components/site-footer.js"></script>
+    <script type="module" src="/src/styles/style.css"></script>
+  </head>
 
-  <!-- Web Components for shared navbar and footer layout -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <script type="module" src="/src/components/site-navbar.js"></script>
-  <script type="module" src="/src/components/site-footer.js"></script>
-  <script type="module" src="/src/styles/style.css"></script>
-</head>
+  <body>
+    <site-navbar></site-navbar>
 
-<body>
-  <!------------------------------>
-  <!-- Your HTML Layout go here -->
-  <!------------------------------>
+    <main class="container py-4 recent-page">
+      <div class="recent-header">
+        <h1 class="recent-title">Recently Viewed</h1>
+        <p class="recent-subtitle">Restaurants you opened most recently.</p>
+      </div>
 
-  <!-- our own navbar goes here -->
-  <site-navbar></site-navbar>
+      <div id="recentRestaurantsContainer" class="recent-grid">
+        <p>Loading recent restaurants...</p>
+      </div>
+    </main>
 
-  <!-- Main content goes here -->
-  <main class="container py-4 recent-page">
-    <h1 class="mb-4">Recently Viewed</h1>
-    <div id="recentRestaurantsContainer" class="recent-grid">
-      <p>Loading recent restaurants...</p>
-    </div>
-  </main>
-  <!-- our own footer goes here -->
-  <site-footer></site-footer>
+    <site-footer></site-footer>
 
-  <!---------------------------------------------->
-  <!-- Your own JavaScript scripts go here      -->
-  <!---------------------------------------------->
-
-  <script type="module" src="/src/app.js"></script>
-  <script type="module" src="/src/pages/recent.js"></script>
-</body>
-
+    <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/pages/recent.js"></script>
+  </body>
 </html>
