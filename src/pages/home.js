@@ -97,31 +97,22 @@ function showNameWhenLoggedIn() {
 
 // --- Restaurant Seeding from Yelp ---
 async function fetchRestaurantsFromYelp() {
-  const restaurants = [];
+  const params = new URLSearchParams({
+    latitude: VANCOUVER.lat,
+    longitude: VANCOUVER.lng,
+    categories: "restaurants",
+    limit: "10",
+    offset: "0",
+  });
 
-  for (let offset = 0; offset < 100; offset += 50) {
-    const params = new URLSearchParams({
-      latitude: VANCOUVER.lat,
-      longitude: VANCOUVER.lng,
-      categories: "restaurants",
-      limit: "50",
-      offset: String(offset),
-    });
-
-    const response = await fetch(`/api/yelp/businesses/search?${params}`);
-    if (!response.ok) {
-      console.error("Yelp API error:", response.status);
-      break;
-    }
-
-    const data = await response.json();
-    if (data.businesses) {
-      restaurants.push(...data.businesses);
-    }
-    if (!data.businesses || data.businesses.length < 50) break;
+  const response = await fetch(`/api/yelp/businesses/search?${params}`);
+  if (!response.ok) {
+    console.error("Yelp API error:", response.status);
+    return [];
   }
 
-  return restaurants;
+  const data = await response.json();
+  return (data.businesses || []).slice(0, 10);
 }
 
 async function seedRestaurants() {
