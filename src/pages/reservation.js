@@ -1,142 +1,294 @@
+import { auth, db } from "../helper/firebaseConfig.js";
+import {
+  doc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+} from "firebase/firestore";
+
 async function displayVendorCards() {
-    const template = document.getElementById("vendorCardTemplate");
-    const container = document.getElementById("Restaurants-go-here");
+  const template = document.getElementById("vendorCardTemplate"); // Blueprint for restaurant cards
+  const container = document.getElementById("Restaurants-go-here"); // Actual <div> that the restaurant cards are appended to
 
-    if (!container || !template) {
-        console.error("Missing container or template element");
-        return;
+  if (!container || !template) {
+    console.error("Missing container or template element");
+    return;
+  }
+
+  try {
+    // Get restaurant data from /public/data/food-vendors.json
+    const response = await fetch("/data/food-vendors.json");
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const vendors = await response.json();
+
+    const validVendors = vendors.filter((v) => v.business_name); // Retrieve only vendors with a business name
+    if (validVendors.length === 0) {
+      container.innerHTML =
+        '<div class="col-12"><p class="text-center">No vendors found.</p></div>';
+      return;
     }
 
-    container.innerHTML = '<div class="col-12 text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2">Loading vendors...</p></div>';
+    // Create a restaurant card for each restaurant
+    validVendors.forEach((vendor) => {
+      const card = template.content.cloneNode(true);
+      const vendorID = vendor.id || null;
 
-    try {
-        const response = await fetch('/data/food-vendors.json');
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      card.querySelector(".card-image").src = vendor.image_url;
+      card.querySelector(".card-image").alt = vendor.business_name;
+      card.querySelector(".card-title").textContent = vendor.business_name;
+      card.querySelector(".card-text").innerHTML = `
+                      <strong>${vendor.description || "Various"}</strong><br>
+                      ${vendor.location}<br>
+                      <span class="badge ${vendor.status === "open" ? "bg-success" : "bg-secondary"} mt-2">
+                          ${vendor.status === "open" ? "● Open" : "● Closed"}
+                      </span>
+                      <p class="text-muted small mt-2">📍 ${vendor.geo_localarea || "Vancouver"}</p>
+                      <span class="fw-semibold">Busyness:</span> ${vendor.busyness || "no data"}<br>
+                  `;
 
-        const vendors = await response.json();
-        const validVendors = vendors.filter(v => v.business_name);
+      const heartEl = document.createElement("i");
+      heartEl.classList.add("material-icons", "fav-icon");
+      heartEl.textContent = "♡";
+      heartEl.style.cssText = "font-size: 36px; cursor: pointer; color: white;";
 
-        if (validVendors.length === 0) {
-            container.innerHTML = '<div class="col-12"><p class="text-center">No vendors found.</p></div>';
-            return;
+      const heartWrapper = document.createElement("div");
+      heartWrapper.classList.add("d-flex", "justify-content-end", "mt-2");
+      heartWrapper.appendChild(heartEl);
+
+      card.querySelector(".card-body").appendChild(heartWrapper);
+
+      // 4. Make it interactive (Toggles red/filled on click)
+      heartEl.addEventListener("click", async () => {
+        const isFavorited = heartEl.textContent === "♥";
+        heartEl.textContent = isFavorited ? "♡" : "♥";
+        heartEl.style.color = isFavorited ? "white" : "red";
+
+        const user = auth.currentUser;
+        if (user) {
+          await toggleBookmark(user.uid, vendorID);
+        } else {
+          console.log("Login to save favorites");
         }
+      });
 
-        container.innerHTML = '';
+      container.appendChild(card);
+    });
 
-        validVendors.forEach(vendor => {
-            // Create cards for each restaurant
-            const card = template.content.cloneNode(true);
-            
-            //-------------------------------------------------------------------------------------------------------
-            // const heartEl = document.createElement("img");
-// 1. Create the heart icon element
-            const heartEl = document.createElement("i");
-            heartEl.classList.add("material-icons", "fav-icon"); // Uses your CSS classes
-            heartEl.textContent = "♡";            // The "empty heart" shape
-            heartEl.style.cssText = "font-size: 36px; cursor: pointer; color: white;";
-
-            // 2. Create a wrapper to push it to the bottom-right
-            const heartWrapper = document.createElement("div");
-            heartWrapper.classList.add("d-flex", "justify-content-end", "mt-2");
-            heartWrapper.appendChild(heartEl);
-
-            // 3. Attach it to the card body
-            card.querySelector('.card-body').appendChild(heartWrapper);
-
-            // 4. Make it interactive (Toggles red/filled on click)
-            heartEl.addEventListener("click", () => {
-                const isFavorited = heartEl.textContent === "♥";
-                heartEl.textContent = isFavorited ? "♡" : "♥";
-                heartEl.style.color = isFavorited ? "white" : "red";
-            });
-            // card.appendChild(heartEl);
-            //-------------------------------------------------------------------------------------------------------
-            card.querySelector('.card-title').textContent = vendor.business_name;
-            card.querySelector('.card-text').innerHTML = `
-                <strong>${vendor.description || 'Various'}</strong><br>
-                ${vendor.location}<br>
-                <span class="badge ${vendor.status === 'open' ? 'bg-success' : 'bg-secondary'} mt-2">
-                    ${vendor.status === 'open' ? '● Open' : '● Closed'}
-                </span>
-                <p class="text-muted small mt-2">📍 ${vendor.geo_localarea || 'Vancouver'}</p>
-            `;
-
-            container.appendChild(card);
-        });
-
-        console.log(`Displayed ${validVendors.length} vendors`);
-    } catch (error) {
-        console.error("Error loading vendors:", error);
-        container.innerHTML = '<div class="col-12"><p class="text-center text-danger">Error loading vendors. Please refresh the page.</p></div>';
-    }
+    console.log(`Displayed ${validVendors.length} vendors`);
+  } catch (error) {
+    console.error("Error loading vendors:", error);
+    container.innerHTML =
+      '<div class="col-12"><p class="text-center text-danger">Error loading vendors. Please refresh the page.</p></div>';
+  }
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', displayVendorCards);
-} else {
-    displayVendorCards();
+async function toggleBookmark(userId, vendorID) {
+  if (!db) {
+    console.error("Database (db) is not defined! Check your imports.");
+    return;
+  }
+
+  const userRef = doc(db, "users", userId);
+  const userSnap = await getDoc(userRef);
+  const userData = userSnap.data() || {};
+  const bookmarks = userData["favorited-restaurants"] || [];
+
+  const isBookmarked = bookmarks.includes(vendorID);
+
+  console.log()
+
+  try {
+    if (isBookmarked) {
+      await updateDoc(userRef, {
+        "favorited-restaurants": arrayRemove(vendorID),
+      });
+    } else {
+      await updateDoc(userRef, {
+        "favorited-restaurants": arrayUnion(vendorID),
+      });
+    }
+  } catch (err) {
+    console.error("Error toggling bookmarkj:", err);
+  }
 }
 
-document.getElementById("card").addEventListener("click", function() {
-    
-    // Changing the path to reflect your new 'cards' data
-    ajaxGET("/cards?format=json", function (data) {
-        let parsedData = JSON.parse(data);
+displayVendorCards();
 
-        let str = "<div class='card-grid'>"; 
-        for (let i = 0; i < parsedData.length; i++) {
-            let item = parsedData[i];
-            
-            // Building a 'Card' layout instead of a simple table row
-            str += "<div class='card'>";
-            str += "<h3>" + item["title"] + "</h3>";
-            str += "<img src='" + item["image"] + "' alt='card image'>";
-            str += "<p><strong>From:</strong> " + item["start"] + " <strong>To:</strong> " + item["end"] + "</p>";
-            str += "<p>" + item["description"] + "</p>";
-            str += "</div>";
-        }
-        str += "</div>";
+let allVendorData = [];
+let selectedFoodTypes = [];
+let selectedBusyness = [];
 
-        // Update the container with the new 'Cards' HTML
-        document.getElementById("card").innerHTML = str;
-    });
-});
+async function loadFilters() {
+  const filterContainer = document.getElementById("filter-container");
+  const busynessContainer = document.getElementById("busyness-container");
 
-document.querySelectorAll('[class*="__heart"]').forEach(heart => {
-    heart.addEventListener('click', (e) => {
-        // 1. 클릭된 하트의 부모 컨테이너에서 정보를 추출 (데이터 저장용)
-        const cardContainer = e.target.closest('[class*="__container"]');
-        
-        // 2. 하트 상태 변경 (시각 효과)
-        e.target.textContent = "♥";
-        e.target.style.color = "red";
+  if (!filterContainer) {
+    console.error("Missing #filter-container");
+    return;
+  }
 
-        // 3. 페이지 이동 (favourite.html로 슝!)
-        window.location.href = 'favourite.html'; 
-    });
-});
+  try {
+    const response = await fetch("/data/food-vendors.json");
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-function loadFavorites() {
-    if (!window.location.pathname.includes('favourite.html')) return;
-    
-    const container = document.getElementById("Restaurants-go-here");
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const vendors = await response.json();
+    allVendorData = vendors.filter((v) => v.business_name);
+    renderFilteredCards(allVendorData);
+    //food types
+    const descriptions = [
+      ...new Set(
+        allVendorData
+          .map((v) => v.description)
+          .filter((d) => d && d.trim() !== ""),
+      ),
+    ];
+    // busyness
+    const busynessOptions = [
+      ...new Set(
+        allVendorData
+          .map((v) => v.busyness)
+          .filter((b) => b && b.trim() !== ""),
+      ),
+    ];
+    filterContainer.innerHTML = "";
+    busynessContainer.innerHTML = "";
 
-    if (savedFavorites.length === 0) {
-        container.innerHTML = '<h3>찜한 가게가 없습니다.</h3>';
-        return;
-    }
-
-    container.innerHTML = savedFavorites.map(vendor => `
-        <div class="card">
-            <h5>${vendor.name}</h5>
-            <p>${vendor.location}</p>
+    // ===== Food type dropdown =====
+    descriptions.forEach((desc, index) => {
+      const item = document.createElement("li");
+      item.innerHTML = `
+        <div class="form-check">
+          <input class="form-check-input food-filter-checkbox" type="checkbox" value="${desc}" id="food-filter-${index}">
+          <label class="form-check-label" for="food-filter-${index}">${desc}</label>
         </div>
-    `).join('');
+      `;
+      filterContainer.appendChild(item);
+    });
+
+    // ===== Busyness dropdown =====
+    busynessOptions.forEach((busy, index) => {
+      const item = document.createElement("li");
+      item.innerHTML = `
+        <div class="form-check">
+          <input class="form-check-input busyness-filter-checkbox" type="checkbox" value="${busy}" id="busyness-filter-${index}">
+          <label class="form-check-label" for="busyness-filter-${index}">${busy}</label>
+        </div>
+      `;
+      busynessContainer.appendChild(item);
+    });
+
+    // follow food type
+    const foodCheckboxes = document.querySelectorAll(".food-filter-checkbox");
+    foodCheckboxes.forEach((cb) => {
+      cb.addEventListener("change", handleCombinedFilter);
+    });
+
+    // follow busyness
+    const busynessCheckboxes = document.querySelectorAll(
+      ".busyness-filter-checkbox",
+    );
+    busynessCheckboxes.forEach((cb) => {
+      cb.addEventListener("change", handleCombinedFilter);
+    });
+  } catch (error) {
+    console.error("Error loading filters:", error);
+  }
+}
+function handleCombinedFilter() {
+  const checkedFood = document.querySelectorAll(
+    ".food-filter-checkbox:checked",
+  );
+  const checkedBusyness = document.querySelectorAll(
+    ".busyness-filter-checkbox:checked",
+  );
+
+  selectedFoodTypes = Array.from(checkedFood).map((cb) => cb.value);
+  selectedBusyness = Array.from(checkedBusyness).map((cb) => cb.value);
+
+  const filtered = allVendorData.filter((vendor) => {
+    const vendorBusyness = vendor.busyness || "no data";
+
+    const matchesFood =
+      selectedFoodTypes.length === 0 ||
+      selectedFoodTypes.includes(vendor.description);
+
+    const matchesBusyness =
+      selectedBusyness.length === 0 ||
+      selectedBusyness.includes(vendorBusyness);
+
+    return matchesFood && matchesBusyness;
+  });
+
+  renderFilteredCards(filtered);
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadFavorites);
-} else {
-    loadFavorites();
+// base on the selected filters, re-render the restaurant cards
+function renderFilteredCards(vendors) {
+  const template = document.getElementById("vendorCardTemplate");
+  const container = document.getElementById("Restaurants-go-here");
+
+  if (!container || !template) return;
+
+  container.innerHTML = "";
+
+  if (vendors.length === 0) {
+    container.innerHTML =
+      '<div class="col-12"><p class="text-center">No vendors found.</p></div>';
+    return;
+  }
+
+  vendors.forEach((vendor) => {
+    const card = template.content.cloneNode(true);
+
+    card.querySelector(".card-image").src = vendor.image_url;
+    card.querySelector(".card-image").alt = vendor.business_name;
+    card.querySelector(".card-title").textContent = vendor.business_name;
+    card.querySelector(".card-text").innerHTML = `
+      <strong>${vendor.description || "Various"}</strong><br>
+      ${vendor.location}<br>
+      <span class="badge ${vendor.status === "open" ? "bg-success" : "bg-secondary"} mt-2">
+        ${vendor.status === "open" ? "● Open" : "● Closed"}
+      </span>
+      
+      <p class="text-muted small mt-2">📍 ${vendor.geo_localarea || "Vancouver"}</p>
+      
+    `;
+
+    const busyness = document.createElement("p");
+    busyness.classList.add("mt-3", "mb-2", "fw-semibold");
+    busyness.textContent = `Busyness: ${vendor.busyness || "no data"}`;
+    card.querySelector(".card-body").appendChild(busyness);
+
+    const heartEl = document.createElement("i");
+    heartEl.classList.add("material-icons", "fav-icon");
+    heartEl.textContent = "♡";
+    heartEl.style.cssText = "font-size: 36px; cursor: pointer; color: white;";
+
+    const heartWrapper = document.createElement("div");
+    heartWrapper.classList.add("d-flex", "justify-content-end", "mt-2");
+    heartWrapper.appendChild(heartEl);
+
+    card.querySelector(".card-body").appendChild(heartWrapper);
+
+    heartEl.addEventListener("click", async () => {
+      const isFavorited = heartEl.textContent === "♥";
+      heartEl.textContent = isFavorited ? "♡" : "♥";
+      heartEl.style.color = isFavorited ? "white" : "red";
+
+      const user = auth.currentUser;
+      if (user) {
+        await toggleBookmark(user.uid, vendor.id);
+      } else {
+        console.log("Login to save favorites");
+      }
+    });
+
+    container.appendChild(card);
+  });
 }
+
+// once page is loaded, generate the restaurant cards, and load the filters
+loadFilters();

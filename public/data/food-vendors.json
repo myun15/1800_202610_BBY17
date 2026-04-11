@@ -1,18 +1,27 @@
 [
   {
+    "id": 0,
     "key": "C11",
     "vendor_type": "vendor_food",
     "status": "open",
     "business_name": "Meet to Eat",
     "location": "Authorised Parking Meter South Side of 1000 Dunsmuir St",
     "description": "Kosher Israeli",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.11975, 49.285658], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.11975, 49.285658],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.11975, "lat": 49.285658 }
+    "geo_point_2d": {
+      "lon": -123.11975,
+      "lat": 49.285658
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/K0VLvyooiskJu07XFdCStQ/o.jpg"
   },
   {
     "key": "C6",
@@ -21,13 +30,21 @@
     "business_name": "The Juice Truck",
     "location": "Authorised Parking Meter West Side of 300 Cambie St",
     "description": "Juice and Smoothies",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.109452, 49.283032], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.109452, 49.283032],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.109452, "lat": 49.283032 }
+    "geo_point_2d": {
+      "lon": -123.109452,
+      "lat": 49.283032
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/N1zNPk7Crd4YloMnktZ20Q/o.jpg"
   },
   {
     "key": "DT01",
@@ -36,6 +53,8 @@
     "business_name": "Mr. Tube Steak",
     "location": "East Side of 600 Beatty St - 6 Metres North of West Georgia St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -45,7 +64,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.112040051, "lat": 49.2787463289 }
+    "geo_point_2d": {
+      "lon": -123.112040051,
+      "lat": 49.2787463289
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/VeSOls5fo5JH7uiLlQa0Eg/o.jpg"
   },
   {
     "key": "EB06",
@@ -54,13 +77,21 @@
     "business_name": "San Juan Family Farm",
     "location": "Authorised Parking Meter North Side of 1600 Davie St",
     "description": "Fruit Shakes, Smoothies and Juices",
+    "busyness": "Low",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.139739, 49.286003], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.139739, 49.286003],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.139739, "lat": 49.286003 }
+    "geo_point_2d": {
+      "lon": -123.139739,
+      "lat": 49.286003
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/r-t0WO-LPwI-uf0TE6tGbw/o.jpg"
   },
   {
     "key": "DT21",
@@ -69,6 +100,7 @@
     "business_name": null,
     "location": "South Side of 300 Davie St - 6 Metres East of Hamilton St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -78,7 +110,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122779848, "lat": 49.2747502296 }
+    "geo_point_2d": {
+      "lon": -123.122779848,
+      "lat": 49.2747502296
+    }
   },
   {
     "key": "C12",
@@ -87,6 +122,7 @@
     "business_name": "Chickpea",
     "location": "Authorised Parking Meter - North Side of W Cordova St",
     "description": "Vegetarian",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -96,7 +132,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.115773447, "lat": 49.2876125304 }
+    "geo_point_2d": {
+      "lon": -123.115773447,
+      "lat": 49.2876125304
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/0snLYlExyZG9yVIXxfq5yQ/o.jpg"
   },
   {
     "key": "GT02",
@@ -105,6 +145,7 @@
     "business_name": "Chou Chou Crepes",
     "location": "North Side of 100 Water St - 10 Metres West of Abbott St",
     "description": "French Crepes",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -114,7 +155,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.106627255, "lat": 49.283989749 }
+    "geo_point_2d": {
+      "lon": -123.106627255,
+      "lat": 49.283989749
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/pZjhDIvMkPC8R1Qx713z8Q/o.jpg"
   },
   {
     "key": "DT75",
@@ -123,13 +168,21 @@
     "business_name": "Eat Chicken Wraps",
     "location": "South Side of 800 Robson St - 28 Metres East of Hornby St",
     "description": "Wraps and Sandwiches",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.121388, 49.282313], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.121388, 49.282313],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.121388, "lat": 49.282313 }
+    "geo_point_2d": {
+      "lon": -123.121388,
+      "lat": 49.282313
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/ubxAeXYLeZ7NQjcfCn6ZgA/o.jpg"
   },
   {
     "key": "DT26",
@@ -138,13 +191,21 @@
     "business_name": "Japadog",
     "location": "East Side of 500 Burrard St - 6 Metres South of West Pender St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.117884, 49.286363], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.117884, 49.286363],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.117884, "lat": 49.286363 }
+    "geo_point_2d": {
+      "lon": -123.117884,
+      "lat": 49.286363
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/5HiXZRsjeZfgtqmqSC8uRA/o.jpg"
   },
   {
     "key": "EB07",
@@ -153,6 +214,7 @@
     "business_name": "Mac BBQ",
     "location": "South Side of 1800 Beach Av - West of Davie St",
     "description": "Hot Dogs",
+    "busyness": "Full",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -162,7 +224,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.142526485, "lat": 49.2875878236 }
+    "geo_point_2d": {
+      "lon": -123.142526485,
+      "lat": 49.2875878236
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/d7IIq9rgXiTsldDpFws5GA/o.jpg"
   },
   {
     "key": "DT16",
@@ -171,13 +237,21 @@
     "business_name": "Mogu",
     "location": "West Side of Howe St - South of Dunsmuir St",
     "description": "Japanese Cuisine",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.117633, 49.284218], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.117633, 49.284218],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.117633, "lat": 49.284218 }
+    "geo_point_2d": {
+      "lon": -123.117633,
+      "lat": 49.284218
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/NLQdgzzH0VbkbWudR988Mg/o.jpg"
   },
   {
     "key": "DT58",
@@ -186,6 +260,7 @@
     "business_name": "Mr. Shawarma",
     "location": "North Side of 800 Robson St - East of Hornby St",
     "description": "Shawarma",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -195,7 +270,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.121480947, "lat": 49.2825844485 }
+    "geo_point_2d": {
+      "lon": -123.121480947,
+      "lat": 49.2825844485
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/_1YvExKBRlCOBNeQZtLUXg/o.jpg"
   },
   {
     "key": "DT56",
@@ -204,6 +283,7 @@
     "business_name": "Sea Dogs",
     "location": "Coal Harbour Seawall  - 200 Metres Northeast of Broughton St",
     "description": "Hot Dogs",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -213,7 +293,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.123682322, "lat": 49.2910821453 }
+    "geo_point_2d": {
+      "lon": -123.123682322,
+      "lat": 49.2910821453
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/sB73UhOUuGGgSEpLlzGLPQ/o.jpg"
   },
   {
     "key": "C24",
@@ -222,6 +306,7 @@
     "business_name": "Vij's Railway Express",
     "location": "Authorised Parking Meter North Side of 1000 W Georgia St",
     "description": "Indian Cuisine",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -231,7 +316,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122541268, "lat": 49.2854937288 }
+    "geo_point_2d": {
+      "lon": -123.122541268,
+      "lat": 49.2854937288
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/4vDsb0VMBbULRR2fsrbY3A/o.jpg"
   },
   {
     "key": "C1",
@@ -240,6 +329,7 @@
     "business_name": "Vie Niapolotan",
     "location": "Authorised Parking Meter - West Side of 400 Burrard St",
     "description": "Italian Cuisine",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -249,7 +339,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.117533502, "lat": 49.2869026429 }
+    "geo_point_2d": {
+      "lon": -123.117533502,
+      "lat": 49.2869026429
+    },
+    "image_url": ""
   },
   {
     "key": "DT48",
@@ -258,6 +352,7 @@
     "business_name": null,
     "location": "East Side of 800 Beatty St - 6 Metres South of Robson St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -267,7 +362,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.114069374, "lat": 49.2774273253 }
+    "geo_point_2d": {
+      "lon": -123.114069374,
+      "lat": 49.2774273253
+    }
   },
   {
     "key": "DT61",
@@ -276,13 +374,21 @@
     "business_name": "Actual Oden",
     "location": "South Side of 900 W Hastings - 10 metres East of Burrard St",
     "description": "Japanese Cuisine",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.116782, 49.286949], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.116782, 49.286949],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.116782, "lat": 49.286949 }
+    "geo_point_2d": {
+      "lon": -123.116782,
+      "lat": 49.286949
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/wYAlD2VBTQEF7VkIc7WsGA/o.jpg"
   },
   {
     "key": "DT57",
@@ -291,6 +397,7 @@
     "business_name": "Arturo's Mexico To Go",
     "location": "North Side of 700 W Cordova St - 14 metres East of Howe St",
     "description": "Mexican Cuisine",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -300,7 +407,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.113567537, "lat": 49.2865282201 }
+    "geo_point_2d": {
+      "lon": -123.113567537,
+      "lat": 49.2865282201
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/QiOhpTRgoVFoQwAvzETUhQ/o.jpg"
   },
   {
     "key": "DT40",
@@ -309,13 +420,21 @@
     "business_name": "Cazba Express",
     "location": "North Side of 700 Robson St - 50 Metres West of Granville St",
     "description": "Kebabs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.12034, 49.281785], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.12034, 49.281785],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.12034, "lat": 49.281785 }
+    "geo_point_2d": {
+      "lon": -123.12034,
+      "lat": 49.281785
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/46G9w526RumYdKFBj26gLQ/o.jpg"
   },
   {
     "key": "C21",
@@ -324,13 +443,21 @@
     "business_name": "Come Arepa",
     "location": "Authorised Parking Meter - 1000 W Hastings St",
     "description": "Venezuelan Cuisine",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.119288, 49.287838], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.119288, 49.287838],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.119288, "lat": 49.287838 }
+    "geo_point_2d": {
+      "lon": -123.119288,
+      "lat": 49.287838
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/nabh4YaVRuO8K77_YXeV7g/o.jpg"
   },
   {
     "key": "DT71",
@@ -339,6 +466,7 @@
     "business_name": "Didi's Greek",
     "location": "South Side of 1700 Robson St - 10 Metres East of Denman St",
     "description": "Greek Cuisine",
+    "busyness": "Full",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -348,7 +476,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.135271204, "lat": 49.2912416909 }
+    "geo_point_2d": {
+      "lon": -123.135271204,
+      "lat": 49.2912416909
+    },
+    "image_url": ""
   },
   {
     "key": "C8",
@@ -357,6 +489,7 @@
     "business_name": "Gourmet Syndicate",
     "location": "Authorised Parking Meter East Side of 900 Burrard St",
     "description": "Comfort Food",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -366,7 +499,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.124511374, "lat": 49.2820545294 }
+    "geo_point_2d": {
+      "lon": -123.124511374,
+      "lat": 49.2820545294
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/4vDsb0VMBbULRR2fsrbY3A/o.jpg"
   },
   {
     "key": "DT67",
@@ -375,13 +512,21 @@
     "business_name": "Mr. Arancino",
     "location": "West Side of Granville St - 75 Metres North of Robson St",
     "description": "Italian Cuisine",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.119039, 49.281957], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.119039, 49.281957],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.119039, "lat": 49.281957 }
+    "geo_point_2d": {
+      "lon": -123.119039,
+      "lat": 49.281957
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/GtxqhmEaEbirdqMGT-hN9w/o.jpg"
   },
   {
     "key": "GM15",
@@ -390,6 +535,7 @@
     "business_name": "Mr. Sandwich",
     "location": "South Side of 700 W Georgia St - 20 Metres West of Granville St",
     "description": "Sandwiches",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -399,7 +545,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118453808, "lat": 49.2825423251 }
+    "geo_point_2d": {
+      "lon": -123.118453808,
+      "lat": 49.2825423251
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/kQT-erMqahxIjrvQHsKMYQ/o.jpg"
   },
   {
     "key": "DT72",
@@ -408,6 +558,7 @@
     "business_name": "The Loving Hut",
     "location": "East Side of 1200 Pacific Boulevard - 10 Metres South of Davie St",
     "description": "Vegetarian and Vegan",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -417,7 +568,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.121519626, "lat": 49.2738358887 }
+    "geo_point_2d": {
+      "lon": -123.121519626,
+      "lat": 49.2738358887
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/jdh8Df4PCMJRtQxlh-zsaw/o.jpg"
   },
   {
     "key": "DT47",
@@ -426,6 +581,7 @@
     "business_name": "V Dub Dogs",
     "location": "Foot of Davie St - 2 Metres South of Marinaside Cres.",
     "description": "Hot Dogs",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -435,7 +591,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.119509851, "lat": 49.2728501609 }
+    "geo_point_2d": {
+      "lon": -123.119509851,
+      "lat": 49.2728501609
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/5HiXZRsjeZfgtqmqSC8uRA/o.jpg"
   },
   {
     "key": "GM11",
@@ -444,6 +604,7 @@
     "business_name": "Van Dog",
     "location": "East Side of 900 Granville St - 75 Metres South of Smithe St",
     "description": "Hot Dogs",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -453,7 +614,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122119558, "lat": 49.2797455147 }
+    "geo_point_2d": {
+      "lon": -123.122119558,
+      "lat": 49.2797455147
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/xUpb-ZuYxtZP4FBDgX4XqA/o.jpg"
   },
   {
     "key": "DT31",
@@ -462,6 +627,7 @@
     "business_name": "Yokabai",
     "location": "West Side of 500 Granville St - 10 Metres South of West Pender St",
     "description": "Burgers and Fries",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -471,7 +637,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.115175232, "lat": 49.284522117 }
+    "geo_point_2d": {
+      "lon": -123.115175232,
+      "lat": 49.284522117
+    },
+    "image_url": ""
   },
   {
     "key": "C23",
@@ -480,13 +650,21 @@
     "business_name": "Fat Duck Mobile Eatery",
     "location": "Authorised Parking Meter - North Side of 800 W Cordova St",
     "description": "International Comfort Foods",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.114022, 49.286811], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.114022, 49.286811],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.114022, "lat": 49.286811 }
+    "geo_point_2d": {
+      "lon": -123.114022,
+      "lat": 49.286811
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/Xvx_wrzQbNoGgFJvixP73g/o.jpg"
   },
   {
     "key": "OD06",
@@ -495,6 +673,7 @@
     "business_name": "La Bomba Taqueria",
     "location": "South Side of 1700 E Broadway",
     "description": "Tacos and Fresh Salsas",
+    "busyness": "Low",
     "geo_localarea": "Kensington-Cedar Cottage",
     "geom": {
       "type": "Feature",
@@ -504,7 +683,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.068886047, "lat": 49.262216537 }
+    "geo_point_2d": {
+      "lon": -123.068886047,
+      "lat": 49.262216537
+    },
+    "image_url": ""
   },
   {
     "key": "C3",
@@ -513,13 +696,21 @@
     "business_name": "Mr. Shawarma",
     "location": "Authorised Parking Meter - North Side of 1000 Melville St",
     "description": "Shawarma",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.120163, 49.285361], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.120163, 49.285361],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120163, "lat": 49.285361 }
+    "geo_point_2d": {
+      "lon": -123.120163,
+      "lat": 49.285361
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/IMvFiFAGM7PYKZeKbx6hMw/o.jpg"
   },
   {
     "key": "C7",
@@ -528,6 +719,7 @@
     "business_name": "Roaming Dragon",
     "location": "Authorised Parking Meter East Side of 800 Burrard St",
     "description": "Asian Fusion",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -537,7 +729,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122918691, "lat": 49.2830967069 }
+    "geo_point_2d": {
+      "lon": -123.122918691,
+      "lat": 49.2830967069
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/JJ1PoegQIULHKzgIJEUJ1A/o.jpg"
   },
   {
     "key": "DT36",
@@ -546,6 +742,7 @@
     "business_name": "Suassy Thai",
     "location": "North Side of 800 Robson St - 30 Metres West of Howe St",
     "description": "Thai Cuisine",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -555,7 +752,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.121070522, "lat": 49.2822804045 }
+    "geo_point_2d": {
+      "lon": -123.121070522,
+      "lat": 49.2822804045
+    },
+    "image_url": ""
   },
   {
     "key": "C22",
@@ -564,13 +765,21 @@
     "business_name": "The Praguery",
     "location": "Authorised Parking Meter - 1000 W Hastings St",
     "description": "Central European Desserts",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.119362, 49.287858], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.119362, 49.287858],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.119362, "lat": 49.287858 }
+    "geo_point_2d": {
+      "lon": -123.119362,
+      "lat": 49.287858
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/3Xo1hqH4uoRC_0gfQMCPyA/o.jpg"
   },
   {
     "key": "DT06",
@@ -579,6 +788,7 @@
     "business_name": "Van Dog",
     "location": "South Side of 900 Robson St - 12 Metres East of Burrard St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -588,7 +798,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.12266063, "lat": 49.2830840428 }
+    "geo_point_2d": {
+      "lon": -123.12266063,
+      "lat": 49.2830840428
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/eckiv9HpTrSZZn3DhNEHcQ/o.jpg"
   },
   {
     "key": "GM04",
@@ -597,6 +811,7 @@
     "business_name": "Van Dog",
     "location": "South Side of 600 W Georgia St - 6 Metres East of Granville St",
     "description": "Western",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -606,7 +821,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.11806677, "lat": 49.2823144043 }
+    "geo_point_2d": {
+      "lon": -123.11806677,
+      "lat": 49.2823144043
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/5HiXZRsjeZfgtqmqSC8uRA/o.jpg"
   },
   {
     "key": "GM03",
@@ -615,6 +834,7 @@
     "business_name": null,
     "location": "East side of 700 Granville St - 6 Metres South W Georgia St",
     "description": "Hot Dogs",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -624,7 +844,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118235028, "lat": 49.2823195925 }
+    "geo_point_2d": {
+      "lon": -123.118235028,
+      "lat": 49.2823195925
+    }
   },
   {
     "key": "DT59",
@@ -633,6 +856,7 @@
     "business_name": "Commissary Connect",
     "location": "East Side of 700 Hornby St - 22 metres South of W Georgia St",
     "description": "Variety Menu",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -642,7 +866,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120309651, "lat": 49.283508765 }
+    "geo_point_2d": {
+      "lon": -123.120309651,
+      "lat": 49.283508765
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/V9f9mHLsrOcrD_IhUq5gxA/o.jpg"
   },
   {
     "key": "DT38",
@@ -651,6 +879,7 @@
     "business_name": null,
     "location": "South Side of 800 W Georgia St - 55 Metres West of Howe St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -660,7 +889,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.11986322, "lat": 49.2834680335 }
+    "geo_point_2d": {
+      "lon": -123.11986322,
+      "lat": 49.2834680335
+    }
   },
   {
     "key": "OD12",
@@ -669,6 +901,8 @@
     "business_name": null,
     "location": "East Side of 8400 Cambie St - 75 Metres South of SW Marine Dr",
     "description": "Hot Dogs",
+    "busyness": "Busy",
+
     "geo_localarea": "Marpole",
     "geom": {
       "type": "Feature",
@@ -678,7 +912,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.117031735, "lat": 49.2098916793 }
+    "geo_point_2d": {
+      "lon": -123.117031735,
+      "lat": 49.2098916793
+    }
   },
   {
     "key": "EB03",
@@ -687,6 +924,8 @@
     "business_name": "Lemon Sea",
     "location": "South Side of 2000 Beach Av - 30 metres West of Chilco St",
     "description": "Lemonade and Crepes",
+    "busyness": "Busy",
+
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -696,7 +935,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.144697764, "lat": 49.2896827396 }
+    "geo_point_2d": {
+      "lon": -123.144697764,
+      "lat": 49.2896827396
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/DkODPxSEVLtAx-r-QTCXig/o.jpg"
   },
   {
     "key": "GM21",
@@ -705,6 +948,8 @@
     "business_name": "Soho Road Naan Kebab",
     "location": "South Side of 700 W Georgia St - 20 Metres West of Granville St",
     "description": "Indian Cuisine",
+    "busyness": "Full",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -714,7 +959,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118501288, "lat": 49.2825721404 }
+    "geo_point_2d": {
+      "lon": -123.118501288,
+      "lat": 49.2825721404
+    },
+    "image_url": ""
   },
   {
     "key": "DT42",
@@ -723,6 +972,8 @@
     "business_name": "Cheesey Does It",
     "location": "South Side of 900 Robson St - 16 Metres West of Hornby St",
     "description": "Sandwiches",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -732,7 +983,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122135786, "lat": 49.2827533647 }
+    "geo_point_2d": {
+      "lon": -123.122135786,
+      "lat": 49.2827533647
+    },
+    "image_url": ""
   },
   {
     "key": "DT05",
@@ -741,6 +996,7 @@
     "business_name": "Mr. Camaron",
     "location": "North Side of W Georgia St - 10 Metres West of Homer St",
     "description": "Drinks and Smoothies",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -750,7 +1006,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.115237361, "lat": 49.2808012429 }
+    "geo_point_2d": {
+      "lon": -123.115237361,
+      "lat": 49.2808012429
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/CLDBERD01KdK26vrGfMgaQ/o.jpg"
   },
   {
     "key": "GM16",
@@ -759,6 +1019,7 @@
     "business_name": "Mr. Shawarma",
     "location": "East Side of 600 Granville St - 80 Metres North of W Georgia St",
     "description": "Middle Eastern Cuisine",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -768,7 +1029,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.117190394, "lat": 49.2830199659 }
+    "geo_point_2d": {
+      "lon": -123.117190394,
+      "lat": 49.2830199659
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/_1YvExKBRlCOBNeQZtLUXg/o.jpg"
   },
   {
     "key": "C5",
@@ -777,6 +1042,7 @@
     "business_name": "Tacofino",
     "location": "Authorised Parking Meter West Side of 700 Howe St",
     "description": "Tacos and Burritos",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -786,7 +1052,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120529317, "lat": 49.2823011792 }
+    "geo_point_2d": {
+      "lon": -123.120529317,
+      "lat": 49.2823011792
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/8mLW5RaKxIg1qCvQ2t-4tA/o.jpg"
   },
   {
     "key": "EB04",
@@ -795,6 +1065,7 @@
     "business_name": null,
     "location": "South Side of 1700 Beach Ave - East Side of Bidwell St",
     "description": "Hot Dogs",
+    "busyness": "Unknown",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -804,7 +1075,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.142926123, "lat": 49.2844925173 }
+    "geo_point_2d": {
+      "lon": -123.142926123,
+      "lat": 49.2844925173
+    }
   },
   {
     "key": "OD05",
@@ -813,6 +1087,7 @@
     "business_name": null,
     "location": "South Side of 1700 East Broadway - 37 Metres East of Commercial Dr",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Kensington-Cedar Cottage",
     "geom": {
       "type": "Feature",
@@ -822,7 +1097,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.069072741, "lat": 49.2622160477 }
+    "geo_point_2d": {
+      "lon": -123.069072741,
+      "lat": 49.2622160477
+    }
   },
   {
     "key": "DT10",
@@ -831,6 +1109,8 @@
     "business_name": null,
     "location": "Expo Boulevard - 20 Metres West of Abbott St",
     "description": "Hot Dogs",
+    "busyness": "Low",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -840,7 +1120,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.108008079, "lat": 49.2787930538 }
+    "geo_point_2d": {
+      "lon": -123.108008079,
+      "lat": 49.2787930538
+    }
   },
   {
     "key": "C18",
@@ -849,6 +1132,7 @@
     "business_name": "Aussie Pie Guy",
     "location": "Authorised Parking Meter - 1000 W Pender St",
     "description": "Australian Pies",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -858,7 +1142,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118192426, "lat": 49.2869519782 }
+    "geo_point_2d": {
+      "lon": -123.118192426,
+      "lat": 49.2869519782
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/ctM0omacwO16m1rnMLAmRA/o.jpg"
   },
   {
     "key": "C17",
@@ -867,6 +1155,7 @@
     "business_name": "Le Tigre",
     "location": "Authorised Parking Meter North Side of Alberni St - East of Bute St",
     "description": "Chinese Cuisine",
+    "busyness": "Low",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -876,7 +1165,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.125618909, "lat": 49.2865915482 }
+    "geo_point_2d": {
+      "lon": -123.125618909,
+      "lat": 49.2865915482
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/mfAk57H3htMhfXk9OhwosQ/o.jpg"
   },
   {
     "key": "DT35",
@@ -885,13 +1178,21 @@
     "business_name": "Russett Shack",
     "location": "West Side of 1100 Burrard St - 10 Metres North of Davie St",
     "description": "Potato Based Dishes",
+    "busyness": "Full",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.128965, 49.279378], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.128965, 49.279378],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.128965, "lat": 49.279378 }
+    "geo_point_2d": {
+      "lon": -123.128965,
+      "lat": 49.279378
+    },
+    "image_url": ""
   },
   {
     "key": "DT32",
@@ -900,6 +1201,7 @@
     "business_name": "Tandoori Tikka Dog",
     "location": "North Side of 500 W Cordova St - 59 Metres West of Richards St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -909,7 +1211,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.111358833, "lat": 49.2851739116 }
+    "geo_point_2d": {
+      "lon": -123.111358833,
+      "lat": 49.2851739116
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/p9dNXUZy9oYyTVslpuZ1iQ/o.jpg"
   },
   {
     "key": "DT73",
@@ -918,6 +1224,7 @@
     "business_name": "Tandoori Tikka Dog",
     "location": "South Side of 200 West Georgia St - 8 Metres East of Hamilton St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -927,7 +1234,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.114194279, "lat": 49.2797972582 }
+    "geo_point_2d": {
+      "lon": -123.114194279,
+      "lat": 49.2797972582
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/p9dNXUZy9oYyTVslpuZ1iQ/o.jpg"
   },
   {
     "key": "DT37",
@@ -936,6 +1247,7 @@
     "business_name": null,
     "location": "West Side of 700 Burrard St - 15 Metres North of Robson St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -945,7 +1257,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122731857, "lat": 49.2834887921 }
+    "geo_point_2d": {
+      "lon": -123.122731857,
+      "lat": 49.2834887921
+    }
   },
   {
     "key": "C15",
@@ -954,6 +1269,7 @@
     "business_name": "Bandidas",
     "location": "Authorised Parking Meter - North Side of 1000 W Georgia St",
     "description": "Vegan Cuisine",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -963,7 +1279,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122093113, "lat": 49.2851936823 }
+    "geo_point_2d": {
+      "lon": -123.122093113,
+      "lat": 49.2851936823
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/tf9ny8tt_nWv3t-z48BZZQ/o.jpg"
   },
   {
     "key": "C14",
@@ -972,6 +1292,7 @@
     "business_name": "Brasilian Roots",
     "location": "Authorised Parking Meter - East Side of 600 Seymour St",
     "description": "Brasilian Cuisine",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -981,7 +1302,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.116846018, "lat": 49.2819872241 }
+    "geo_point_2d": {
+      "lon": -123.116846018,
+      "lat": 49.2819872241
+    },
+    "image_url": ""
   },
   {
     "key": "DT70",
@@ -990,6 +1315,7 @@
     "business_name": "Commissary Connect",
     "location": "West Side of 600 Hornby St - 6 Metres South of Dunsmuir St",
     "description": "Variety Menu",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -999,7 +1325,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118581094, "lat": 49.2849051032 }
+    "geo_point_2d": {
+      "lon": -123.118581094,
+      "lat": 49.2849051032
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/V9f9mHLsrOcrD_IhUq5gxA/o.jpg"
   },
   {
     "key": "C13",
@@ -1008,6 +1338,7 @@
     "business_name": "Disco Cheetah",
     "location": "Authorised Parking Meter West Side of 700 Howe St",
     "description": "Korean",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1017,7 +1348,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120443627, "lat": 49.2823678348 }
+    "geo_point_2d": {
+      "lon": -123.120443627,
+      "lat": 49.2823678348
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/OzihrTOAkraKK2Gpw_RCYg/o.jpg"
   },
   {
     "key": "DT49",
@@ -1026,6 +1361,8 @@
     "business_name": "Eat Chicken Wraps",
     "location": "West Side of 800 Howe St - 5 Metres South of Robson St",
     "description": "Wraps and Sandwiches",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1035,7 +1372,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.121098559, "lat": 49.2819285671 }
+    "geo_point_2d": {
+      "lon": -123.121098559,
+      "lat": 49.2819285671
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/ubxAeXYLeZ7NQjcfCn6ZgA/o.jpg"
   },
   {
     "key": "DT69",
@@ -1044,6 +1385,7 @@
     "business_name": "Japadog",
     "location": "North Side of 600 W Cordova St - 6 Metres East of Granville St",
     "description": "Hot Dogs",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1053,7 +1395,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.112525974, "lat": 49.285906094 }
+    "geo_point_2d": {
+      "lon": -123.112525974,
+      "lat": 49.285906094
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/5HiXZRsjeZfgtqmqSC8uRA/o.jpg"
   },
   {
     "key": "GM17",
@@ -1062,6 +1408,7 @@
     "business_name": "Master Chef's Kebab House",
     "location": "East Side of 500 Granville St - 10 Metres North of Dunsmuir St",
     "description": "Kebabs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1071,7 +1418,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.115997593, "lat": 49.2838072993 }
+    "geo_point_2d": {
+      "lon": -123.115997593,
+      "lat": 49.2838072993
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/EKoCneU-PfqiZtXs61_VuA/o.jpg"
   },
   {
     "key": "DT39",
@@ -1080,6 +1431,7 @@
     "business_name": "Mo's Hot Dog Plus",
     "location": "South Side of 800 Robson St  -30 Metres West of Howe St",
     "description": "Western",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1089,7 +1441,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.121307872, "lat": 49.2822753151 }
+    "geo_point_2d": {
+      "lon": -123.121307872,
+      "lat": 49.2822753151
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/5HiXZRsjeZfgtqmqSC8uRA/o.jpg"
   },
   {
     "key": "C10",
@@ -1098,6 +1454,8 @@
     "business_name": "Mum's Grilled Cheese Truck",
     "location": "Authorised Parking Meter -West Side of 700 Howe St",
     "description": "Grilled Cheese and Soups",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1107,7 +1465,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120684903, "lat": 49.2822094865 }
+    "geo_point_2d": {
+      "lon": -123.120684903,
+      "lat": 49.2822094865
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/WWZghNOm5IH0WnhZ_Zex7Q/o.jpg"
   },
   {
     "key": "C4",
@@ -1116,13 +1478,21 @@
     "business_name": "Tacofino White Lightening",
     "location": "Authorised Parking Meter West Side 500 Burrard St",
     "description": "Tacos and Burritos",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.119002, 49.286031], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.119002, 49.286031],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.119002, "lat": 49.286031 }
+    "geo_point_2d": {
+      "lon": -123.119002,
+      "lat": 49.286031
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/tf9ny8tt_nWv3t-z48BZZQ/o.jpg"
   },
   {
     "key": "C19",
@@ -1131,6 +1501,7 @@
     "business_name": "The Reef",
     "location": "Authorised Parking Meter - East Side of Thurlow St - North of W Hastings St",
     "description": "Caribbean",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1140,7 +1511,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.119509663, "lat": 49.2880164318 }
+    "geo_point_2d": {
+      "lon": -123.119509663,
+      "lat": 49.2880164318
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/ygmsnycw015nA0SrFTj5ug/o.jpg"
   },
   {
     "key": "EB05",
@@ -1149,6 +1524,7 @@
     "business_name": null,
     "location": "South Side of 1900 Beach Ave - 17 Metres West of Gilford St",
     "description": "Hot Dogs",
+    "busyness": "Full",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -1158,7 +1534,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.143229444, "lat": 49.2887284882 }
+    "geo_point_2d": {
+      "lon": -123.143229444,
+      "lat": 49.2887284882
+    }
   },
   {
     "key": "GT04",
@@ -1167,6 +1546,7 @@
     "business_name": null,
     "location": "North Side of 100 Water St - 10 Metres West of Abbott St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1176,7 +1556,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.106609298, "lat": 49.2839891744 }
+    "geo_point_2d": {
+      "lon": -123.106609298,
+      "lat": 49.2839891744
+    }
   },
   {
     "key": "DT02",
@@ -1185,6 +1568,8 @@
     "business_name": null,
     "location": "North Side of Dunsmuir St - 6 Metres East of Beatty St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1194,7 +1579,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.11025893, "lat": 49.2798897005 }
+    "geo_point_2d": {
+      "lon": -123.11025893,
+      "lat": 49.2798897005
+    }
   },
   {
     "key": "GM13",
@@ -1203,6 +1591,7 @@
     "business_name": "BBKB Kaboom Box",
     "location": "West Side of 700 Granville St - South of W Georgia St",
     "description": "Seafood and Western",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1212,7 +1601,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118591524, "lat": 49.2823626147 }
+    "geo_point_2d": {
+      "lon": -123.118591524,
+      "lat": 49.2823626147
+    },
+    "image_url": ""
   },
   {
     "key": "DT74",
@@ -1221,13 +1614,21 @@
     "business_name": "Commissary Connect",
     "location": "South Side of 800 Robson St- 13 Metres West of Howe St",
     "description": "Variety Menu",
+    "busyness": "Unknown",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.121122, 49.282109], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.121122, 49.282109],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.121122, "lat": 49.282109 }
+    "geo_point_2d": {
+      "lon": -123.121122,
+      "lat": 49.282109
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/V9f9mHLsrOcrD_IhUq5gxA/o.jpg"
   },
   {
     "key": "GT05",
@@ -1236,6 +1637,8 @@
     "business_name": null,
     "location": "North Side of 300 Water St - 17 Metres West of Cambie St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1245,7 +1648,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.10916041, "lat": 49.2844467907 }
+    "geo_point_2d": {
+      "lon": -123.10916041,
+      "lat": 49.2844467907
+    }
   },
   {
     "key": "OD03",
@@ -1254,6 +1660,7 @@
     "business_name": "Holy Smokes",
     "location": "South Side 1500 West Broadway - 6 Metres West of Granville St",
     "description": "Hot Dogs",
+    "busyness": "Full",
     "geo_localarea": "Fairview",
     "geom": {
       "type": "Feature",
@@ -1263,7 +1670,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.138921554, "lat": 49.2634838294 }
+    "geo_point_2d": {
+      "lon": -123.138921554,
+      "lat": 49.2634838294
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/_qtmcYvH8Vkp3P5_IeKfLQ/o.jpg"
   },
   {
     "key": "EB01",
@@ -1272,6 +1683,7 @@
     "business_name": "Mac BBQ",
     "location": "South Side of 1800 Beach Av - East of Davie St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -1281,7 +1693,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.142505041, "lat": 49.2873240136 }
+    "geo_point_2d": {
+      "lon": -123.142505041,
+      "lat": 49.2873240136
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/6UdmtFft-ynYQEGqTXqSCw/o.jpg"
   },
   {
     "key": "DT64",
@@ -1290,6 +1706,7 @@
     "business_name": "Marimba",
     "location": "South Side of 800 W Georgia St - 30 Metres West of Howe St",
     "description": "Middle Eastern Cuisine",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1299,7 +1716,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.119611426, "lat": 49.2832896022 }
+    "geo_point_2d": {
+      "lon": -123.119611426,
+      "lat": 49.2832896022
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/5gd2A6STKbVgonssPLz3XQ/o.jpg"
   },
   {
     "key": "DT15",
@@ -1308,6 +1729,7 @@
     "business_name": "Meet to Eat",
     "location": "West Side of 1100 Burrard St - 10 Metres North of Davie St",
     "description": "Kosher Israeli",
+    "busyness": "Low",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -1317,7 +1739,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.129163572, "lat": 49.2792760359 }
+    "geo_point_2d": {
+      "lon": -123.129163572,
+      "lat": 49.2792760359
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/K0VLvyooiskJu07XFdCStQ/o.jpg"
   },
   {
     "key": "C20",
@@ -1326,6 +1752,7 @@
     "business_name": "The Fryinig Pan",
     "location": "Authorised Parking Meter West Side of 500 Burrard St",
     "description": "Fried Chicken Sandwiches",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1335,7 +1762,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118158491, "lat": 49.2865384001 }
+    "geo_point_2d": {
+      "lon": -123.118158491,
+      "lat": 49.2865384001
+    },
+    "image_url": ""
   },
   {
     "key": "DT13",
@@ -1344,6 +1775,7 @@
     "business_name": null,
     "location": "North Side of 900 Robson St - 6 Metres East of Burrard St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1353,7 +1785,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122520505, "lat": 49.2832224976 }
+    "geo_point_2d": {
+      "lon": -123.122520505,
+      "lat": 49.2832224976
+    }
   },
   {
     "key": "GM20",
@@ -1362,6 +1797,7 @@
     "business_name": "Crab Park Chowdery",
     "location": "East Side of 600 Granville St - 30 Metres North of W Georgia St",
     "description": "Chowders and Soups",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1371,7 +1807,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.117466132, "lat": 49.2828190133 }
+    "geo_point_2d": {
+      "lon": -123.117466132,
+      "lat": 49.2828190133
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/bs1KHZIOrzr5SLfOxFQ0mw/o.jpg"
   },
   {
     "key": "GM05",
@@ -1380,6 +1820,7 @@
     "business_name": null,
     "location": "East Side of 800 Granville St - 30 Metres North of Smithe St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1389,7 +1830,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120951897, "lat": 49.2805178578 }
+    "geo_point_2d": {
+      "lon": -123.120951897,
+      "lat": 49.2805178578
+    }
   },
   {
     "key": "GM18",
@@ -1398,6 +1842,7 @@
     "business_name": null,
     "location": "West Side of 700 Granville St - 5 Metres South of W Georgia St",
     "description": "Hot Dogs",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1407,7 +1852,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118426844, "lat": 49.2824701485 }
+    "geo_point_2d": {
+      "lon": -123.118426844,
+      "lat": 49.2824701485
+    }
   },
   {
     "key": "DT79",
@@ -1416,6 +1864,7 @@
     "business_name": "Ali's Hot Dogs",
     "location": "North Side of 1000 Robson St",
     "description": "Hot Dogs",
+    "busyness": "Full",
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -1425,7 +1874,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.123569703, "lat": 49.2839220207 }
+    "geo_point_2d": {
+      "lon": -123.123569703,
+      "lat": 49.2839220207
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/gF3RFKRn3joxBJirZ1Fh_A/o.jpg"
   },
   {
     "key": "DT54",
@@ -1434,6 +1887,7 @@
     "business_name": "Dim Sum Express",
     "location": "East Side of 200 Howe St - 100 Metres North of W Cordova St",
     "description": "Dim Sum",
+    "busyness": "Full",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1443,7 +1897,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.112870853, "lat": 49.2872354621 }
+    "geo_point_2d": {
+      "lon": -123.112870853,
+      "lat": 49.2872354621
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/6yA_L1ZeYe6JpgCqH4wJeA/o.jpg"
   },
   {
     "key": "OD18",
@@ -1452,6 +1910,8 @@
     "business_name": "Dog Meister",
     "location": "West Side of 2900 Main St - 20 Metres North of E 14th Ave",
     "description": "Hot Dogs",
+    "busyness": "Busy",
+
     "geo_localarea": "Mount Pleasant",
     "geom": {
       "type": "Feature",
@@ -1461,7 +1921,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.101569149, "lat": 49.258474676 }
+    "geo_point_2d": {
+      "lon": -123.101569149,
+      "lat": 49.258474676
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/IGmogNblTqFWFst4Ez9dGw/o.jpg"
   },
   {
     "key": "C9",
@@ -1470,13 +1934,21 @@
     "business_name": "Feastro - The Rolling Bistro",
     "location": "Authorised Parking Meter - Thurlow St at W Cordova St",
     "description": "Local Meats and Seafood",
+    "busyness": "Busy",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
-      "geometry": { "coordinates": [-123.118453, 49.288672], "type": "Point" },
+      "geometry": {
+        "coordinates": [-123.118453, 49.288672],
+        "type": "Point"
+      },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.118453, "lat": 49.288672 }
+    "geo_point_2d": {
+      "lon": -123.118453,
+      "lat": 49.288672
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/nBZOQ0bjXx8FTL4y1kmnbg/o.jpg"
   },
   {
     "key": "C16",
@@ -1485,6 +1957,8 @@
     "business_name": "Feastro The Rolling Bistro",
     "location": "Authorised Parking Meter West Side of 700 Howe St",
     "description": "Local Meats and Seafood",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1494,7 +1968,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120345228, "lat": 49.2824386635 }
+    "geo_point_2d": {
+      "lon": -123.120345228,
+      "lat": 49.2824386635
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/rFqfmU0qwey5FHKkZa5eCQ/o.jpg"
   },
   {
     "key": "DT52",
@@ -1503,6 +1981,8 @@
     "business_name": "Japadog",
     "location": "West Side of 800 Burrard St - 2.5 Metres North of Smithe St",
     "description": "Hot Dogs",
+    "busyness": "Busy",
+
     "geo_localarea": "West End",
     "geom": {
       "type": "Feature",
@@ -1512,7 +1992,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.124363671, "lat": 49.2824199268 }
+    "geo_point_2d": {
+      "lon": -123.124363671,
+      "lat": 49.2824199268
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/5HiXZRsjeZfgtqmqSC8uRA/o.jpg"
   },
   {
     "key": "GM10",
@@ -1521,6 +2005,8 @@
     "business_name": "Potato Tornado",
     "location": "West Side of 800 Granville St - 6 Metres South of Robson St",
     "description": "Potato Based Dishes",
+    "busyness": "Busy",
+
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1530,7 +2016,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.120079603, "lat": 49.2812971849 }
+    "geo_point_2d": {
+      "lon": -123.120079603,
+      "lat": 49.2812971849
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/d-azTdEuli4e-92CHkyPPw/o.jpg"
   },
   {
     "key": "C25",
@@ -1539,6 +2029,8 @@
     "business_name": "Roaming Dragon",
     "location": "Authorised Parking Meter East Side of 1600 Manitoba St",
     "description": "Asian Fusion",
+    "busyness": "Busy",
+
     "geo_localarea": "Mount Pleasant",
     "geom": {
       "type": "Feature",
@@ -1548,7 +2040,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.106548732, "lat": 49.2713078459 }
+    "geo_point_2d": {
+      "lon": -123.106548732,
+      "lat": 49.2713078459
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/JJ1PoegQIULHKzgIJEUJ1A/o.jpg"
   },
   {
     "key": "C26",
@@ -1557,6 +2053,7 @@
     "business_name": "Super Thai",
     "location": "Authorised Parking Meter North Side of 1000 W Georgia St",
     "description": "Thai Cuisine",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1566,7 +2063,11 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122623765, "lat": 49.285532115 }
+    "geo_point_2d": {
+      "lon": -123.122623765,
+      "lat": 49.285532115
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/KLRwLaTf-TuRtLFoyvpscQ/o.jpg"
   },
   {
     "key": "DT41",
@@ -1575,6 +2076,7 @@
     "business_name": "The Juice Truck",
     "location": "South Side of 900 Robson - 6 Metres East of Burrard St",
     "description": "Juice and Smoothies",
+    "busyness": "Low",
     "geo_localarea": "Downtown",
     "geom": {
       "type": "Feature",
@@ -1584,6 +2086,10 @@
       },
       "properties": {}
     },
-    "geo_point_2d": { "lon": -123.122696998, "lat": 49.2831023503 }
+    "geo_point_2d": {
+      "lon": -123.122696998,
+      "lat": 49.2831023503
+    },
+    "image_url": "https://s3-media0.fl.yelpcdn.com/bphoto/N1zNPk7Crd4YloMnktZ20Q/o.jpg"
   }
 ]
