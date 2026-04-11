@@ -14,20 +14,35 @@ class SiteNavbar extends HTMLElement {
         : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html'" type="button">Log in</button> 
            <button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html#signup'" type="button">Sign up</button>`;
 
+           const sidePanelAuthButton = user
+        ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
+        : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html'" type="button">Log in</button> 
+           <button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html#signup'" type="button">Sign up</button>`;
+
       this.innerHTML = `
             <nav class="navbar">
                 <div class="navbar-main-container">
                   <div class="d-flex align-items-center gap-2" style="flex-shrink: 0;">
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-link" data-bs-toggle="dropdown">
-                            <img src="images/menu.svg" alt="dropdown" class="navbar-menu-icon" />
-                            </button>
-                            <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">asdf</a></li>
-                            <li><a class="dropdown-item" href="#">asdf</a></li>
-                            <li><a class="dropdown-item" href="#">asdf</a></li>
-                            </ul>                  
-                        </div>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#mySidebar">
+  <section><img id="side-panel" src="/public/images/menu.svg"></section>
+</button>
+
+<!-- The Sidebar (Offcanvas) -->
+<div class="offcanvas offcanvas-start" id="mySidebar">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <!-- Your sidebar content goes here -->
+    <ul class="list-group list-group-flush">
+      <li><button id="logOutBtn" class="login bg-light" type="button">${sidePanelAuthButton}</button></li>
+      <li class="list-group-item"><a href="#">Home</a></li>
+      <li class="list-group-item"><a href="#">Profile</a></li>
+      <li class="list-group-item"><a href="#">Settings</a></li>
+    </ul>
+  </div>
+</div>
                         <a class="navbar-brand" href="${href}">
                             TimesUp
                         </a>
