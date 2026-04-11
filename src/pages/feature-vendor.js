@@ -104,7 +104,7 @@ function renderFilteredCards(vendors) {
 
     //  renderFilteredCards + button
     const actionButtons = document.createElement("div");
-    actionButtons.className = "mt-3 d-flex gap-2 align-items-center"; // 使用 Flex 布局让按钮排成一排
+    actionButtons.className = "mt-3 d-flex gap-2 align-items-center";
 
     actionButtons.innerHTML = `
             <div class="restaurant-popup-actions">

@@ -1,4 +1,4 @@
-import { auth, db } from "../helper/firebaseConfig.js";
+import { auth, db } from "../../helper/firebaseConfig.js";
 import {
   doc,
   getDoc,
@@ -21,8 +21,8 @@ async function displayVendorCards() {
   }
 
   try {
-    // 读取 Firestore 的 vendors collection，只拿 5 笔
-    const vendorsRef = collection(db, "vendors"); // collection 名称改成你的
+    // read Firestore vendors collection，only 5 for demo purposes
+    const vendorsRef = collection(db, "vendors"); // collection
     const q = query(vendorsRef, limit(5));
     const snapshot = await getDocs(q);
 
