@@ -1,12 +1,17 @@
-import { auth, db } from "../helper/firebaseConfig.js";
+import { db, auth } from "/src/helper/firebaseConfig.js";
 import {
+  collection,
+  getDocs,
+  query,
+  where,
+  limit,
   doc,
   getDoc,
   updateDoc,
   arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
-
+import { onAuthReady } from "/src/helper/authentication.js";
 async function displayVendorCards() {
   const template = document.getElementById("vendorCardTemplate"); // Blueprint for restaurant cards
   const container = document.getElementById("Restaurants-go-here"); // Actual <div> that the restaurant cards are appended to
@@ -17,28 +22,40 @@ async function displayVendorCards() {
   }
 
   try {
-    // Get restaurant data from /public/data/food-vendors.json
-    const response = await fetch("/data/food-vendors.json");
+    // const querySnapshot = await getDocs(collection(db, "restaurants"));
 
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    // 1. restful api turn to data
+    const vendorsRef = collection(db, "restaurants");
+    const snapshot = await getDocs(vendorsRef);
 
-    const vendors = await response.json();
+    // 2. firebaw turn to data
+    vendors = snapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
 
-    const validVendors = vendors.filter((v) => v.business_name); // Retrieve only vendors with a business name
+    // 3.filter by name
+    const validVendors = vendors.filter((v) => v.name);
+
     if (validVendors.length === 0) {
       container.innerHTML =
         '<div class="col-12"><p class="text-center">No vendors found.</p></div>';
       return;
     }
+    container.innerHTML = "";
 
     // Create a restaurant card for each restaurant
+    const vendors = snapshot.docs
+      .map((doc) => ({ id: doc.id, ...doc.data() }))
+      .filter((v) => v.name);
+
     validVendors.forEach((vendor) => {
       const card = template.content.cloneNode(true);
       const vendorID = vendor.id || null;
 
       card.querySelector(".card-image").src = vendor.image_url;
-      card.querySelector(".card-image").alt = vendor.business_name;
-      card.querySelector(".card-title").textContent = vendor.business_name;
+      card.querySelector(".card-image").alt = vendor.name;
+      card.querySelector(".card-title").textContent = vendor.name;
       card.querySelector(".card-text").innerHTML = `
                       <strong>${vendor.description || "Various"}</strong><br>
                       ${vendor.location}<br>
@@ -111,7 +128,7 @@ async function toggleBookmark(userId, vendorID) {
       });
     }
   } catch (err) {
-    console.error("Error toggling bookmarkj:", err);
+    console.error("Error toggling bookmark:", err);
   }
 }
 
@@ -125,33 +142,33 @@ async function loadFilters() {
   const filterContainer = document.getElementById("filter-container");
   const busynessContainer = document.getElementById("busyness-container");
 
-  if (!filterContainer) {
-    console.error("Missing #filter-container");
-    return;
-  }
+  if (!filterContainer) return;
 
   try {
-    const response = await fetch("/data/food-vendors.json");
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    //1.load vendor data from firebase
+    const querySnapshot = await getDocs(collection(db, "restaurants"));
 
-    const vendors = await response.json();
-    allVendorData = vendors.filter((v) => v.business_name);
+    // convert Firebase data to an array
+    allVendorData = querySnapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
+
+    // filter out entries without a name (just in case)
+    allVendorData = allVendorData.filter((v) => v.name);
+
+    // render all cards before applying filters, so that the filter options are based on the full dataset
     renderFilteredCards(allVendorData);
+
     //food types
     const descriptions = [
       ...new Set(
-        allVendorData
-          .map((v) => v.description)
-          .filter((d) => d && d.trim() !== ""),
+        allVendorData.map((v) => v.cuisine || v.vendor_type).filter((d) => d),
       ),
     ];
     // busyness
     const busynessOptions = [
-      ...new Set(
-        allVendorData
-          .map((v) => v.busyness)
-          .filter((b) => b && b.trim() !== ""),
-      ),
+      ...new Set(allVendorData.map((v) => v.status).filter((b) => b)),
     ];
     filterContainer.innerHTML = "";
     busynessContainer.innerHTML = "";
@@ -194,7 +211,7 @@ async function loadFilters() {
       cb.addEventListener("change", handleCombinedFilter);
     });
   } catch (error) {
-    console.error("Error loading filters:", error);
+    console.error("Error loading filters from Firebase:", error);
   }
 }
 function handleCombinedFilter() {
@@ -213,11 +230,10 @@ function handleCombinedFilter() {
 
     const matchesFood =
       selectedFoodTypes.length === 0 ||
-      selectedFoodTypes.includes(vendor.description);
+      selectedFoodTypes.includes(vendor.cuisine || vendor.vendor_type);
 
     const matchesBusyness =
-      selectedBusyness.length === 0 ||
-      selectedBusyness.includes(vendorBusyness);
+      selectedBusyness.length === 0 || selectedBusyness.includes(vendor.status);
 
     return matchesFood && matchesBusyness;
   });
@@ -243,12 +259,12 @@ function renderFilteredCards(vendors) {
   vendors.forEach((vendor) => {
     const card = template.content.cloneNode(true);
 
-    card.querySelector(".card-image").src = vendor.image_url;
-    card.querySelector(".card-image").alt = vendor.business_name;
-    card.querySelector(".card-title").textContent = vendor.business_name;
+    card.querySelector(".card-title").textContent = vendor.name; // 之前是 business_name
+    card.querySelector(".card-image").src = vendor.imageSrc || vendor.image_url;
     card.querySelector(".card-text").innerHTML = `
-      <strong>${vendor.description || "Various"}</strong><br>
-      ${vendor.location}<br>
+  <strong>${vendor.cuisine || "Various"}</strong><br>
+  ${vendor.address || vendor.location}<br>
+  
       <span class="badge ${vendor.status === "open" ? "bg-success" : "bg-secondary"} mt-2">
         ${vendor.status === "open" ? "● Open" : "● Closed"}
       </span>
