@@ -119,3 +119,4 @@ if (document.readyState === "loading") {
 } else {
   loadRecentRestaurants();
 }
+
