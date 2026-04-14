@@ -10,9 +10,15 @@ class SiteNavbar extends HTMLElement {
     onAuthReady((user) => {
       const href = "/index.html";
       const authButton = user
-        ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
-        : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html'" type="button">Log in</button> 
-           <button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html#signup'" type="button">Sign up</button>`;
+  ? `<button class="login col-md-auto rounded-pill me-4 btn-danger" 
+             onclick="logoutUser()" 
+             type="button">Log Out</button>`
+  : `<button class="login col-md-auto rounded-pill" 
+             onclick="window.location.href='/pages/login.html'" 
+             type="button">Log in</button> 
+     <button class="login col-md-auto rounded-pill" 
+             onclick="window.location.href='/pages/login.html#signup'" 
+             type="button">Sign up</button>`;
 
            const sidePanelAuthButton = user
         ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
@@ -36,7 +42,7 @@ class SiteNavbar extends HTMLElement {
   <div class="offcanvas-body">
     <!-- Your sidebar content goes here -->
     <ul class="list-group list-group-flush">
-      <li><button id="logOutBtn" class="login bg-light" type="button">${sidePanelAuthButton}</button></li>
+      <li>${sidePanelAuthButton}</li>
       <li class="list-group-item"><a href="#">Home</a></li>
       <li class="list-group-item"><a href="#">Profile</a></li>
       <li class="list-group-item"><a href="#">Settings</a></li>

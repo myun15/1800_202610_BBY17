@@ -161,12 +161,21 @@ function renderFilteredCards(vendors) {
     // 4. Make it interactive (Toggles red/filled on click)
     heartEl.addEventListener("click", async () => {
       const isFavorited = heartEl.textContent === "♥";
-      heartEl.textContent = isFavorited ? "♡" : "♥";
+
+if (isFavorited) {
+  // 1. Remove the class from the ELEMENTj
+  heartEl.classList.remove("is-favorited"); 
+  heartEl.textContent = "♡";
+} else {
+  // 2. Add the class to the ELEMENTj
+  heartEl.classList.add("is-favorited");
+  heartEl.textContent = "♥";
+}      
       heartEl.style.color = isFavorited ? "white" : "red";
 
       const user = auth.currentUser;
       if (user) {
-        await toggleBookmark(user.uid, vendorID);
+        await toggleBookmark(user.uid, id);
       } else {
         alert("Please login to save favorites");
       }
@@ -175,6 +184,90 @@ function renderFilteredCards(vendors) {
     container.appendChild(card);
   });
 }
+
+
+async function toggleFavorite(buttonEl, restaurantID) {
+  onAuthReady(async (user) => {
+    if (!user) {
+      alert("Please log in to save favorites.");
+      return;
+    }
+
+    const userRef = doc(db, "users", user.uid);
+
+    try {
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, { bookmarks: [restaurantID] });
+
+        if (buttonEl) {
+          buttonEl.classList.add("is-favorited");
+          buttonEl.innerHTML = "♥";
+        }
+        return;
+      }
+
+      const bookmarks = userSnap.data()?.bookmarks || [];
+      const isBookmarked = bookmarks.includes(restaurantID);
+
+      if (isBookmarked) {
+        await updateDoc(userRef, { bookmarks: arrayRemove(restaurantID) });
+
+        if (buttonEl) {
+          buttonEl.classList.remove("is-favorited");
+          buttonEl.innerHTML = "♡";
+        }
+      } else {
+        await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
+
+        if (buttonEl) {
+          buttonEl.classList.add("is-favorited");
+          buttonEl.innerHTML = "♥";
+        }
+      }
+    } catch (err) {
+      console.error("Error updating favorite:", err);
+      alert("Could not update favorites.");
+    }
+  });
+}
+
+async function syncFavoriteButton(restaurantID) {
+  onAuthReady(async (user) => {
+    if (!user) return;
+
+    try {
+      const buttonEl = document.getElementById(`favorite-btn-${restaurantID}`);
+      if (!buttonEl) return;
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        buttonEl.classList.remove("is-favorited");
+        buttonEl.innerHTML = "♡";
+        return;
+      }
+
+      const bookmarks = userSnap.data()?.bookmarks || [];
+      const isBookmarked = bookmarks.includes(restaurantID);
+
+      if (isBookmarked) {
+        buttonEl.classList.add("is-favorited");
+        buttonEl.innerHTML = "♥";
+      } else {
+        buttonEl.classList.remove("is-favorited");
+        buttonEl.innerHTML = "♡";
+      }
+    } catch (error) {
+      console.error("Error syncing favorite button:", error);
+    }
+  });
+}
+
+window.toggleFavorite = toggleFavorite;
+window.syncFavoriteButton = syncFavoriteButton;
 
 // #3 section:  filter the data base on the slected checkboxes.
 async function loadFilters() {
