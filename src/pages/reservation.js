@@ -48,16 +48,16 @@ async function displayVendorCards() {
                       <p class="text-muted small mt-2">📍 ${vendor.geo_localarea || "Vancouver"}</p>
                       <span class="fw-semibold">Busyness:</span> ${vendor.busyness || "no data"}<br>
                   `;
-
+      // 1. Create the heart icon element
       const heartEl = document.createElement("i");
       heartEl.classList.add("material-icons", "fav-icon");
       heartEl.textContent = "♡";
       heartEl.style.cssText = "font-size: 36px; cursor: pointer; color: white;";
-
+      // 2. Create a wrapper to push it to the bottom-right
       const heartWrapper = document.createElement("div");
       heartWrapper.classList.add("d-flex", "justify-content-end", "mt-2");
       heartWrapper.appendChild(heartEl);
-
+      // 3. Attach it to the card body
       card.querySelector(".card-body").appendChild(heartWrapper);
 
       // 4. Make it interactive (Toggles red/filled on click)
@@ -98,7 +98,7 @@ async function toggleBookmark(userId, vendorID) {
 
   const isBookmarked = bookmarks.includes(vendorID);
 
-  console.log()
+  console.log();
 
   try {
     if (isBookmarked) {

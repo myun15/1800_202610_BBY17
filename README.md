@@ -1,8 +1,11 @@
-# Elmo Hikes
+# TimesUp
 
 
 ## Overview
-Elmo Hikes is a client-side JavaScript web application that helps users discover and explore hiking trails. The app displays a curated list of hike trails, each with details such as name, location, difficulty, and an image. Users can browse the list and mark their favorite trails for easy access later.
+“TimesUp” provides real-time crowd insights for customers, restaurants, and vendors, helping them
+manage wait times and preparation, while also addressing overcrowding and uneven customer distribution
+during the FIFA event in Vancouver by guiding users to less crowded venues and supporting local
+businesses.
 
 Developed for the COMP 1800 course, this project applies User-Centred Design practices and agile project management, and demonstrates integration with Firebase backend services for storing user favorites.
 
