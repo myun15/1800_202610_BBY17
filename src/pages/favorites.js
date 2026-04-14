@@ -29,7 +29,10 @@ async function renderSavedRestaurants(userId) {
       return;
     }
 
-    const bookmarks = userDocSnap.data().bookmarks || [];
+    const userData = userDocSnap.data() || {};
+    const bookmarks = userData.bookmarks || [];
+    const favoritedRestaurants = userData["favorited-restaurants"] || [];
+    const allFavorites = [...new Set([...bookmarks, ...favoritedRestaurants])];
 
     if (bookmarks.length === 0) {
       container.innerHTML =
@@ -37,7 +40,7 @@ async function renderSavedRestaurants(userId) {
       return;
     }
 
-    for (const restaurantId of bookmarks) {
+    for (const restaurantId of allFavorites) {
       const restRef = doc(db, "restaurants", restaurantId);
       const restDoc = await getDoc(restRef);
 
@@ -48,6 +51,7 @@ async function renderSavedRestaurants(userId) {
         id: restDoc.id,
         ...data,
       };
+
       if (template) {
         const card = template.content.cloneNode(true);
 
@@ -98,7 +102,6 @@ async function renderSavedRestaurants(userId) {
 
         container.appendChild(card);
       } else {
-        // Fallback if no template exists
         const cardHTML = `
   <div class="favorite-card" onclick="window.location.href='restaurant-detail.html?id=${mergedData.id}'">
     <img
