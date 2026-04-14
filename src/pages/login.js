@@ -17,7 +17,7 @@ function initAuthUI() {
   const toLoginBtn = document.getElementById('toLogin');
   const loginForm = document.getElementById('loginForm');
   const signupForm = document.getElementById('signupForm');
-  const redirectUrl = 'home.html';
+  const redirectUrl = '/index.html';
 
   function setVisible(el, visible) {
     el.classList.toggle('d-none', !visible);
@@ -40,6 +40,12 @@ function initAuthUI() {
   function setSubmitDisabled(form, disabled) {
     const submitBtn = form?.querySelector('[type="submit"]');
     if (submitBtn) submitBtn.disabled = disabled;
+  }
+
+  if (window.location.hash === '#signup') {
+    setVisible(loginView, false);
+    setVisible(signupView, true);
+    signupView?.querySelector('input')?.focus();
   }
 
   toSignupBtn?.addEventListener('click', (e) => {
@@ -105,7 +111,7 @@ function initAuthUI() {
 async function redirectToMainIfLoggedIn() {
   await auth.authStateReady();
   if (auth.currentUser) {
-    location.href = "home.html";
+    location.href = "/index.html";
   }
 }
 

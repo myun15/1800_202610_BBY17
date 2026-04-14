@@ -10,7 +10,8 @@ function formatCrowdStatus(status = "") {
   const value = status.toString().trim().toLowerCase();
 
   if (value === "empty" || value === "low") return "Empty";
-  if (value === "busy" || value === "medium" || value === "moderate") return "Busy";
+  if (value === "busy" || value === "medium" || value === "moderate")
+    return "Busy";
   if (value === "full" || value === "high") return "Full";
 
   return "No update yet";
@@ -126,7 +127,7 @@ async function displayRestaurantInfo() {
 
     if (detailsContainer) {
       detailsContainer.innerHTML = `
-        <div class="card shadow-sm border-0 rounded-4 restaurant-detail-card">
+        <div class="card shadow-sm border-0 rounded-4 vendor-detail-card">
           <div class="card-body p-4">
             <h5 class="mb-3">Restaurant Information</h5>
 

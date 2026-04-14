@@ -17,7 +17,6 @@ import { onAuthReady } from "/src/helper/authentication.js";
 let allVendorData = [];
 let selectedFoodTypes = [];
 let selectedBusyness = [];
-let favoriteRestaurantIds = [];
 
 const STATUS_CONFIG = {
   empty: {
@@ -46,22 +45,6 @@ function normalizeStatus(status = "") {
   return { label: "Unknown", className: "bg-secondary" };
 }
 
-async function getUserFavorites(userId) {
-  const userRef = doc(db, "users", userId);
-
-  try {
-    const userSnap = await getDoc(userRef);
-    const userData = userSnap.data() || {};
-    const bookmarks = userData.bookmarks || [];
-    const favoritedRestaurants = userData["favorited-restaurants"] || [];
-
-    return [...new Set([...bookmarks, ...favoritedRestaurants])];
-  } catch (err) {
-    console.error("Error loading favorites:", err);
-    return [];
-  }
-}
-
 // 1. core render function: responsible for converting data into HTML cards
 function renderFilteredCards(vendors) {
   const template = document.getElementById("vendorCardTemplate");
@@ -79,18 +62,17 @@ function renderFilteredCards(vendors) {
   // --- loop through each vendor ---
   vendors.forEach((vendor) => {
     const card = template.content.cloneNode(true);
-    const id = vendor.id;
-    const statusInfo = normalizeStatus(vendor.status);
+    const id = vendor.id; // get id from the vendor data (assuming it's stored as 'id' in Firebase)
+    const statusInfo = normalizeStatus(vendor.status); // got color status
 
     // set up title and image
     const titleEl = card.querySelector(".card-title");
     const imageEl = card.querySelector(".card-image");
 
     if (titleEl) titleEl.textContent = vendor.name || "Unnamed Vendor";
-    if (imageEl) {
+    if (imageEl)
       imageEl.src =
         vendor.imageSrc || vendor.image_url || "/images/food-truck.jpg";
-    }
 
     // change description with Badge
     const textEl = card.querySelector(".card-text");
@@ -104,7 +86,8 @@ function renderFilteredCards(vendors) {
       `;
     }
 
-    // key: add the update status controls for each card
+    // key: add the update status controls for each card,
+    // and bind the onclick event to call the update function with the correct restaurant ID
     const updateControls = document.createElement("div");
     updateControls.className = "mt-3 d-flex gap-2";
     updateControls.innerHTML = `
@@ -119,76 +102,82 @@ function renderFilteredCards(vendors) {
     `;
     card.querySelector(".card-body").appendChild(updateControls);
 
-    // view details button
+    //  renderFilteredCards + button
     const actionButtons = document.createElement("div");
     actionButtons.className = "mt-3 d-flex gap-2 align-items-center";
 
     actionButtons.innerHTML = `
-      <div class="restaurant-popup-actions">
-        <button class="view-details-btn" onclick="window.goToRestaurantPage('${id}')">
-          View Details
-        </button>
-      </div>
-    `;
+            <div class="restaurant-popup-actions">
+          <button class="view-details-btn " onclick="window.goToRestaurantPage('${id}')">
+            View Details
+
+      `;
 
     card.querySelector(".card-body").appendChild(actionButtons);
+
+    // --- turn the page to the restaurant detail page ---
 
     /**
      * turn the page to the restaurant detail page
      * @param {string} restaurantId
      */
     function goToRestaurantPage(restaurantId) {
+      // 1. got the saved info from localStorage, if not exist, use an empty array as default
       const recentRestaurants =
         JSON.parse(localStorage.getItem("recentRestaurants")) || [];
 
+      // 2. updtate the list: add the new restaurant ID to the front,
+      // and remove any existing occurrence of it to avoid duplicates. limit 10
       const updatedRecents = [
         restaurantId,
         ...recentRestaurants.filter((id) => id !== restaurantId),
       ].slice(0, 10);
 
+      // 3. updated information back to localStorage
       localStorage.setItem("recentRestaurants", JSON.stringify(updatedRecents));
-      window.location.href = `/pages/restaurant-detail.html?id=${restaurantId}`;
+
+      // 4. start turn and shows on  html
+      window.location.href = `/pages/vendor-detail.html?id=${restaurantId}`;
     }
 
+    // key: shows on window onclick="window.goToRestaurantPage(...)" and make sue it can access the function
     window.goToRestaurantPage = goToRestaurantPage;
 
-    // favorite icon logic
-    const isFavorited = favoriteRestaurantIds.includes(id);
-
+    // #2 section: favorite icon logic: we create a heart icon, and when clicked, it toggles the bookmark in Firebase for the current user
+    // 1. Create the heart icon element
     const heartEl = document.createElement("i");
     heartEl.classList.add("material-icons", "fav-icon");
-    heartEl.textContent = isFavorited ? "♥" : "♡";
-    heartEl.style.cssText = `font-size: 36px; cursor: pointer; color: ${
-      isFavorited ? "red" : "white"
-    };`;
+    heartEl.textContent = "♡";
+    heartEl.style.cssText = "font-size: 36px; cursor: pointer; color: white;";
 
+    // 2. Create a wrapper to push it to the bottom-right
     const heartWrapper = document.createElement("div");
     heartWrapper.classList.add("d-flex", "justify-content-end", "mt-2");
     heartWrapper.appendChild(heartEl);
 
+    // 3. Attach it to the card body
     card.querySelector(".card-body").appendChild(heartWrapper);
 
+    // 4. Make it interactive (Toggles red/filled on click)
     heartEl.addEventListener("click", async () => {
+      const isFavorited = heartEl.textContent === "♥";
+
+if (isFavorited) {
+  // 1. Remove the class from the ELEMENTj
+  heartEl.classList.remove("is-favorited"); 
+  heartEl.textContent = "♡";
+} else {
+  // 2. Add the class to the ELEMENTj
+  heartEl.classList.add("is-favorited");
+  heartEl.textContent = "♥";
+}      
+      heartEl.style.color = isFavorited ? "white" : "red";
+
       const user = auth.currentUser;
-
-      if (!user) {
-        alert("Please login to save favorites");
-        return;
-      }
-
-      const currentlyFavorited = heartEl.textContent === "♥";
-
-      heartEl.textContent = currentlyFavorited ? "♡" : "♥";
-      heartEl.style.color = currentlyFavorited ? "white" : "red";
-
-      await toggleBookmark(user.uid, id);
-
-      if (currentlyFavorited) {
-        favoriteRestaurantIds = favoriteRestaurantIds.filter(
-          (favId) => favId !== id,
-        );
+      if (user) {
+        await toggleBookmark(user.uid, id);
       } else {
-        favoriteRestaurantIds.push(id);
+        alert("Please login to save favorites");
       }
     });
 
@@ -196,36 +185,120 @@ function renderFilteredCards(vendors) {
   });
 }
 
-// #3 section: filter the data base on the selected checkboxes.
+
+async function toggleFavorite(buttonEl, restaurantID) {
+  onAuthReady(async (user) => {
+    if (!user) {
+      alert("Please log in to save favorites.");
+      return;
+    }
+
+    const userRef = doc(db, "users", user.uid);
+
+    try {
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        await setDoc(userRef, { bookmarks: [restaurantID] });
+
+        if (buttonEl) {
+          buttonEl.classList.add("is-favorited");
+          buttonEl.innerHTML = "♥";
+        }
+        return;
+      }
+
+      const bookmarks = userSnap.data()?.bookmarks || [];
+      const isBookmarked = bookmarks.includes(restaurantID);
+
+      if (isBookmarked) {
+        await updateDoc(userRef, { bookmarks: arrayRemove(restaurantID) });
+
+        if (buttonEl) {
+          buttonEl.classList.remove("is-favorited");
+          buttonEl.innerHTML = "♡";
+        }
+      } else {
+        await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
+
+        if (buttonEl) {
+          buttonEl.classList.add("is-favorited");
+          buttonEl.innerHTML = "♥";
+        }
+      }
+    } catch (err) {
+      console.error("Error updating favorite:", err);
+      alert("Could not update favorites.");
+    }
+  });
+}
+
+async function syncFavoriteButton(restaurantID) {
+  onAuthReady(async (user) => {
+    if (!user) return;
+
+    try {
+      const buttonEl = document.getElementById(`favorite-btn-${restaurantID}`);
+      if (!buttonEl) return;
+
+      const userRef = doc(db, "users", user.uid);
+      const userSnap = await getDoc(userRef);
+
+      if (!userSnap.exists()) {
+        buttonEl.classList.remove("is-favorited");
+        buttonEl.innerHTML = "♡";
+        return;
+      }
+
+      const bookmarks = userSnap.data()?.bookmarks || [];
+      const isBookmarked = bookmarks.includes(restaurantID);
+
+      if (isBookmarked) {
+        buttonEl.classList.add("is-favorited");
+        buttonEl.innerHTML = "♥";
+      } else {
+        buttonEl.classList.remove("is-favorited");
+        buttonEl.innerHTML = "♡";
+      }
+    } catch (error) {
+      console.error("Error syncing favorite button:", error);
+    }
+  });
+}
+
+window.toggleFavorite = toggleFavorite;
+window.syncFavoriteButton = syncFavoriteButton;
+
+// #3 section:  filter the data base on the slected checkboxes.
 async function loadFilters() {
   const filterContainer = document.getElementById("filter-container");
   const busynessContainer = document.getElementById("busyness-container");
   if (!filterContainer) return;
 
   try {
-    const querySnapshot = await getDocs(collection(db, "restaurants"));
+    // get data from firebase
+    const q = query(
+      collection(db, "restaurants"),
+      where("vendor_type", "==", "vendor_food"),
+    );
+    const querySnapshot = await getDocs(q);
     allVendorData = querySnapshot.docs
       .map((docSnap) => ({
         id: docSnap.id,
         ...docSnap.data(),
       }))
-      .filter((v) => v.name);
+      .filter((v) => v.name); // only keep entries that have a name field
 
-    const user = auth.currentUser;
-    if (user) {
-      favoriteRestaurantIds = await getUserFavorites(user.uid);
-    } else {
-      favoriteRestaurantIds = [];
-    }
-
+    // start rendering cards
     renderFilteredCards(allVendorData);
 
+    //food types and busyness levels are both stored in the same collection, we can extract the unique values for both and create checkboxes for them.
     const descriptions = [
       ...new Set(
         allVendorData.map((v) => v.cuisine || v.vendor_type).filter((d) => d),
       ),
     ];
-
+    // busyness
     const busynessOptions = [
       ...new Set(allVendorData.map((v) => v.status).filter((b) => b)),
     ];
@@ -243,6 +316,7 @@ async function loadFilters() {
     });
 
     // ===== Busyness dropdown =====
+
     busynessOptions.forEach((busy, index) => {
       busynessContainer.innerHTML += `
         <li><div class="form-check">
@@ -251,6 +325,7 @@ async function loadFilters() {
         </div></li>`;
     });
 
+    // follow food type
     document
       .querySelectorAll(".food-filter-checkbox, .busyness-filter-checkbox")
       .forEach((cb) => {
@@ -263,6 +338,7 @@ async function loadFilters() {
 
 // 1. update function: when user clicks the "Update" button.
 async function updateRestaurantStatusById(restaurantId) {
+  // collect the selected value from restuarnt card
   const select = document.getElementById(`status-select-${restaurantId}`);
   if (!select) {
     console.error(
@@ -276,13 +352,16 @@ async function updateRestaurantStatusById(restaurantId) {
   console.log("updating restaurant ID:", restaurantId, "to status:", newStatus);
 
   try {
+    // collect the reference from firebase
     const restaurantRef = doc(db, "restaurants", restaurantId);
 
+    // 2. refresh the status in firebase
     await updateDoc(restaurantRef, {
       status: newStatus,
-      lastUpdated: new Date(),
+      lastUpdated: new Date(), // record the update time
     });
 
+    // 3. update badge color
     const badge = document.getElementById(`badge-${restaurantId}`);
     if (badge) {
       const statusInfo = normalizeStatus(newStatus);
@@ -290,6 +369,7 @@ async function updateRestaurantStatusById(restaurantId) {
       badge.textContent = `● ${statusInfo.label}`;
     }
 
+    // 4. updated local cache, prevent old data from showing after filtering
     const idx = allVendorData.findIndex((v) => v.id === restaurantId);
     if (idx !== -1) {
       allVendorData[idx].status = newStatus;
@@ -300,6 +380,7 @@ async function updateRestaurantStatusById(restaurantId) {
   }
 }
 
+// move to window to make sure it can be accessed by the onclick event in the generated HTML
 window.updateRestaurantStatus = updateRestaurantStatusById;
 
 function handleCombinedFilter() {
@@ -325,27 +406,20 @@ function handleCombinedFilter() {
   renderFilteredCards(filtered);
 }
 
-// save/remove favorite in both fields so home page and favorite page stay synced
+// favorited collection in user document: when user clicks the heart icon, we update the "favorited-restaurants" array field in the user's document in Firebase. If the restaurant ID is already in the array, we remove it (unfavorite); if it's not, we add it (favorite).
 async function toggleBookmark(userId, vendorID) {
   const userRef = doc(db, "users", userId);
-
   try {
     const userSnap = await getDoc(userRef);
     const userData = userSnap.data() || {};
-    const bookmarks = userData.bookmarks || [];
-    const favoritedRestaurants = userData["favorited-restaurants"] || [];
+    const bookmarks = userData["favorited-restaurants"] || [];
 
-    const alreadySaved =
-      bookmarks.includes(vendorID) || favoritedRestaurants.includes(vendorID);
-
-    if (alreadySaved) {
+    if (bookmarks.includes(vendorID)) {
       await updateDoc(userRef, {
-        bookmarks: arrayRemove(vendorID),
         "favorited-restaurants": arrayRemove(vendorID),
       });
     } else {
       await updateDoc(userRef, {
-        bookmarks: arrayUnion(vendorID),
         "favorited-restaurants": arrayUnion(vendorID),
       });
     }
@@ -354,4 +428,5 @@ async function toggleBookmark(userId, vendorID) {
   }
 }
 
+// once page is loaded, generate the restaurant cards, and load the filters
 loadFilters();

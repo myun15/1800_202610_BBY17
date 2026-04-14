@@ -42,17 +42,17 @@ export async function signupUser(name, email, password) {
 
 export async function logoutUser() {
   await signOut(auth);
-  window.location.href = "index.html";
+  window.location.href = "/index.html";
 }
 
 export function checkAuthState() {
   onAuthStateChanged(auth, (user) => {
-    if (window.location.pathname.endsWith("home.html")) {
+    if (window.location.pathname.endsWith("index.html") || window.location.pathname === "/") {
       if (user) {
         const displayName = user.displayName || user.email;
         $("#welcomeMessage").text(`Hello, ${displayName}!`);
       } else {
-        window.location.href = "index.html";
+        window.location.href = "/index.html";
       }
     }
   });
@@ -79,3 +79,4 @@ export function authErrorMessage(error) {
 
   return map[code] || "Something went wrong. Please try again.";
 }
+window.logoutUser = logoutUser;
