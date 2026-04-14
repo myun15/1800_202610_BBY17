@@ -1,48 +1,13 @@
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "/src/helper/firebaseConfig.js";
-
-async function collectionToJSON(collectionName) {
-  const snapshot = await getDocs(collection(db, collectionName));
-  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-}
-
-async function createRestaurantsFavorites() {
-  const restaurants = await collectionToJSON("restaurants");
-  const restaurantsEl = document.getElementById("restaurants");
-
-  if (!restaurants || !restaurantsEl) return;
-
-<<<<<<< Updated upstream
-  for (const restaurant of restaurants) {
-    const li = document.createElement("li");
-    li.textContent = restaurant.name;
-=======
-  return "crowd-unknown";
-}
-
-function getRestaurantImage(data) {
-  const defaultImage =
-    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
->>>>>>> Stashed changes
-
-    const img = document.createElement("img");
-    img.src = restaurant.imageSrc;
-    img.alt = restaurant.name;
-    img.addEventListener("click", () => {
-      window.location.href = "review.html";
-    });
-
-<<<<<<< Updated upstream
-    li.appendChild(img);
-    restaurantsEl.appendChild(li);
-=======
-  return defaultImage;
-}
-
-function formatCuisine(cuisine = "") {
-  if (!cuisine) return "Restaurant";
-  return cuisine.charAt(0).toUpperCase() + cuisine.slice(1);
-}
+import { db } from "../helper/firebaseConfig.js";
+import { doc, getDoc } from "firebase/firestore";
+import { onAuthReady } from "/src/helper/authentication.js";
+import {
+  formatCrowdStatus,
+  getStatusClass,
+  getRestaurantImage,
+  getDefaultRestaurantImage,
+  formatCuisine,
+} from "../helper/utils.js";
 
 async function renderSavedRestaurants(userId) {
   const container =
@@ -122,8 +87,7 @@ async function renderSavedRestaurants(userId) {
           imageEl.src = getRestaurantImage(mergedData);
           imageEl.alt = mergedData.name || "Restaurant image";
           imageEl.onerror = () => {
-            imageEl.src =
-              "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+            imageEl.src = getDefaultRestaurantImage();
           };
         }
 
@@ -137,14 +101,13 @@ async function renderSavedRestaurants(userId) {
 
         container.appendChild(card);
       } else {
-        // Fallback if no template exists
         const cardHTML = `
   <div class="favorite-card" onclick="window.location.href='restaurant-detail.html?id=${mergedData.id}'">
     <img
       class="favorite-card-image"
       src="${getRestaurantImage(mergedData)}"
       alt="${mergedData.name || "Restaurant image"}"
-      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80';"
+      onerror="this.onerror=null;this.src='${getDefaultRestaurantImage()}';"
     />
 
     <div class="favorite-card-body">
@@ -176,8 +139,22 @@ async function renderSavedRestaurants(userId) {
   } catch (error) {
     console.error("Error loading favorites:", error);
     container.innerHTML = "<p class='text-center'>Error loading your favorites.</p>";
->>>>>>> Stashed changes
   }
 }
 
-createRestaurantsFavorites();
+onAuthReady((user) => {
+  const container =
+    document.getElementById("Restaurants-go-here") ||
+    document.getElementById("favoritesContainer");
+
+  if (!container) return;
+
+  if (!user) {
+    container.innerHTML = "<p class='text-center'>Please log in to view your favorites.</p>";
+    return;
+  }
+
+  renderSavedRestaurants(user.uid);
+});
+
+export { renderSavedRestaurants };

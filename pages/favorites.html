@@ -2,13 +2,9 @@
 <html lang="en">
   <head>
     <title>TeamBBY</title>
-    <meta name="BBY Team 17 template" content="TimesUp App" />
-
-    <!-- Required meta tags -->
+    <meta name="comp1800 template" content="My 1800 App" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- Web Components for shared navbar and footer layout -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,26 +17,24 @@
     />
     <script type="module" src="/src/components/site-navbar.js"></script>
     <script type="module" src="/src/components/site-footer.js"></script>
-    <script type="module" src="/src/styles/style.css"></script>
   </head>
 
   <body>
-    <!------------------------------>
-    <!-- Your HTML Layout go here -->
-    <!------------------------------>
-
-    <!-- our own navbar goes here -->
     <site-navbar></site-navbar>
 
-    <!-- Main content goes here -->
-    place holder
-    <!-- our own footer goes here -->
+    <!-- Main Content -->
+    <main class="container py-4 favorites-page">
+      <div class="favorites-header">
+        <h1 class="favorites-title">Favorite Restaurants</h1>
+        <p class="favorites-subtitle">Your saved places, all in one spot.</p>
+      </div>
+
+      <div id="Restaurants-go-here" class="favorites-grid"></div>
+    </main>
+
     <site-footer></site-footer>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript scripts go here      -->
-    <!---------------------------------------------->
-
     <script type="module" src="/src/app.js"></script>
+    <script type="module" src="/src/pages/favorites.js"></script>
   </body>
 </html>

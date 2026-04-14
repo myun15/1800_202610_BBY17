@@ -21,7 +21,7 @@ function initReviewForm() {
       comment: commentEl?.value || "",
     });
 
-    window.location.href = "home.html";
+    window.location.href = "/index.html";
   });
 }
 
