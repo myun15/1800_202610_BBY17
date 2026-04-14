@@ -50,7 +50,7 @@ class MapLegendControl {
             <div class="map-legend-row">
               <span class="map-legend-swatch" style="background:${item.color}"></span>
               <span class="map-legend-label">${item.label}</span>
-            </div>`
+            </div>`,
         )
         .join("")}
     `;
@@ -98,7 +98,7 @@ function initPreviewMap() {
       },
       () => {
         console.log("Location denied, showing Vancouver");
-      }
+      },
     );
   }
 }
@@ -175,7 +175,7 @@ function getDistanceText(data) {
     userLocation.lat,
     userLocation.lng,
     parseFloat(data.lat),
-    parseFloat(data.lng)
+    parseFloat(data.lng),
   );
 
   return `📍 ${distance.toFixed(1)} km`;
@@ -212,10 +212,10 @@ function buildPopupHTML(id, data) {
 
         <p class="restaurant-popup-cuisine">
           ${escapeHTML(
-    data.cuisine
-      ? data.cuisine.charAt(0).toUpperCase() + data.cuisine.slice(1)
-      : "Restaurant"
-  )}
+            data.cuisine
+              ? data.cuisine.charAt(0).toUpperCase() + data.cuisine.slice(1)
+              : "Restaurant",
+          )}
         </p>
 
         <p class="restaurant-popup-address">
@@ -374,7 +374,7 @@ async function toggleFavorite(buttonEl, restaurantID) {
 
         if (buttonEl) {
           buttonEl.classList.remove("is-favorited");
-          buttonEl.innerHTML = "j";
+          buttonEl.innerHTML = "♡";
         }
       } else {
         await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
@@ -444,7 +444,12 @@ window.addEventListener("restaurant-search", async (e) => {
   let foundLng = null;
   snapshot.docs.forEach((docSnap) => {
     const data = docSnap.data();
-    if (data.name && data.lat && data.lng && data.name.toLowerCase().includes(searchTerm)) {
+    if (
+      data.name &&
+      data.lat &&
+      data.lng &&
+      data.name.toLowerCase().includes(searchTerm)
+    ) {
       found = data;
       foundId = docSnap.id;
       foundLat = parseFloat(data.lat);
@@ -456,7 +461,10 @@ window.addEventListener("restaurant-search", async (e) => {
     // Find the marker for this restaurant
     const marker = restaurantMarkers.find((m) => {
       const lngLat = m.getLngLat();
-      return Math.abs(lngLat.lat - foundLat) < 0.0001 && Math.abs(lngLat.lng - foundLng) < 0.0001;
+      return (
+        Math.abs(lngLat.lat - foundLat) < 0.0001 &&
+        Math.abs(lngLat.lng - foundLng) < 0.0001
+      );
     });
     if (marker) {
       previewMap.flyTo({ center: [foundLng, foundLat], zoom: 16 });

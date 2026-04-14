@@ -1,39 +1,39 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap';
-import '/src/styles/style.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+import "/src/styles/style.css";
 
-import { auth } from '/src/helper/firebaseConfig.js';
+import { auth } from "/src/helper/firebaseConfig.js";
 import {
   loginUser,
   signupUser,
   authErrorMessage,
-} from '/src/helper/authentication.js';
+} from "/src/helper/authentication.js";
 
 function initAuthUI() {
-  const alertEl = document.getElementById('authAlert');
-  const loginView = document.getElementById('loginView');
-  const signupView = document.getElementById('signupView');
-  const toSignupBtn = document.getElementById('toSignup');
-  const toLoginBtn = document.getElementById('toLogin');
-  const loginForm = document.getElementById('loginForm');
-  const signupForm = document.getElementById('signupForm');
-  const redirectUrl = '/index.html';
+  const alertEl = document.getElementById("authAlert");
+  const loginView = document.getElementById("loginView");
+  const signupView = document.getElementById("signupView");
+  const toSignupBtn = document.getElementById("toSignup");
+  const toLoginBtn = document.getElementById("toLogin");
+  const loginForm = document.getElementById("loginForm");
+  const signupForm = document.getElementById("signupForm");
+  const redirectUrl = "/index.html";
 
   function setVisible(el, visible) {
-    el.classList.toggle('d-none', !visible);
+    el.classList.toggle("d-none", !visible);
   }
 
   let errorTimeout;
   function showError(msg) {
-    alertEl.textContent = msg || '';
-    alertEl.classList.remove('d-none');
+    alertEl.textContent = msg || "";
+    alertEl.classList.remove("d-none");
     clearTimeout(errorTimeout);
     errorTimeout = setTimeout(hideError, 5000);
   }
 
   function hideError() {
-    alertEl.classList.add('d-none');
-    alertEl.textContent = '';
+    alertEl.classList.add("d-none");
+    alertEl.textContent = "";
     clearTimeout(errorTimeout);
   }
 
@@ -42,35 +42,35 @@ function initAuthUI() {
     if (submitBtn) submitBtn.disabled = disabled;
   }
 
-  if (window.location.hash === '#signup') {
+  if (window.location.hash === "#signup") {
     setVisible(loginView, false);
     setVisible(signupView, true);
-    signupView?.querySelector('input')?.focus();
+    signupView?.querySelector("input")?.focus();
   }
 
-  toSignupBtn?.addEventListener('click', (e) => {
+  toSignupBtn?.addEventListener("click", (e) => {
     e.preventDefault();
     hideError();
     setVisible(loginView, false);
     setVisible(signupView, true);
-    signupView?.querySelector('input')?.focus();
+    signupView?.querySelector("input")?.focus();
   });
 
-  toLoginBtn?.addEventListener('click', (e) => {
+  toLoginBtn?.addEventListener("click", (e) => {
     e.preventDefault();
     hideError();
     setVisible(signupView, false);
     setVisible(loginView, true);
-    loginView?.querySelector('input')?.focus();
+    loginView?.querySelector("input")?.focus();
   });
 
-  loginForm?.addEventListener('submit', async (e) => {
+  loginForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     hideError();
-    const email = document.querySelector('#loginEmail')?.value?.trim() ?? '';
-    const password = document.querySelector('#loginPassword')?.value ?? '';
+    const email = document.querySelector("#loginEmail")?.value?.trim() ?? "";
+    const password = document.querySelector("#loginPassword")?.value ?? "";
     if (!email || !password) {
-      showError('Please enter your email and password.');
+      showError("Please enter your email and password.");
       return;
     }
     setSubmitDisabled(loginForm, true);
@@ -85,14 +85,14 @@ function initAuthUI() {
     }
   });
 
-  signupForm?.addEventListener('submit', async (e) => {
+  signupForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     hideError();
-    const name = document.querySelector('#signupName')?.value?.trim() ?? '';
-    const email = document.querySelector('#signupEmail')?.value?.trim() ?? '';
-    const password = document.querySelector('#signupPassword')?.value ?? '';
+    const name = document.querySelector("#signupName")?.value?.trim() ?? "";
+    const email = document.querySelector("#signupEmail")?.value?.trim() ?? "";
+    const password = document.querySelector("#signupPassword")?.value ?? "";
     if (!name || !email || !password) {
-      showError('Please fill in name, email, and password.');
+      showError("Please fill in name, email, and password.");
       return;
     }
     setSubmitDisabled(signupForm, true);
@@ -117,4 +117,4 @@ async function redirectToMainIfLoggedIn() {
 
 redirectToMainIfLoggedIn();
 
-document.addEventListener('DOMContentLoaded', initAuthUI);
+document.addEventListener("DOMContentLoaded", initAuthUI);
