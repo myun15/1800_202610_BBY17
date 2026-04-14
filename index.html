@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>TeamBBY</title>
+    <title>Times Up</title>
     <meta name="comp1800 template" content="My 1800 App" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,7 +24,13 @@
 
   <body>
     <site-navbar></site-navbar>
-
+    <!-- Live Bar -->
+    <div class="live-bar">
+      <div class="ticker-wrap">
+        <div id="liveTicker" class="ticker-track"></div>
+      </div>
+    </div>
+    
     <!-- Map Preview -->
     <div id="map-preview"></div>
 
@@ -73,12 +79,6 @@
       </div>
     </template>
 
-    <!-- Live Bar -->
-    <div class="live-bar">
-      <div class="ticker-wrap">
-        <div id="liveTicker" class="ticker-track"></div>
-      </div>
-    </div>
 
     <!-- Filler content for scrolling -->
     <div class="container my-5">
@@ -89,6 +89,6 @@
 
     <script type="module" src="/src/app.js"></script>
     <script type="module" src="/src/pages/home.js"></script>
-    <script type="module" src="/src/pages/firebase-liverbar.js"></script>
+    <script type="module" src="/src/pages/livebar.js"></script>
   </body>
 </html>
