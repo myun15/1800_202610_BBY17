@@ -22,10 +22,9 @@ export default defineConfig(({ mode }) => {
         input: {
           main: resolve(__dirname, "index.html"),
           login: resolve(__dirname, "pages/login.html"),
-          restaurant: resolve(__dirname, "pages/reservation.html"),
           restaurantDetail: resolve(__dirname, "pages/restaurant-detail.html"),
+          featuredRestaurants: resolve(__dirname, "pages/featured-restaurants.html"),
           favorites: resolve(__dirname, "pages/favorites.html"),
-          review: resolve(__dirname, "pages/review.html"),
           recent: resolve(__dirname, "pages/recent.html"),
         },
       },

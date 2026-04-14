@@ -3,6 +3,7 @@ import { onAuthReady } from "/src/helper/authentication.js";
 class SiteFooter extends HTMLElement {
   connectedCallback() {
     onAuthReady((user) => {
+      // Only display navbar if user is logged in
       if (user) {
         this.innerHTML = `
                 <footer class="fixed-bottom footer">

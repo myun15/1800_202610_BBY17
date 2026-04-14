@@ -9,6 +9,7 @@ import {
   formatCuisine,
 } from "../helper/utils.js";
 
+// Fetches restaurant from restaurant collection from firebase and creates html vendor card templates
 async function renderSavedRestaurants(userId) {
   const container =
     document.getElementById("Restaurants-go-here") ||

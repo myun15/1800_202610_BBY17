@@ -1,23 +1,16 @@
 import { onAuthReady, logoutUser } from "/src/helper/authentication.js";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "/src/helper/firebaseConfig.js";
+import { escapeHTML } from "/src/helper/utils.js";
 
 let restaurantCache = null;
 
+// Get restaurant object
 async function getRestaurants() {
   if (restaurantCache) return restaurantCache;
   const snapshot = await getDocs(collection(db, "restaurants"));
   restaurantCache = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
   return restaurantCache;
-}
-
-function escapeAttr(value = "") {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
 }
 
 class SiteNavbar extends HTMLElement {
@@ -29,22 +22,27 @@ class SiteNavbar extends HTMLElement {
   renderNavbar() {
     onAuthReady((user) => {
       const href = "/index.html";
+
+      // If a user is logged in show logout button
+      // Otherwise show login and signup button
       const authButton = user
-        ? `<button class="login col-md-auto rounded-pill me-4 btn-danger" 
-               onclick="logoutUser()" 
+        ? `<button class="login col-md-auto rounded-pill me-4 btn-danger"
+               onclick="logoutUser()"
                type="button">Log Out</button>`
-        : `<button class="login col-md-auto rounded-pill" 
-               onclick="window.location.href='/pages/login.html'" 
-               type="button">Log in</button> 
-       <button class="login col-md-auto rounded-pill" 
-               onclick="window.location.href='/pages/login.html#signup'" 
+        : `<button class="login col-md-auto rounded-pill"
+               onclick="window.location.href='/pages/login.html'"
+               type="button">Log in</button>
+       <button class="login col-md-auto rounded-pill"
+               onclick="window.location.href='/pages/login.html#signup'"
                type="button">Sign up</button>`;
 
+      // Same logic as above, but for the logout, login, and signup button in the side panel
       const sidePanelAuthButton = user
         ? `<button id="logOutBtn" class="login col-md-auto rounded-pill me-4" type="button">Log Out</button>`
-        : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html'" type="button">Log in</button> 
+        : `<button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html'" type="button">Log in</button>
            <button id="loginBtn" class="login col-md-auto rounded-pill" onclick="window.location.href='/pages/login.html#signup'" type="button">Sign up</button>`;
 
+      // Render HTML first so DOM elements exist before attaching listeners
       this.innerHTML = `
             <nav class="navbar">
                 <div class="navbar-main-container">
@@ -91,12 +89,14 @@ class SiteNavbar extends HTMLElement {
             </nav>
         `;
 
+      // Log out user when they click logout button
       if (user) {
         this.querySelector("#logOutBtn").addEventListener("click", () =>
           logoutUser(),
         );
       }
 
+      // Search bar logic
       const searchBtn = this.querySelector("#restaurant-search-btn");
       const searchInput = this.querySelector("#restaurant-search-input");
       const dropdown = this.querySelector("#restaurant-search-dropdown");
@@ -105,7 +105,7 @@ class SiteNavbar extends HTMLElement {
         const searchTerm = (term ?? searchInput.value).trim();
         if (!searchTerm) return;
         window.dispatchEvent(
-          new CustomEvent("restaurant-search", { detail: { searchTerm } })
+          new CustomEvent("restaurant-search", { detail: { searchTerm } }),
         );
         hideDropdown();
       };
@@ -126,9 +126,9 @@ class SiteNavbar extends HTMLElement {
           .map((r) => {
             const sub = [r.address, r.city].filter(Boolean).join(", ");
             return `
-              <li class="search-dropdown-item" data-name="${escapeAttr(r.name)}">
-                <span class="search-dropdown-name">${escapeAttr(r.name || "Unknown")}</span>
-                <span class="search-dropdown-sub">${escapeAttr(sub)}</span>
+              <li class="search-dropdown-item" data-name="${escapeHTML(r.name)}">
+                <span class="search-dropdown-name">${escapeHTML(r.name || "Unknown")}</span>
+                <span class="search-dropdown-sub">${escapeHTML(sub)}</span>
               </li>`;
           })
           .join("");

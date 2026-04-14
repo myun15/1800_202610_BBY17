@@ -1,13 +1,16 @@
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "/src/helper/firebaseConfig.js";
+import {
+  normalizeStatus,
+  formatTimeAgo,
+  getStatusLevel,
+} from "../helper/utils";
 
-console.log("DB =", db);
 const ticker = document.getElementById("liveTicker");
 
-// --- previous Live Ticker ---
 const previousStatuses = {};
 const activeTrends = {};
-// Stores the timestamp of the last status change for each restaurant
+
 let hasInitialized = false;
 
 function getTrendDirection(oldStatus, newStatus) {
@@ -29,58 +32,12 @@ function renderTrendSymbol(direction) {
   return "•";
 }
 
-function normalizeStatus(status) {
-  const s = (status || "").toLowerCase();
-
-  if (s.includes("empty") || s.includes("low")) return "empty";
-  if (s.includes("busy") || s.includes("medium") || s.includes("wait"))
-    return "busy";
-  if (s.includes("full") || s.includes("high") || s.includes("sold out"))
-    return "full";
-  return "unknown";
-}
-
-function getStatusLevel(status) {
-  const normalized = normalizeStatus(status);
-
-  if (normalized === "empty") return 1;
-  if (normalized === "busy") return 2;
-  if (normalized === "full") return 3;
-  return 0;
-}
-
 function getStatusBadge(status) {
-  const normalized = normalizeStatus(status);
-
-  if (normalized === "empty") return "🟢 Empty";
-  if (normalized === "busy") return "🟡 Busy";
-  if (normalized === "full") return "🔴 Full";
+  const { className } = normalizeStatus(status);
+  if (className === "crowd-empty") return "🟢 Empty";
+  if (className === "crowd-busy") return "🟡 Busy";
+  if (className === "crowd-full") return "🔴 Full";
   return "⚪ Unknown";
-}
-function formatTimeAgo(timestamp) {
-  if (!timestamp) return "";
-
-  let timeMs;
-
-  // Firestore Timestamp
-  if (typeof timestamp.toDate === "function") {
-    timeMs = timestamp.toDate().getTime();
-  } else if (typeof timestamp === "number") {
-    timeMs = timestamp;
-  } else {
-    return "";
-  }
-
-  const diffSeconds = Math.floor((Date.now() - timeMs) / 1000);
-
-  if (diffSeconds < 15) return "just updated";
-  if (diffSeconds < 60) return `${diffSeconds}s ago`;
-
-  const diffMinutes = Math.floor(diffSeconds / 60);
-  if (diffMinutes < 60) return `${diffMinutes} min ago`;
-
-  const diffHours = Math.floor(diffMinutes / 60);
-  return `${diffHours} hr ago`;
 }
 
 const restaurantsCollection = collection(db, "restaurants");
@@ -115,7 +72,6 @@ onSnapshot(restaurantsCollection, (snapshot) => {
 
     let trend = '<span class="trend-flat">•</span>';
 
-    // if changes in 20 seconds the ▲ / ▼ shows
     if (
       activeDirection &&
       lastTrendTime &&
@@ -126,7 +82,7 @@ onSnapshot(restaurantsCollection, (snapshot) => {
     }
 
     const statusBadge = getStatusBadge(currentStatus);
-    const timeLabel = formatTimeAgo(restaurant.lastUpdated); // show previous status for live updates
+    const timeLabel = formatTimeAgo(restaurant.lastUpdated);
     previousStatuses[id] = currentStatus;
 
     return `
