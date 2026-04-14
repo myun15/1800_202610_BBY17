@@ -164,13 +164,13 @@ function renderFilteredCards(vendors) {
 
 if (isFavorited) {
   // 1. Remove the class from the ELEMENTj
-  heartEl.classList.remove("is-favorited"); 
+  heartEl.classList.remove("is-favorited");
   heartEl.textContent = "♡";
 } else {
   // 2. Add the class to the ELEMENTj
   heartEl.classList.add("is-favorited");
   heartEl.textContent = "♥";
-}      
+}
       heartEl.style.color = isFavorited ? "white" : "red";
 
       const user = auth.currentUser;
@@ -290,7 +290,7 @@ async function loadFilters() {
       .filter((v) => v.name); // only keep entries that have a name field
 
     // start rendering cards
-    renderFilteredCards(allVendorData);
+    renderFilteredCards(allVendorData.filter((v) => v.imageSrc || v.image_url).slice(0, 10));
 
     //food types and busyness levels are both stored in the same collection, we can extract the unique values for both and create checkboxes for them.
     const descriptions = [

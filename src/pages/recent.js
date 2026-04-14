@@ -68,7 +68,7 @@ async function loadRecentRestaurants() {
             </p>
           </div>
         </div>
-      `
+      `,
     )
     .join("");
 }
@@ -78,4 +78,3 @@ if (document.readyState === "loading") {
 } else {
   loadRecentRestaurants();
 }
-

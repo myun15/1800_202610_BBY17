@@ -1,106 +1,86 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>TeamBBY</title>
-    <meta name="comp1800 template" content="My 1800 App" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-    <script type="module" src="/src/components/site-navbar.js"></script>
-    <script type="module" src="/src/components/site-footer.js"></script>
-    <script type="module" src="/src/styles/style.css"></script>
-  </head>
 
-  <body>
-    <site-navbar></site-navbar>
+<head>
+  <title>Times Up</title>
+  <meta name="comp1800 template" content="My 1800 App" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script type="module" src="/src/components/site-navbar.js"></script>
+  <script type="module" src="/src/components/site-footer.js"></script>
+  <script type="module" src="/src/styles/style.css"></script>
+</head>
 
-    <!-- Restaurant Preview -->
-    <!-- Food Vendors Section -->
-    <div class="container-fluid bg-light text-dark p-5">
-      <div class="container">
-        <h1 class="mb-4">Featured Vendors</h1>
-        <p class="mb-4">
-          Explore Vancouver's diverse food truck scene - from hot dogs to Fine
-          cuisine
-        </p>
+<body>
+  <site-navbar></site-navbar>
 
-        <!-- 3.31filter -->
-        <!-- food type -->
-        <div class="filter-bar my-3 d-flex align-items-center gap-3">
-          <p class="mb-0">Filter</p>
+  <!-- Restaurant Preview -->
+  <!-- Food Vendors Section -->
+  <div class="container-fluid bg-light text-dark p-5">
+    <div class="container">
+      <h1 class="mb-4">Featured Vendors</h1>
+      <p class="mb-4">
+        Explore Vancouver's diverse food truck scene - from hot dogs to Fine
+        cuisine
+      </p>
 
-          <div class="dropdown">
-            <button
-              class="btn btn-outline-primary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Select food types
-            </button>
-            <ul class="dropdown-menu p-3" id="filter-container">
-              <!-- JS file for food type -->
-            </ul>
-          </div>
+      <!-- 3.31filter -->
+      <!-- food type -->
+      <div class="filter-bar my-3 d-flex align-items-center gap-3">
+        <p class="mb-0">Filter</p>
 
-          <!-- Busyness -->
-          <div class="dropdown">
-            <button
-              class="btn btn-outline-primary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Select busyness
-            </button>
-            <ul class="dropdown-menu p-3" id="busyness-container">
-              <!-- JS file for busyness -->
-            </ul>
-          </div>
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Select food types
+          </button>
+          <ul class="dropdown-menu p-3" id="filter-container">
+            <!-- JS file for food type -->
+          </ul>
         </div>
-        <div
-          id="Restaurants-go-here"
-          class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4"
-        >
-          <!-- Vendor cards will be dynamically inserted here -->
+
+        <!-- Busyness -->
+        <div class="dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Select busyness
+          </button>
+          <ul class="dropdown-menu p-3" id="busyness-container">
+            <!-- JS file for busyness -->
+          </ul>
+        </div>
+      </div>
+      <div id="Restaurants-go-here" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <!-- Vendor cards will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Vendor Card Template -->
+  <template id="vendorCardTemplate">
+    <div class="col">
+      <div class="card h-100">
+        <img src="/images/food-truck.jpg" class="card-img-top card-image" alt="Food Vendor" />
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
         </div>
       </div>
     </div>
+    </div>
+  </template>
 
-    <!-- Vendor Card Template -->
-    <template id="vendorCardTemplate">
-      <div class="col">
-        <div class="card h-100">
-          <img
-            src="/images/food-truck.jpg"
-            class="card-img-top card-image"
-            alt="Food Vendor"
-          />
-          <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </template>
+  <site-footer></site-footer>
 
-    <!-- our own footer goes here -->
-    <site-footer></site-footer>
+  <script type="module" src="/src/app.js"></script>
+  <script type="module" src="/src/pages/feature-vendor.js"></script>
+</body>
 
-    <!---------------------------------------------->
-    <!-- Your own JavaScript scripts go here      -->
-    <!---------------------------------------------->
-    <script type="module" src="/src/app.js"></script>
-    <script type="module" src="/src/pages/feature-vendor.js"></script>
-  </body>
 </html>

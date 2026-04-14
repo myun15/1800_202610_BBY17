@@ -34,8 +34,9 @@ async function renderSavedRestaurants(userId) {
     const favoritedRestaurants = userData["favorited-restaurants"] || [];
     const allFavorites = [...new Set([...bookmarks, ...favoritedRestaurants])];
 
-    if (allFavorites.length === 0) {
-      container.innerHTML = "<p class='text-center'>No favorite restaurants yet!</p>";
+    if (bookmarks.length === 0) {
+      container.innerHTML =
+        "<p class='text-center'>No favorite restaurants yet!</p>";
       return;
     }
 
@@ -79,7 +80,7 @@ async function renderSavedRestaurants(userId) {
         if (badgeEl) {
           badgeEl.innerText = formatCrowdStatus(mergedData.status);
           badgeEl.className = `status-badge badge rounded-pill px-3 ${getStatusClass(
-            mergedData.status
+            mergedData.status,
           )}`;
         }
 
@@ -134,11 +135,13 @@ async function renderSavedRestaurants(userId) {
     }
 
     if (container.innerHTML.trim() === "") {
-      container.innerHTML = "<p class='text-center'>No favorite restaurants found.</p>";
+      container.innerHTML =
+        "<p class='text-center'>No favorite restaurants found.</p>";
     }
   } catch (error) {
     console.error("Error loading favorites:", error);
-    container.innerHTML = "<p class='text-center'>Error loading your favorites.</p>";
+    container.innerHTML =
+      "<p class='text-center'>Error loading your favorites.</p>";
   }
 }
 
@@ -150,7 +153,8 @@ onAuthReady((user) => {
   if (!container) return;
 
   if (!user) {
-    container.innerHTML = "<p class='text-center'>Please log in to view your favorites.</p>";
+    container.innerHTML =
+      "<p class='text-center'>Please log in to view your favorites.</p>";
     return;
   }
 

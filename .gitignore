@@ -4,3 +4,5 @@ node_modules/
 .vscode/
 .env
 ./bootstrap-utility-classes.md
+./package-lock.json
+./docs
