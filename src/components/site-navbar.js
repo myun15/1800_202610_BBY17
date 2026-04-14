@@ -64,8 +64,8 @@ class SiteNavbar extends HTMLElement {
                             </ul>
                           </div>
                         </div>
-                        <a class="navbar-brand" href="${href}">
-                            TimesUp
+                        <a class="navbar-brand d-flex align-items-center gap-2" href="${href}">
+                            <img src="images/logo_2.jpg" alt="TimesUp logo" class="navbar-logo" />
                         </a>
                   </div>
 
