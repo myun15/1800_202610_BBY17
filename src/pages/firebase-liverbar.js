@@ -29,7 +29,6 @@ function renderTrendSymbol(direction) {
   return "•";
 }
 
-//--- Compare the previous and current status to determine trend symbol ---
 function normalizeStatus(status) {
   const s = (status || "").toLowerCase();
 

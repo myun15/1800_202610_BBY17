@@ -1,61 +1,16 @@
 import { db } from "../helper/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
+import {
+  getStatusBadge,
+  getRestaurantImage,
+  getDefaultRestaurantImage,
+  formatCuisine,
+  formatTimeAgo,
+} from "../helper/utils.js";
 
 function getDocIdFromUrl() {
   const params = new URL(window.location.href).searchParams;
   return params.get("id");
-}
-
-function formatCrowdStatus(status = "") {
-  const value = status.toString().trim().toLowerCase();
-
-  if (value === "empty" || value === "low") return "Empty";
-  if (value === "busy" || value === "medium" || value === "moderate") return "Busy";
-  if (value === "full" || value === "high") return "Full";
-
-  return "No update yet";
-}
-
-function getStatusBadge(status = "") {
-  const value = status.toString().trim().toLowerCase();
-
-  if (value === "empty" || value === "low") {
-    return `<span class="badge bg-success">Empty</span>`;
-  }
-
-  if (value === "busy" || value === "medium" || value === "moderate") {
-    return `<span class="badge bg-warning text-dark">Busy</span>`;
-  }
-
-  if (value === "full" || value === "high") {
-    return `<span class="badge bg-danger">Full</span>`;
-  }
-
-  return `<span class="badge bg-secondary">No update yet</span>`;
-}
-
-function formatTimeAgo(timestamp) {
-  if (!timestamp) return "No updates yet";
-
-  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-  const diffSeconds = Math.floor((Date.now() - date.getTime()) / 1000);
-
-  if (diffSeconds < 10) return "Just now";
-  if (diffSeconds < 60) return `${diffSeconds} sec ago`;
-
-  const minutes = Math.floor(diffSeconds / 60);
-  if (minutes < 60) return `${minutes} min${minutes > 1 ? "s" : ""} ago`;
-
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-
-  const days = Math.floor(hours / 24);
-  return `${days} day${days > 1 ? "s" : ""} ago`;
-}
-
-function formatCuisine(cuisine = "") {
-  if (!cuisine) return "Restaurant";
-  return cuisine.charAt(0).toUpperCase() + cuisine.slice(1);
 }
 
 async function displayRestaurantInfo() {
@@ -111,16 +66,10 @@ async function displayRestaurantInfo() {
     }
 
     if (img) {
-      img.src =
-        restaurant.imageSrc && restaurant.imageSrc.trim() !== ""
-          ? restaurant.imageSrc
-          : "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
-
+      img.src = getRestaurantImage(restaurant);
       img.alt = restaurant.name || "Restaurant image";
-
       img.onerror = () => {
-        img.src =
-          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+        img.src = getDefaultRestaurantImage();
       };
     }
 
