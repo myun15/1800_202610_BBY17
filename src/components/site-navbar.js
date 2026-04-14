@@ -27,8 +27,9 @@ class SiteNavbar extends HTMLElement {
                             <li><a class="dropdown-item" href="#">asdf</a></li>
                             </ul>                  
                         </div>
-                        <a class="navbar-brand" href="${href}">
-                            TimesUp
+                        <a class="navbar-brand d-flex align-items-center gap-2" href="${href}">
+                            <img src="images/logo.png" alt="TimesUp logo" class="navbar-logo" />
+                            <span>TimesUp</span>
                         </a>
                   </div>
 

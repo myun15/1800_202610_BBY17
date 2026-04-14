@@ -353,3 +353,12 @@ body.no-scroll {
   background: #e5e7eb;
   color: #374151;
 }
+.navbar-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-brand {
+  text-decoration: none;
+}
