@@ -1,0 +1,735 @@
+[33mcommit 47a9bdd5fd82ff74b190af192633e2be6912e5b1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmarcus-branch[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: a452c74 4393667
+Author: 29myun <myun29@outlook.com>
+Date:   Sat Apr 11 02:31:08 2026 -0700
+
+    Merge pull request #35 from myun15/wenting-branch
+    
+    Wenting branch: Update FeaturedVendor / connect with Recent page
+
+[33mcommit a452c74f53d4da2f943941b74857ef3bc3e0f00a[m
+Merge: 804a7c0 203e304
+Author: 29myun <myun29@outlook.com>
+Date:   Sat Apr 11 02:30:09 2026 -0700
+
+    Merge pull request #33 from myun15/marcus-branch
+    
+    Marcus branch "updated the sidebar"
+
+[33mcommit 439366707f2e85ae0019a4013038e09de2085dc1[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Fri Apr 10 22:08:09 2026 -0700
+
+    Update FeaturedVendor page UI to match Home page (map + design style). Implement update, view page, and connect with Recent page.
+
+[33mcommit 6bc2fc5f05b734261054519cd97d4543c33c41f5[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Fri Apr 10 22:02:07 2026 -0700
+
+    git
+
+[33mcommit 203e30408d03b256d5a973043974dbc7c90eaa05[m[33m ([m[1;31morigin/marcus-branch[m[33m)[m
+Merge: 57008c5 804a7c0
+Author: Marcus Leung <leungmarcus.email@gmail.com>
+Date:   Fri Apr 10 17:40:30 2026 -0700
+
+    Merge branch 'main' of https://github.com/myun15/1800_202610_BBY17 into marcus-branch
+
+[33mcommit 57008c518ee986e77f951bd3dcc6de738e6f8585[m
+Author: Marcus Leung <leungmarcus.email@gmail.com>
+Date:   Fri Apr 10 17:38:59 2026 -0700
+
+    update
+
+[33mcommit b9016a10b307221f1b7f7d955210507b47ec0db6[m
+Merge: 8fa04ae 804a7c0
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Thu Apr 9 23:28:10 2026 -0700
+
+    resolve merge conflicts from main
+
+[33mcommit 8fa04aef8f356b0f588e9cb015997a22ba2aa96c[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Thu Apr 9 23:23:34 2026 -0700
+
+    update recent and restaurant-detail for pull the updated main file
+
+[33mcommit 804a7c080074b23b11f22c398a6d675a1238bd01[m
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Thu Apr 9 12:27:25 2026 -0700
+
+    Update various files including home, recent, restaurant-detail pages and styles
+
+[33mcommit 72bd37f3454b8899baf3b3b1a0ba3a1ebf7f72b8[m
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Thu Apr 9 12:27:17 2026 -0700
+
+    Merge branch 'fardis-branch' of https://github.com/myun15/1800_202610_BBY17 into fardis-branch
+
+[33mcommit 206cc946038d19bf32b3fdc5a9d3c48e8ed1bf53[m[33m ([m[1;32mmain[m[33m)[m
+Merge: 2fc19c3 143a957
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Tue Apr 7 14:31:01 2026 -0700
+
+    Update button, view details button, button to connect to recents page, button to connect to favorites page (which is connected to the database).
+
+[33mcommit 2fc19c3908ba742353ca35c5f25dab7a01531c81[m
+Merge: 34817f3 1f071a0
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Tue Apr 7 13:52:53 2026 -0700
+
+    Update button, view details button, button to connect to recents page, button to connect to favorites page (which is connected to the database).
+
+[33mcommit 143a95700446d49f4be51a3d54f3bc71dc84bb61[m
+Merge: 1f071a0 ee932ce
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Apr 7 13:41:07 2026 -0700
+
+    Merge pull request #32 from myun15/myun-branch
+    
+    Fixed error where favorites button didn't save to database.
+
+[33mcommit ee932cead35f513e1ff480a5dc2a76f21d83e53a[m[33m ([m[1;31morigin/myun-branch[m[33m)[m
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Apr 7 13:40:27 2026 -0700
+
+    Fixed error where favorites button didn't save to database.
+
+[33mcommit 34817f30e066f7cccc8225f027501ecebd9b4d46[m
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Tue Apr 7 12:28:12 2026 -0700
+
+    This PR updates the restaurant popup, detail page, recent page, and favorites UI.
+    It also improves crowd status display, recent tracking, favorites behavior, and overall styling.
+
+[33mcommit 1f071a007837d2019538ae36d30a5750acf5c816[m
+Merge: 6df3950 99146e1
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Apr 6 21:28:44 2026 -0700
+
+    Merge pull request #31 from myun15/myun-branch
+    
+    Moved everything from home.html to index.html. Made it so user sees n…
+
+[33mcommit 99146e161e640836abc2c07ba28d1cbde8c95527[m
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Apr 6 21:28:11 2026 -0700
+
+    Moved everything from home.html to index.html. Made it so user sees navbar only when logged in. Re-organized project structure.
+
+[33mcommit 6df39502a3972fd5f431fca12426421b42a3ed95[m
+Merge: 1870568 388d178
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Apr 6 20:53:07 2026 -0700
+
+    Merge pull request #29 from myun15/wenting-branch
+    
+    Add filter function and update UI
+
+[33mcommit 388d178adcb7fb164ced7585290c8c4888edf3aa[m[33m ([m[1;31morigin/wenting-branch[m[33m)[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Sun Apr 5 13:11:57 2026 -0700
+
+    connect timestamp and up and down arrow.
+
+[33mcommit 1941135d7061c67ece9ce063c1c6cf92b6c4ab32[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Sun Apr 5 10:14:01 2026 -0700
+
+    feat:connect live bar to home page and try to connect map makers
+
+[33mcommit 28641f1ef2c8d697a4fed9d49f15565e735b8546[m
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Sat Apr 4 22:55:46 2026 -0700
+
+    Update home page popup, detail page, recent page, favorites, and UI
+
+[33mcommit 9b90b0958eb9b33478e74252e89227b700707728[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Wed Apr 1 01:48:30 2026 -0700
+
+    add the filter function on featured vendor page.(Select Food Type and Busyness)/change footer/add Current Busy
+    ness level and update timestampe button.
+
+[33mcommit ca37aad0a8c66f14046957e7aa1320ee71e66eaa[m
+Merge: 91e6616 1870568
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Tue Mar 31 15:56:16 2026 -0700
+
+    Merge https://github.com/myun15/1800_202610_BBY17 into wenting-branch
+
+[33mcommit 91e66162e7c731fa992dceab93ec84f52d38c7d2[m
+Merge: 0c4f051 1251be9
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Tue Mar 31 15:50:58 2026 -0700
+
+    update the latest work from group
+
+[33mcommit 187056816bdb69c2ea9fd678853263fa31cea7ee[m
+Merge: 8e41023 2b3497f
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 31 13:50:36 2026 -0700
+
+    Merge pull request #28 from myun15/myun-branch
+    
+    Fixed bugs after latest merges.
+
+[33mcommit 2b3497f61dec5bb5d736973205c1baa5dd7c6d5b[m
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 31 13:49:40 2026 -0700
+
+    Fixed bugs after latest merges.
+
+[33mcommit 8e41023d4ab7e1f681cc8dff9cc271408cded0a3[m
+Merge: 934f3e6 1300e1f
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 31 13:38:38 2026 -0700
+
+    Merge pull request #27 from myun15/myun-branch
+    
+    Added images to restaurant cards in reservation.html.
+
+[33mcommit 1300e1f49f36d4de8c729a12a8a5f38938c296ed[m
+Merge: 7e683f6 934f3e6
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 31 13:38:32 2026 -0700
+
+    Merge branch 'main' into myun-branch
+
+[33mcommit 7e683f61e9757282634baa1f781e16ed8af4d658[m
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 31 13:36:52 2026 -0700
+
+    Added images to restaurant cards in reservation.html.
+
+[33mcommit 934f3e6a7caaf1770d55a1e893c7cd1795431840[m
+Merge: 925159c 97ee851
+Author: MrL30121 <leungmarcus.email@gmail.com>
+Date:   Tue Mar 31 13:21:27 2026 -0700
+
+    Merge pull request #26 from myun15/marcus-branch
+    
+    Added heart icon to restaurant cards. Not functional yet.
+
+[33mcommit 97ee8515f1ef76d339bedfbed9a08c8b876a1a8a[m
+Merge: 48f4d43 925159c
+Author: MrL30121 <leungmarcus.email@gmail.com>
+Date:   Tue Mar 31 13:21:19 2026 -0700
+
+    Merge branch 'main' into marcus-branch
+
+[33mcommit 48f4d436e6047958dc999ff3939ace56ef7d0303[m
+Author: Marcus Leung <leungmarcus.email@gmail.com>
+Date:   Tue Mar 31 13:16:45 2026 -0700
+
+    Added heart icon to restaurant cards. Not functional yet.
+
+[33mcommit 925159c5ffca491957c6da601fc12a656616a347[m
+Merge: 1251be9 61205e0
+Author: FardisV <fvalipour@my.bcit.ca>
+Date:   Tue Mar 31 13:15:05 2026 -0700
+
+    Merge pull request #25 from myun15/fardis-branch
+    
+    Updated restaurant card for pins in home.html.
+
+[33mcommit 61205e02e983c55a13184dc3b40e359156b4f6ae[m[33m ([m[1;31morigin/fardis-branch[m[33m)[m
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Tue Mar 31 13:14:16 2026 -0700
+
+    Updated restaurant card for pins in home.html.
+
+[33mcommit 0c4f0511824209a39c5cb49e71357d3d3feea4ad[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Mon Mar 30 16:56:40 2026 -0700
+
+    just need to commit before pull.
+
+[33mcommit 1251be9c20384cb748d598359a5d41b7388cb9eb[m
+Merge: 8eda89c 4a77a2c
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Tue Mar 24 17:20:30 2026 -0700
+
+    Merge pull request #23 from myun15/myun-branch
+    
+    Reservation page: load vendors from JSON, sticky navbar, scrollable p…
+
+[33mcommit 4a77a2c5660cb193e253cdfdaa92f2868c294899[m
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 24 17:19:48 2026 -0700
+
+    Reservation page: load vendors from JSON, sticky navbar, scrollable pages
+    
+    - Replace hardcoded placeholder cards with dynamic template in reservation.html
+    - Rewrite reservation.js to fetch directly from food-vendors.json instead of Firebase
+    - Add 3-column responsive grid (row-cols-1/md-2/lg-3) for vendor cards
+    - Remove View Details button and link logic from cards
+    - Enable page scrolling: move overflow:hidden to body.no-scroll class (home only)
+    - Make navbar sticky: add position:sticky + display:block on site-navbar element
+    - Simplify index.html: remove duplicate hero/carousel markup
+
+[33mcommit 8eda89c2aa8a9a9e488c8c735bb591c6b148a7b6[m
+Merge: d0f3b81 ee71ea8
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Tue Mar 24 17:11:50 2026 -0700
+
+    Merge pull request #22 from myun15/fardis-branch
+    
+    added restaurant's status
+
+[33mcommit ee71ea80c18f34a37bea4525577a1e94dd476394[m
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Tue Mar 24 16:49:24 2026 -0700
+
+    added restaurant's status
+
+[33mcommit d0f3b8107f6a319194f9b49f4f4fa379e794990b[m
+Merge: 2a30d5b 4a2c8bf
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Tue Mar 24 16:30:18 2026 -0700
+
+    Merge pull request #21 from myun15/myun-branch
+    
+    Clean up project structure and rename files by purpose
+
+[33mcommit 4a2c8bf86b24802eeb0ba32a2e862004aac329cc[m
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 24 16:28:05 2026 -0700
+
+    Clean up project structure and rename files by purpose
+    
+    - Move JSON data files to public/data/
+    - Create vite.config.js for multi-page build
+    - Fix broken image paths and script references in HTML files
+    - Fix navbar: proper auth button logic, responsive layout, grouped elements
+    - Fix footer: updated page references (home.html, reservation.html)
+    - Convert all CSS px values to responsive clamp() units
+    - Restructure hero area layout with flex-row for map positioning
+    - Rename restaurant.html -> reservation.html
+    - Rename eachRestaurant.html -> restaurant-detail.html
+    - Move eachRestaurant.js -> src/pages/restaurant-detail.js
+    - Delete unused files: skeleton.html, main.js (hikes code), stylewebbackup.css,
+      restaurantData.js (duplicate seed script), restaurantMain.js
+    - Fix reservation.html to use correct reservation.js script
+    - Clean up package.json metadata
+
+[33mcommit 2a30d5bfd530775dbdef0afd48a3c86204d1b781[m
+Merge: c6c0e4e 19cbdf9
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Mar 23 22:06:37 2026 -0700
+
+    Merge pull request #19 from myun15/myun-branch
+    
+    Fixed issue of map not rendering.
+
+[33mcommit 19cbdf9c1f724926b8a78d21f3bb1638f8d1c2e8[m
+Merge: ccd33e5 c6c0e4e
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Mar 23 22:06:18 2026 -0700
+
+    Fixed issue of map not rendering.
+
+[33mcommit ccd33e559845bab03db993e10811e42c332552c5[m
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Mar 23 22:04:28 2026 -0700
+
+    Fixed issue of map not rendering.
+
+[33mcommit c6c0e4e9e2cdf70bb942805550d3f2df10832573[m
+Merge: f294fa2 0eaf4c0
+Author: 29myun <myun29@outlook.com>
+Date:   Sat Mar 21 18:50:37 2026 -0700
+
+    Merge pull request #18 from myun15/feature/sprint#3_wyang
+    
+    Feature/sprint#3 wyang: Update home page and Initial reservation page, Restructure images, optimize homepage layout, and implement Firebase data fetching
+
+[33mcommit 0eaf4c0622851de52627238270fa7e172cc9c709[m[33m ([m[1;31morigin/feature/sprint#3_wyang[m[33m)[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Sat Mar 21 13:47:28 2026 +0800
+
+    refine the description
+
+[33mcommit 1cade7e20eeed6f7d92ae38681bbc383509bc899[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Sat Mar 21 07:19:10 2026 +0800
+
+    feat: implement Firebase read functionality to fetch and display restaurant data
+
+[33mcommit 76eeb05474e35ae243b4a4ebd64cfd99f6b7fcf9[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Sat Mar 21 07:12:44 2026 +0800
+
+    design on home page and reservation page with CSS and Bootstrap
+
+[33mcommit a3c12272e157d2851cc295d9209054311fdd6b49[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Fri Mar 20 19:31:12 2026 +0800
+
+    change home page base on Figma design. Optimize layout: implement title + fullscreen map layout, fix address input icon position
+
+[33mcommit 971790fc1f60fde1d87fb6257284e89386af1751[m
+Merge: 6bcfb5c f294fa2
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Fri Mar 20 07:39:21 2026 +0800
+
+    Resolve merge conflict in favorites.html
+
+[33mcommit f294fa236d5e023b5d8846638dcde9ab7860831a[m
+Merge: 4179fa5 2ba17aa
+Author: 29myun <myun29@outlook.com>
+Date:   Thu Mar 19 15:50:04 2026 -0700
+
+    Merge pull request #17 from myun15/myun-branch
+    
+    refactor: reorganize project structure and replace map implementation
+
+[33mcommit 2ba17aa929452633d19120dd137b139a53b8915d[m
+Merge: 5c89b34 4179fa5
+Author: 29myun <myun29@outlook.com>
+Date:   Thu Mar 19 15:49:13 2026 -0700
+
+    Merge branch into myun-branch, keep restructured project layout
+
+[33mcommit 5c89b3431f955aa7d48115c14ee5d7ff5a2322da[m
+Author: 29myun <myun29@outlook.com>
+Date:   Thu Mar 19 15:42:16 2026 -0700
+
+    refactor: reorganize project structure and replace map implementation
+    
+    - Split monolithic main.js into per-page modules under src/pages/
+      (home.js, map.js, favorites.js, review.js, login.js)
+    - Replace Google Maps + Leaflet with MapLibre GL using MapTiler
+    - Seed restaurant data from OpenStreetMap Overpass API instead of hardcoded entries
+    - Simplify app.js to shared bootstrap/style imports only
+    - Move login/signup logic from loginSignup.js to src/pages/login.js
+    - Update navbar to conditionally render login/logout button
+    - Fix invalid nested CSS rule in style.css
+    - Update all HTML files to reference page-specific scripts
+    - Remove unused main.js, loginSignup.js, and map.html
+
+[33mcommit 6bcfb5c62fd14fc6b0db79fcfcc3a782c8c4c5d0[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Fri Mar 20 06:03:37 2026 +0800
+
+    Restructure image files: move all images to public folder
+
+[33mcommit 4179fa5fa9043cb6f9828b3bf3a91da89b473c76[m
+Merge: a86070f 3a74d9e
+Author: CelestiaWana <wyang73@my.bcit.ca>
+Date:   Fri Mar 20 05:49:16 2026 +0800
+
+    Merge pull request #16 from myun15/feature/sprint#3_wyang: Setup Restaurant Test List,Import vendors Data and Update main.js
+    
+    Feature/sprint#3 wyang: Setup Restaurant Test List, Import vendors Data and Update main.js
+
+[33mcommit 3a74d9e3bc8a8ca39470a4a1df41b0c27481be16[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Fri Mar 20 05:17:34 2026 +0800
+
+    Update restaurant Test List for demo,import Vancouver open data for food Vendors,update main.js
+
+[33mcommit 5bd086609153fec4a28f26c81986264c45115da6[m
+Merge: 52485fd a86070f
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Wed Mar 18 01:07:35 2026 +0800
+
+    marge main and feature/sprint#3_wyang and solove the conflic on style.css
+
+[33mcommit 52485fda1867d8f939f00d1940eeef19faaf1889[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Wed Mar 18 00:52:17 2026 +0800
+
+    set up restaurant list, restaurant booking and download food-vendors jsonfile from opendata of Vancouver
+
+[33mcommit c6644681820dc07361bd1f9f621ec4828232c444[m
+Author: celestiawana <wyang73@my.bcit.ca>
+Date:   Tue Mar 17 20:57:18 2026 +0800
+
+    set up restaurant list, restaurant booking and download food-vendors jsonfile from opendata of Vancouver
+
+[33mcommit a86070f7ad8f9ebb4ca3284a97a6a034650d8ebc[m
+Author: Fardis <fvalipour@my.bcit.ca>
+Date:   Mon Mar 16 23:03:07 2026 -0700
+
+    add the map into the first page
+
+[33mcommit 4d96371d0382b09ca5be692e8add0b1e98e1f0d7[m
+Merge: 938423a bb076d6
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Tue Mar 10 01:31:38 2026 -0700
+
+    Merge pull request #15 from myun15/sprint2-myun
+    
+    Connected firebase database to application: User Accounts, Restaurant…
+
+[33mcommit bb076d6909a79a7ce05d8738ac5cdbe02c579261[m[33m ([m[1;31morigin/sprint2-myun[m[33m)[m
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 10 01:29:26 2026 -0700
+
+    Connected firebase database to application: User Accounts, Restaurant Data, and Restaurant Reviews can now all be saved to the database.
+
+[33mcommit 938423a25721affbc3c941a9f4feaf8d1e037892[m
+Merge: e2476c1 45bc2db
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 3 15:09:13 2026 -0800
+
+    Merge pull request #14 from myun15/feature/sprint1-myun
+    
+    Added login/signup page, main-page, map-page, favorites-page, and res…
+
+[33mcommit 45bc2db29546c02f9eda5c948000e5b695e977a3[m[33m ([m[1;31morigin/feature/sprint1-myun[m[33m)[m
+Author: 29myun <myun29@outlook.com>
+Date:   Tue Mar 3 15:08:30 2026 -0800
+
+    Added login/signup page, main-page, map-page, favorites-page, and restaurant-review-page. All changes currently has just minimal functionality.
+
+[33mcommit e2476c11715a705ad3951d43737f8c80b9954527[m
+Author: Vivian Yang <wyang73@my.bcit.ca>
+Date:   Fri Feb 13 14:25:20 2026 -0800
+
+    Added background to hero-area and footer.
+
+[33mcommit 68900f230216b26ac13fdbeb1214af87bddc824a[m
+Merge: ed0604e 0411bda
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Feb 11 20:19:48 2026 -0800
+
+    Merge pull request #13 from myun15/feature/intro-myun
+    
+    Created landing page, almost done.
+
+[33mcommit 0411bdad21b3fa7c1ba0ed4bd25ebe377635e706[m[33m ([m[1;31morigin/feature/intro-myun[m[33m)[m
+Author: 29myun <myun29@outlook.com>
+Date:   Wed Feb 11 20:13:57 2026 -0800
+
+    Created landing page, almost done.
+
+[33mcommit ed0604eb76dc252728b3efcf3228ef65b5ecba06[m
+Merge: 7cdab9b ec59a1b
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Jan 26 18:40:13 2026 -0800
+
+    Merge branch 'main' of https://github.com/myun15/1800_202610_BBY17
+
+[33mcommit 7cdab9bec294230b33400d1e24d88973436db72d[m
+Merge: 8aa2b7f 22b36a0
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Jan 26 18:40:08 2026 -0800
+
+    Merge branch 'feature/intro-myun'
+
+[33mcommit 8aa2b7f4b0646b2aabf42b258c267b4050ddb38c[m
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Jan 26 18:31:35 2026 -0800
+
+    Made changes to README
+
+[33mcommit 22b36a0f761dd8aa949a75f9a91ad663d484848a[m
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Jan 26 18:30:55 2026 -0800
+
+    Made changes to file
+
+[33mcommit 06d7c1ce2585edb84b0452d61fc6d3e05f92718c[m
+Author: 29myun <myun29@outlook.com>
+Date:   Mon Jan 26 18:28:52 2026 -0800
+
+    Mades changes to Matthew's Contributor
+
+[33mcommit ec59a1b4f977d76304c91bbdf08eb261535e7c5c[m
+Merge: 66e86b6 a66d3fa
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Mon Jan 26 18:27:35 2026 -0800
+
+    Merge pull request #12 from myun15/feature/intro-Fardis
+    
+    Made changes to README in contributor for Fardis
+
+[33mcommit 66e86b6a9d3f8c7d6605fe154e46246c5b0002ee[m
+Merge: 7b325f0 5772f30
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Mon Jan 26 18:23:37 2026 -0800
+
+    Merge pull request #11 from myun15/feature/intro-Wenting
+    
+    feat add intro to README file for Wenting
+
+[33mcommit a66d3fa3771c739b4e533a226b80bbcdae952a39[m
+Author: Fardis Valipour <fvalipopur@my.bcit.ca>
+Date:   Mon Jan 26 18:22:01 2026 -0800
+
+    Made changes to README in contributor for Fardis
+
+[33mcommit 5772f303659cfc63e748c62b3fdce42692477789[m[33m ([m[1;31morigin/feature/intro-Wenting[m[33m)[m
+Author: Vivian Yang <wyang73@my.bcit.ca>
+Date:   Mon Jan 26 18:16:58 2026 -0800
+
+    feat add intro to README file for Wenting
+
+[33mcommit 7b325f0c4e6ac9393fd516d8bdd521af6741bb59[m
+Merge: 1c2f21e 4e56850
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Mon Jan 26 18:11:51 2026 -0800
+
+    Merge pull request #9 from myun15/feature/intro-Fardis
+    
+    feat: Add intro to README file for Fardis
+
+[33mcommit 4e568504dd97330801c570ed6df7448046431c99[m
+Author: Fardis Valipour <fvalipopur@my.bcit.ca>
+Date:   Mon Jan 26 13:30:21 2026 -0800
+
+    feat: Add intro to README file for Fardis
+
+[33mcommit 1c2f21e79a145093d757d91bcbff9f7aa01fe7b5[m
+Merge: e46114a e8ea334
+Author: CelestiaWana <wyang73@my.bcit.ca>
+Date:   Thu Jan 22 23:40:32 2026 -0800
+
+    Merge pull request #8 from myun15/feature/intro-Wenting
+    
+    feat: Add intro to README file for Wenting
+
+[33mcommit e8ea33407e0a2fb082251b4227bb1dbda83dde3a[m
+Author: CelestiaWana <wyang73@my.bcit.ca>
+Date:   Thu Jan 22 23:35:33 2026 -0800
+
+    feat: Add intro to README file for Wenting
+
+[33mcommit e46114a9074ec9e576cf5b57952ed724e72c0656[m
+Author: CelestiaWana <wyang73@my.bcit.ca>
+Date:   Thu Jan 22 22:09:21 2026 -0800
+
+    Delete REAME.md
+
+[33mcommit 39ea9a757da49a1fca4f000f3a9e474f4d0e62d2[m
+Merge: 1dd0149 1a8c328
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Thu Jan 22 14:01:21 2026 -0800
+
+    Merge pull request #7 from myun15/feature/intro-myun
+    
+    Feature/intro myun
+
+[33mcommit 1a8c3283a655af87e0cedbfceef5bce7ef3494bd[m
+Author: 29myun <myun29@outlook.com>
+Date:   Thu Jan 22 14:00:04 2026 -0800
+
+    updated matthew's contributor intro in the README.md file
+
+[33mcommit 7951f18c3fb5c1b20be87f36ee016736d4103d50[m
+Merge: 5e7da7d 1dd0149
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Thu Jan 22 13:54:50 2026 -0800
+
+    Merge pull request #6 from myun15/main
+    
+    Update myun's branch
+
+[33mcommit 1dd014927b2c84e1e3fd3b315a1a4e77fad89552[m
+Merge: f095953 07d8b7c
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Jan 21 13:17:55 2026 -0800
+
+    Merge pull request #5 from myun15/feature/intro-Fardis
+    
+    feat: Add intro to README file for Fardis
+
+[33mcommit 07d8b7c25e9694ade17d51f840291d327f731e40[m
+Author: Fardis Valipour <fvalipopur@my.bcit.ca>
+Date:   Wed Jan 21 13:15:07 2026 -0800
+
+    feat: Add intro to README file for Fardis
+
+[33mcommit f095953754e6def1918a5765f394954e2d8cb1b5[m
+Merge: 27409ee a5ebd87
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Jan 21 13:03:48 2026 -0800
+
+    Merge pull request #2 from myun15/feature/intro-Wenting
+    
+    feat: Add intro to README file for Wenting Yang
+
+[33mcommit a5ebd87d007123e73d59da46b2a998d084f81866[m
+Merge: c4eed80 27409ee
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Jan 21 13:03:16 2026 -0800
+
+    Merge branch 'main' into feature/intro-Wenting
+
+[33mcommit 27409ee50be99ce13da6338bca5b3c7252265220[m
+Merge: 049585d 7f53c5b
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Jan 21 13:02:27 2026 -0800
+
+    Merge pull request #3 from myun15/feature/intro-ml
+    
+    Add Marcus' Introduction
+
+[33mcommit 7f53c5bc26a491bbe5b1d537cd3c5d69222cba6b[m[33m ([m[1;31morigin/feature/intro-ml[m[33m)[m
+Merge: 87d882d 049585d
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Jan 21 13:02:17 2026 -0800
+
+    Merge branch 'main' into feature/intro-ml
+
+[33mcommit 049585dd62a784ddf32a61076acc14a8ccca9144[m
+Merge: acb7ba8 5e7da7d
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Jan 21 12:55:10 2026 -0800
+
+    Merge pull request #4 from myun15/feature/intro-myun
+    
+    Add Matthew's Introduction
+
+[33mcommit 5e7da7dc79280d1404759051ed2e1797cccb828f[m
+Author: 29myun <myun29@outlook.com>
+Date:   Wed Jan 21 12:45:33 2026 -0800
+
+    feat: Add intro to README file for Matthew
+
+[33mcommit 30865202debfc12e81b8c8eaca6d8a1ab0e152f5[m
+Author: 29myun <myun29@outlook.com>
+Date:   Wed Jan 21 12:44:37 2026 -0800
+
+    feat: Add intro to README file for Matthew
+
+[33mcommit 87d882da80962d7bdbb08c8aa048eadc5f8ad680[m
+Author: Marcus Leung <leungmarcus.email@gmail.com>
+Date:   Wed Jan 21 12:34:55 2026 -0800
+
+    feat: Add intro to README file for Marcus
+
+[33mcommit acb7ba8bfed0cd119643a5c9afd1dde11da7fe7a[m
+Merge: 7971b2e ae414e3
+Author: FardisV <fvalipour@my.bcit.ca>
+Date:   Wed Jan 21 12:32:58 2026 -0800
+
+    Merge pull request #1 from myun15/feature/intro-Fardis
+    
+    Add intro to README file for #Fardis
+
+[33mcommit 3e058a0ab09484469e887c7c3204808e7546df7e[m
+Author: Marcus Leung <leungmarcus.email@gmail.com>
+Date:   Wed Jan 21 12:31:59 2026 -0800
+
+    feat: Add intro to README file for Marcus
+
+[33mcommit c4eed8049209ded3e5982dbffe38263b91f9a047[m
+Author: CelestiaWana <wyang73@my.bcit.ca>
+Date:   Wed Jan 21 12:21:30 2026 -0800
+
+    feat: Add intro to README file for Wenting Yang
+
+[33mcommit ae414e3fd7d99c96ac6eae8df7adf75a838ba3fd[m
+Author: Fardis Valipour <fvalipopur@my.bcit.ca>
+Date:   Wed Jan 21 12:20:52 2026 -0800
+
+    feat: Add intro to README file for #Fardis
+
+[33mcommit 7971b2eb86f385339a7a4007ef65f9dbe41feaf9[m
+Author: myun15 <myun15@my.bcit.ca>
+Date:   Wed Jan 21 11:39:21 2026 -0800
+
+    Initial commit

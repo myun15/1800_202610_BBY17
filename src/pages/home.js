@@ -414,7 +414,7 @@ async function toggleFavorite(buttonEl, restaurantID) {
 
         if (buttonEl) {
           buttonEl.classList.remove("is-favorited");
-          buttonEl.innerHTML = "♡";
+          buttonEl.innerHTML = "j";
         }
       } else {
         await updateDoc(userRef, { bookmarks: arrayUnion(restaurantID) });
