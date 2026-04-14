@@ -137,7 +137,7 @@ function renderFilteredCards(vendors) {
       localStorage.setItem("recentRestaurants", JSON.stringify(updatedRecents));
 
       // 4. start turn and shows on  html
-      window.location.href = `/pages/restaurant-detail.html?id=${restaurantId}`;
+      window.location.href = `/pages/vendor-detail.html?id=${restaurantId}`;
     }
 
     // key: shows on window onclick="window.goToRestaurantPage(...)" and make sue it can access the function
@@ -184,7 +184,11 @@ async function loadFilters() {
 
   try {
     // get data from firebase
-    const querySnapshot = await getDocs(collection(db, "restaurants"));
+    const q = query(
+      collection(db, "restaurants"),
+      where("vendor_type", "==", "vendor_food"),
+    );
+    const querySnapshot = await getDocs(q);
     allVendorData = querySnapshot.docs
       .map((docSnap) => ({
         id: docSnap.id,

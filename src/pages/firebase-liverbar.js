@@ -103,7 +103,7 @@ onSnapshot(restaurantsCollection, (snapshot) => {
     const currentStatus = restaurant.status || "unknown";
     const previousStatus = previousStatuses[id];
 
-    const lastTrendTime = restaurant.statusChangedAt;
+    const lastTrendTime = restaurant.lastUpdated;
 
     if (hasInitialized) {
       const direction = getTrendDirection(previousStatus, currentStatus);
@@ -121,14 +121,13 @@ onSnapshot(restaurantsCollection, (snapshot) => {
       activeDirection &&
       lastTrendTime &&
       typeof lastTrendTime.toDate === "function" &&
-      now - lastTrendTime.toDate().getTime() <= 20000
+      now - lastTrendTime.toDate().getTime() <= 2000
     ) {
       trend = renderTrendSymbol(activeDirection);
     }
 
     const statusBadge = getStatusBadge(currentStatus);
-    const timeLabel = formatTimeAgo(restaurant.statusChangedAt);
-    // show previous status for live updates
+    const timeLabel = formatTimeAgo(restaurant.lastUpdated); // show previous status for live updates
     previousStatuses[id] = currentStatus;
 
     return `
