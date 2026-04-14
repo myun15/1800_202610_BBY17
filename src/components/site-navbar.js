@@ -67,14 +67,7 @@ class SiteNavbar extends HTMLElement {
                           </div>
                         </div>
                         <a class="navbar-brand d-flex align-items-center gap-2" href="${href}">
-<<<<<<< Updated upstream
-                            <img src="images/logo.png" alt="TimesUp logo" class="navbar-logo" />
-                            <span>TimesUp</span>
-=======
                             <img src="images/logo_2.jpg" alt="TimesUp logo" class="navbar-logo" />
-                            <span>TimesUp</span>
-                            <span class="navbar-tagline">show the real time restaurant's crowdness level</span>
->>>>>>> Stashed changes
                         </a>
                   </div>
 
