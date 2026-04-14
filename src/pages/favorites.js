@@ -1,42 +1,13 @@
 import { db } from "../helper/firebaseConfig.js";
 import { doc, getDoc } from "firebase/firestore";
 import { onAuthReady } from "/src/helper/authentication.js";
-
-function formatCrowdStatus(status = "") {
-  const value = status.toString().trim().toLowerCase();
-
-  if (value === "empty" || value === "low") return "Empty";
-  if (value === "busy" || value === "medium" || value === "moderate") return "Busy";
-  if (value === "full" || value === "high") return "Full";
-
-  return "No update yet";
-}
-
-function getStatusClass(status = "") {
-  const value = status.toString().trim().toLowerCase();
-
-  if (value === "empty" || value === "low") return "crowd-empty";
-  if (value === "busy" || value === "medium" || value === "moderate") return "crowd-busy";
-  if (value === "full" || value === "high") return "crowd-full";
-
-  return "crowd-unknown";
-}
-
-function getRestaurantImage(data) {
-  const defaultImage =
-    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
-
-  if (data.imageSrc && data.imageSrc.trim() !== "") {
-    return data.imageSrc;
-  }
-
-  return defaultImage;
-}
-
-function formatCuisine(cuisine = "") {
-  if (!cuisine) return "Restaurant";
-  return cuisine.charAt(0).toUpperCase() + cuisine.slice(1);
-}
+import {
+  formatCrowdStatus,
+  getStatusClass,
+  getRestaurantImage,
+  getDefaultRestaurantImage,
+  formatCuisine,
+} from "../helper/utils.js";
 
 async function renderSavedRestaurants(userId) {
   const container =
@@ -116,8 +87,7 @@ async function renderSavedRestaurants(userId) {
           imageEl.src = getRestaurantImage(mergedData);
           imageEl.alt = mergedData.name || "Restaurant image";
           imageEl.onerror = () => {
-            imageEl.src =
-              "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
+            imageEl.src = getDefaultRestaurantImage();
           };
         }
 
@@ -137,7 +107,7 @@ async function renderSavedRestaurants(userId) {
       class="favorite-card-image"
       src="${getRestaurantImage(mergedData)}"
       alt="${mergedData.name || "Restaurant image"}"
-      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80';"
+      onerror="this.onerror=null;this.src='${getDefaultRestaurantImage()}';"
     />
 
     <div class="favorite-card-body">

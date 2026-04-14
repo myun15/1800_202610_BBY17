@@ -143,13 +143,6 @@ nav.navbar {
 .address-input {
   border: none;
   transition: box-shadow 0.3s ease-in-out;
-}
-
-.address-input:focus {
-  box-shadow: red 0px -2px 0px inset;
-}
-
-.address-input {
   background: url("../images/pin-fill-sharp-circle-634-svgrepo-com.svg");
   background-position-x: clamp(10px, 1.5vw, 17px);
   background-position-y: 50%;
@@ -157,6 +150,54 @@ nav.navbar {
   background-repeat: no-repeat;
   background-color: white;
   width: clamp(200px, 30vw, 500px);
+}
+
+.address-input:focus {
+  box-shadow: red 0px -2px 0px inset;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: clamp(200px, 30vw, 500px);
+  margin: 4px 0 0;
+  padding: 4px 0;
+  list-style: none;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1050;
+}
+
+.search-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.search-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.search-dropdown-item:hover {
+  background-color: #f9fafb;
+}
+
+.search-dropdown-name {
+  font-weight: 600;
+  color: #111827;
+  font-size: 0.95rem;
+}
+
+.search-dropdown-sub {
+  font-size: 0.8rem;
+  color: #6b7280;
 }
 
 /* BODY */
@@ -241,6 +282,42 @@ body.no-scroll {
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-legend {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #1f2937;
+  min-width: 140px;
+}
+
+.map-legend-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.map-legend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.map-legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.map-legend-label {
+  white-space: nowrap;
 }
 
 /* CARDS */
@@ -456,36 +533,6 @@ body.no-scroll {
   border: 2px solid white;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
 }
-.restaurant-popup-actions {
-  margin-top: 10px;
-}
-
-.view-details-btn {
-  width: 100%;
-  border: none;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: #222;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.view-details-btn:hover {
-  opacity: 0.9;
-}
-.restaurant-detail-page {
-  flex: 1;
-  padding-top: 24px;
-  padding-bottom: 140px;
-}
-
-.restaurant-detail-image {
-  width: 100%;
-  max-height: 380px;
-  object-fit: cover;
-  border-radius: 20px;
-}
 
 .restaurant-detail-card {
   background: #ffffff;
@@ -515,21 +562,6 @@ body.no-scroll {
   max-height: 380px;
   object-fit: cover;
   border-radius: 20px;
-}
-
-.restaurant-detail-card .card-body {
-  background: #fff !important;
-  color: #222 !important;
-}
-
-#restaurantName {
-  font-size: 3rem;
-  font-weight: 800;
-  color: #1f2937;
-}
-
-#restaurantMeta {
-  color: #6b7280 !important;
 }
 
 #restaurantName {
@@ -635,22 +667,6 @@ body.no-scroll {
   opacity: 0.9;
 }
 
-.favorite-popup-btn {
-  border: none;
-  min-width: 56px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: white;
-  color: #111;
-  font-size: 22px;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.favorite-popup-btn:hover {
-  background: #fff1f2;
-}
 .favorite-popup-btn {
   border: none;
   min-width: 56px;
@@ -882,3 +898,38 @@ body.no-scroll {
   color: #FFFFFF;
   opacity: 0.8;
 }
+
+.offcanvas {
+  width: 400px !important; /* Make it wider than the default 400px */
+  background-color: #333;  /* Dark sidebar */
+  color: white;
+}
+
+#side-panel {
+  width: 25px;
+  height: 25px;
+}
+
+.offcanvas-header {
+  border-bottom: 1px solid #444;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  color: #1190f1;
+}
+
+/* Your custom menu */
+.dropdown-menu {
+  display: none;        /* Hidden by default */
+  position: absolute;   /* Float it */
+  top: 100%;            /* Put it right under the button */
+  left: 0;
+  min-width: 160px;
+  border: 1px solid #ccc;
+  color: #1190f1;
+  list-style: none;
+  padding: 10px;
+  z-index: 1000;        /* Make sure it's on top */
+} 

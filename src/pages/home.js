@@ -8,12 +8,20 @@ import {
   arrayRemove,
   getDoc,
   setDoc,
-  serverTimestamp,
 } from "firebase/firestore";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { db } from "/src/helper/firebaseConfig.js";
 import { onAuthReady } from "/src/helper/authentication.js";
+import {
+  STATUS_CONFIG,
+  normalizeStatus,
+  getRestaurantImage,
+  getDefaultRestaurantImage,
+  formatTimeAgo,
+  calculateDistance,
+  escapeHTML,
+} from "/src/helper/utils.js";
 
 const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY;
 const VANCOUVER = { lng: -123.1207, lat: 49.2827 };
@@ -22,23 +30,38 @@ let userLocation = null;
 let previewMap = null;
 let restaurantMarkers = [];
 
-const STATUS_CONFIG = {
-  empty: {
-    label: "Empty",
-    className: "crowd-empty",
-    markerColor: "#22c55e",
-  },
-  busy: {
-    label: "Busy",
-    className: "crowd-busy",
-    markerColor: "#f59e0b",
-  },
-  full: {
-    label: "Full",
-    className: "crowd-full",
-    markerColor: "#ef4444",
-  },
-};
+class MapLegendControl {
+  onAdd() {
+    const items = [
+      { color: STATUS_CONFIG.empty.markerColor, label: "Empty" },
+      { color: STATUS_CONFIG.busy.markerColor, label: "Busy" },
+      { color: STATUS_CONFIG.full.markerColor, label: "Full" },
+      { color: "#9ca3af", label: "No update yet" },
+      { color: "#2563eb", label: "Your location" },
+    ];
+
+    this._container = document.createElement("div");
+    this._container.className = "maplibregl-ctrl map-legend";
+    this._container.innerHTML = `
+      <div class="map-legend-title">Crowd Status</div>
+      ${items
+        .map(
+          (item) => `
+            <div class="map-legend-row">
+              <span class="map-legend-swatch" style="background:${item.color}"></span>
+              <span class="map-legend-label">${item.label}</span>
+            </div>`
+        )
+        .join("")}
+    `;
+    return this._container;
+  }
+
+  onRemove() {
+    this._container?.remove();
+    this._container = null;
+  }
+}
 
 function initPreviewMap() {
   const mapEl = document.getElementById("map-preview");
@@ -52,6 +75,7 @@ function initPreviewMap() {
   });
 
   previewMap.addControl(new maplibregl.NavigationControl(), "top-right");
+  previewMap.addControl(new MapLegendControl(), "bottom-left");
 
   previewMap.on("load", async () => {
     await initRestaurantPins(previewMap);
@@ -105,12 +129,16 @@ async function fetchRestaurantsFromYelp() {
   return restaurants;
 }
 
+const SEED_FLAG_KEY = "restaurantsSeeded";
+
 async function seedRestaurants() {
+  if (localStorage.getItem(SEED_FLAG_KEY) === "true") return;
+
   const restaurantsRef = collection(db, "restaurants");
   const querySnapshot = await getDocs(restaurantsRef);
 
   if (!querySnapshot.empty) {
-    console.log("Restaurant collection already contains data. Skipping seed...");
+    localStorage.setItem(SEED_FLAG_KEY, "true");
     return;
   }
 
@@ -131,62 +159,13 @@ async function seedRestaurants() {
       lastUpdated: null,
     });
   }
-}
 
-function escapeHTML(value = "") {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-function normalizeStatus(status = "") {
-  const value = status.toString().trim().toLowerCase();
-
-  if (value === "low") return STATUS_CONFIG.empty;
-  if (value === "medium" || value === "moderate") return STATUS_CONFIG.busy;
-  if (value === "high") return STATUS_CONFIG.full;
-  if (STATUS_CONFIG[value]) return STATUS_CONFIG[value];
-
-  return {
-    label: "No update yet",
-    className: "crowd-unknown",
-    markerColor: "#9ca3af",
-  };
-}
-
-function getRestaurantImage(data) {
-  const defaultImage =
-    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80";
-
-  if (data.imageSrc && data.imageSrc.trim() !== "") {
-    return data.imageSrc;
-  }
-
-  return defaultImage;
+  localStorage.setItem(SEED_FLAG_KEY, "true");
 }
 
 function getOpenText(data) {
   if (data.hours && data.hours.trim() !== "") return data.hours;
   return "Hours not available";
-}
-
-function calculateDistance(lat1, lng1, lat2, lng2) {
-  const R = 6371;
-  const dLat = ((lat2 - lat1) * Math.PI) / 180;
-  const dLng = ((lng2 - lng1) * Math.PI) / 180;
-
-  const a =
-    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos((lat1 * Math.PI) / 180) *
-    Math.cos((lat2 * Math.PI) / 180) *
-    Math.sin(dLng / 2) *
-    Math.sin(dLng / 2);
-
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return R * c;
 }
 
 function getDistanceText(data) {
@@ -200,25 +179,6 @@ function getDistanceText(data) {
   );
 
   return `📍 ${distance.toFixed(1)} km`;
-}
-
-function formatTimeAgo(timestamp) {
-  if (!timestamp) return "No updates yet";
-
-  const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-  const diffSeconds = Math.floor((Date.now() - date.getTime()) / 1000);
-
-  if (diffSeconds < 10) return "Just now";
-  if (diffSeconds < 60) return `${diffSeconds} sec ago`;
-
-  const minutes = Math.floor(diffSeconds / 60);
-  if (minutes < 60) return `${minutes} min${minutes > 1 ? "s" : ""} ago`;
-
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours} hour${hours > 1 ? "s" : ""} ago`;
-
-  const days = Math.floor(hours / 24);
-  return `${days} day${days > 1 ? "s" : ""} ago`;
 }
 
 function createMarkerElement(statusValue) {
@@ -242,7 +202,7 @@ function buildPopupHTML(id, data) {
         class="restaurant-popup-image"
         src="${escapeHTML(image)}"
         alt="${escapeHTML(data.name || "Restaurant image")}"
-        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80';"
+        onerror="this.onerror=null;this.src='${getDefaultRestaurantImage()}';"
       />
 
       <div class="restaurant-popup-body">
@@ -470,4 +430,42 @@ window.toggleFavorite = toggleFavorite;
 window.syncFavoriteButton = syncFavoriteButton;
 
 window.addEventListener("load", initPreviewMap);
+// Listen for restaurant search event from navbar
+window.addEventListener("restaurant-search", async (e) => {
+  const searchTerm = e.detail?.searchTerm?.toLowerCase().trim();
+  if (!searchTerm || !previewMap || restaurantMarkers.length === 0) return;
+
+  // Find the marker and its data by restaurant name (case-insensitive, partial match)
+  // We'll need to fetch all restaurant docs to get their names and ids
+  const snapshot = await getDocs(collection(db, "restaurants"));
+  let found = null;
+  let foundId = null;
+  let foundLat = null;
+  let foundLng = null;
+  snapshot.docs.forEach((docSnap) => {
+    const data = docSnap.data();
+    if (data.name && data.lat && data.lng && data.name.toLowerCase().includes(searchTerm)) {
+      found = data;
+      foundId = docSnap.id;
+      foundLat = parseFloat(data.lat);
+      foundLng = parseFloat(data.lng);
+    }
+  });
+
+  if (found && !Number.isNaN(foundLat) && !Number.isNaN(foundLng)) {
+    // Find the marker for this restaurant
+    const marker = restaurantMarkers.find((m) => {
+      const lngLat = m.getLngLat();
+      return Math.abs(lngLat.lat - foundLat) < 0.0001 && Math.abs(lngLat.lng - foundLng) < 0.0001;
+    });
+    if (marker) {
+      previewMap.flyTo({ center: [foundLng, foundLat], zoom: 16 });
+      setTimeout(() => {
+        marker.togglePopup();
+      }, 600); // Wait for flyTo animation
+    }
+  } else {
+    alert("No restaurant found matching that name.");
+  }
+});
 seedRestaurants();
