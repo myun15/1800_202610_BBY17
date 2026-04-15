@@ -16,7 +16,7 @@ class SiteFooter extends HTMLElement {
                         <a href="#" class="text-dark d-flex flex-column align-items-center"><span class="material-symbols-outlined">history_2</span>
                         <span class="Recent">Recent</span></a>
                     </li>
-                    <li onclick="window.location.href='/pages/featuredRestaurants.html'">
+                    <li onclick="window.location.href='/pages/featured-restaurants.html'">
                         <a href="#" class="text-dark d-flex flex-column align-items-center"><span class="material-symbols-outlined">calendar_meal</span>
                         <span class="Featured Vendor">Featured Vendor</span></a>
                     </li>
