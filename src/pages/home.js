@@ -29,6 +29,22 @@ const VANCOUVER = { lng: -123.1207, lat: 49.2827 };
 let userLocation = null;
 let previewMap = null;
 let restaurantMarkers = [];
+let urlSearchHandled = false;
+
+function runUrlSearch() {
+  if (urlSearchHandled) return;
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get("q");
+  if (!q) return;
+  urlSearchHandled = true;
+
+  const input = document.getElementById("restaurant-search-input");
+  if (input) input.value = q;
+
+  window.dispatchEvent(
+    new CustomEvent("restaurant-search", { detail: { searchTerm: q } }),
+  );
+}
 
 class MapLegendControl {
   onAdd() {
@@ -79,6 +95,7 @@ function initPreviewMap() {
 
   previewMap.on("load", async () => {
     await initRestaurantPins(previewMap);
+    runUrlSearch();
   });
 
   if (navigator.geolocation) {
@@ -95,6 +112,7 @@ function initPreviewMap() {
           .addTo(previewMap);
 
         await initRestaurantPins(previewMap);
+        runUrlSearch();
       },
       () => {
         console.log("Location denied, showing Vancouver");

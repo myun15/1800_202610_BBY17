@@ -135,13 +135,28 @@ class SiteNavbar extends HTMLElement {
         dropdown.hidden = false;
       };
 
+      const isOnHome = () => {
+        const path = window.location.pathname;
+        return path === "/" || path.endsWith("/index.html") || path.endsWith("index.html");
+      };
+
+      const submitSearch = (term) => {
+        const searchTerm = (term ?? searchInput.value).trim();
+        if (!searchTerm) return;
+        if (isOnHome()) {
+          triggerSearch(searchTerm);
+        } else {
+          window.location.href = `/index.html?q=${encodeURIComponent(searchTerm)}`;
+        }
+      };
+
       if (searchBtn && searchInput) {
-        searchBtn.addEventListener("click", () => triggerSearch());
+        searchBtn.addEventListener("click", () => submitSearch());
 
         searchInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter") {
             e.preventDefault();
-            triggerSearch();
+            submitSearch();
           } else if (e.key === "Escape") {
             hideDropdown();
           }
@@ -181,7 +196,7 @@ class SiteNavbar extends HTMLElement {
           if (!item) return;
           const name = item.dataset.name;
           searchInput.value = name;
-          triggerSearch(name);
+          submitSearch(name);
         });
 
         document.addEventListener("click", (e) => {
