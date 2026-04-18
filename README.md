@@ -56,28 +56,24 @@ Once the application is running:
 
 ```
 1800_202610_bby17/
-├── docs/
-   └── bootstrap-utility-classes.md
 ├── pages/
-   ├── favorites.html
-   ├── featuredRestaurants.html
-   ├── login.html
-   ├── recent.html
-   ├── restaurant-detail.html
-   └── review.html
+│  ├── favorites.html
+│  ├── featuredRestaurants.html
+│  ├── login.html
+│  ├── recent.html
+│  └── restaurant-detail.html
 ├── public/
-   ├── data
-       └── food-vendors.json
-   ├──images
-       ├── FirePizza.jpg
-       ├── l
-ogo_2.jpg
-       ├── Pizza.jpg
-       ├── menu.svg
-       ├── pin-fill-sharp-circle-634-svgrepo-com.svg
-       └── restaurant.jpg
+│  ├── data
+│      └── food-vendors.json
+│  ├──images
+│      ├── logo.png
+│      ├── logo_1.jpg
+│      ├── logo_2.jpg
+│      ├── menu.svg
+│      ├── pin-fill-sharp-circle-634-svgrepo-com.svg
+│      └── restaurant.jpg
 ├── scripts/
-│   ├── fetch-yelp-images.js
+│   └── fetch-yelp-images.js
 │
 ├── src/
 │   ├── components/
@@ -86,32 +82,26 @@ ogo_2.jpg
 │   │
 │   ├── helper/
 │   │   ├── authentication.js
-│   │   └── firebaseConfig.js
+│   │   ├── firebaseConfig.js
+│   │   └── utlis.js
 │   │
 │   ├── pages/
 │   │   ├── favorites.js
-│   │   ├── feature-vendor.js
-│   │   ├── firebase-liverbar.js
+│   │   ├── featureVendor.js
 │   │   ├── home.js
 │   │   ├── login.js
 │   │   ├── recent.js
-│   │   ├── reservation.js
-│   │   ├── restaurant-detail.js
-│   │   ├── review.js
-│   │   ├── vender-recent.js
-│   │   └── vendor-detail.js
+│   │   └── restaurantDetail.js
 │   │
 │   ├── styles/
 │   │   └── style.css
 │   │
 │   └── app.js
 │
-├── .env
 ├── .gitignore
-├── index.html
-├── package-lock.json
-├── package.json
 ├── README.md
+├── index.html
+├── package.json
 └── vite.config.js
 
 
