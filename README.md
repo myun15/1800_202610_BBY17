@@ -89,6 +89,7 @@ Once the application is running:
 │   │   ├── favorites.js
 │   │   ├── featureVendor.js
 │   │   ├── home.js
+│   │   ├── livebar.js
 │   │   ├── login.js
 │   │   ├── recent.js
 │   │   └── restaurantDetail.js
